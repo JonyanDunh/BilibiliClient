@@ -1,0 +1,225 @@
+﻿<Window x:Class="Bilibili_Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+        mc:Ignorable="d"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Title="Randroca" Height="900" Width="1600"  AllowsTransparency="True" WindowStyle="None" MouseMove="Window_MouseMove" >
+    <Window.Resources>
+        <ControlTemplate x:Key="FilletTextBox" TargetType="{x:Type TextBox}">
+            <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1.25"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1.25"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+                            <Label Name="lbl" Content="{TemplateBinding Content}" Background="Transparent" 
+                                   Height="66"                           
+                                   Width="182" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="lbl" Value="#330091FF"/>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard x:Name="Storyboard_Copy1_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="lbl" Value="#000000FF"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="233.4"/>
+            <ColumnDefinition Width="988.8"/>
+            <ColumnDefinition Width="377.7"/>
+        </Grid.ColumnDefinitions>
+        <!-- 主边框-->
+        <Border  Background="White" CornerRadius="10" BorderThickness="5" BorderBrush="#FED4E0" Grid.ColumnSpan="3" >
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="8"/>
+            </Border.Effect>
+
+        </Border>
+
+        <!--左边组-->
+        <Grid x:Name="left_grid" Grid.Column="0" Margin="5,5,0,5">
+            <!--PILIPILI_Logo-->
+            <Image Source="resource/img/PILIPILI_LOGO.png" Margin="47,10,47,820"  RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Grid  x:Name="button_grid" Margin="0,95,0,0" HorizontalAlignment="Center" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button  Style="{StaticResource ButtonStyle}" FontSize="21" FontFamily="Microsoft YaHei" Click="index_button" FontWeight="Bold" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228"  >
+                    <WrapPanel >
+                        <Image Source="resource/img/首页.png" Width="32" Height="32"/>
+                        <TextBlock Text="首页" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button  Style="{StaticResource ButtonStyle}"  FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228">
+                    <WrapPanel >
+                        <Image Source="resource/img/动态.png" Width="32" Height="32"/>
+                        <TextBlock Text="动态" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
+                    <WrapPanel >
+                        <Image Source="resource/img/排行榜.png" Width="32" Height="32"/>
+                        <TextBlock Text="排行" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
+                    <WrapPanel >
+                        <Image Source="resource/img/分类.png" Width="32" Height="32"/>
+                        <TextBlock Text="分类" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0">
+                    <WrapPanel >
+                        <Image Source="resource/img/直播.png" Width="28" Height="28"/>
+                        <TextBlock Text="直播" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0">
+                    <WrapPanel >
+                        <Image Source="resource/img/番剧.png" Width="28" Height="28"/>
+                        <TextBlock Text="番剧" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="6" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0" Width="228">
+                    <WrapPanel >
+                        <Image Source="resource/img/漫画.png" Width="28" Height="28"/>
+                        <TextBlock Text="漫画" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="-2,0,0,0">
+                    <WrapPanel >
+                        <Image Source="resource/img/会员购.png" Width="28" Height="28"/>
+                        <TextBlock Text="会员购" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="8" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
+                    <WrapPanel >
+                        <Image Source="resource/img/游戏.png" Width="28" Height="28"/>
+                        <TextBlock Text="游戏中心" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="228" Margin="0" >
+                    <WrapPanel >
+                        <Image Source="resource/img/投稿.png" Width="28" Height="28"/>
+                        <TextBlock Text="投稿工具" VerticalAlignment="Center" />
+                    </WrapPanel>
+                </Button>
+                <Button Foreground="White" Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="228" >
+
+                    <WrapPanel >
+                        <Image Source="resource/img/头像.png" Width="48" Height="48">
+                            <Image.Clip>
+                                <RectangleGeometry RadiusX="48" RadiusY="48" Rect="0,0,48,48"/>
+                            </Image.Clip>
+                        </Image>
+                        <TextBlock Text="JonyanDunh" VerticalAlignment="Center" />
+                    </WrapPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="20" Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FED4E0" Offset="0.0" />
+                                        <GradientStop Color="#FED4E0" Offset="0.5" />
+                                        <GradientStop Color="#FED4E0" Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter  Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+        <GridSplitter HorizontalAlignment="Right" Grid.Column="0"  Width="2"  />
+        <!--中间-->
+        <Grid x:Name="middle_grid" Grid.Column="1" Margin="0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--标题栏-->
+            <!--标题-->
+            <Label x:Name="middle_title" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontSize="21" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="0" Content="首页" Margin="0,0,900,0"/>
+            <!--分割线-->
+            <GridSplitter  VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  Grid.Row="0"  Height="2"   />
+            <!--中间页面-->
+            <Frame x:Name="middle_frame" Grid.Row="1"  Margin="0" Source="index.xaml"></Frame>
+        </Grid>
+        <GridSplitter HorizontalAlignment="Left" Grid.Column="2"  Width="2"   />
+        <!--右边组-->
+        <Grid x:Name="right_grid" Grid.Column="2" Margin="0,5,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--搜索栏-->
+            <TextBox Template="{StaticResource FilletTextBox}" TextWrapping="Wrap" Text="TextBox" Margin="61,8,74,8"/>
+            <!--右边页面-->
+            <Frame x:Name="right_frame"   Source="index.xaml" Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</Window>
