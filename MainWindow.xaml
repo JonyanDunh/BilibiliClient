@@ -51,7 +51,7 @@
                             </Grid.RenderTransform>
                             <Label Name="lbl" Content="{TemplateBinding Content}" Background="Transparent" 
                                    Height="66"                           
-                                   Width="182" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" />
+                                   Width="182" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True"/>
@@ -133,37 +133,37 @@
                 </Button>
                 <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0">
                     <WrapPanel >
-                        <Image Source="resource/img/直播.png" Width="28" Height="28"/>
+                        <Image Source="resource/img/直播.png" Width="32" Height="32"/>
                         <TextBlock Text="直播" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0">
                     <WrapPanel >
-                        <Image Source="resource/img/番剧.png" Width="28" Height="28"/>
+                        <Image Source="resource/img/番剧.png" Width="32" Height="32"/>
                         <TextBlock Text="番剧" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="6" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0" Width="228">
                     <WrapPanel >
-                        <Image Source="resource/img/漫画.png" Width="28" Height="28"/>
+                        <Image Source="resource/img/漫画.png" Width="32" Height="32"/>
                         <TextBlock Text="漫画" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="-2,0,0,0">
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" >
                     <WrapPanel >
-                        <Image Source="resource/img/会员购.png" Width="28" Height="28"/>
+                        <Image Source="resource/img/会员购.png" Width="32" Height="32"/>
                         <TextBlock Text="会员购" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="8" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
                     <WrapPanel >
-                        <Image Source="resource/img/游戏.png" Width="28" Height="28"/>
+                        <Image Source="resource/img/游戏.png" Width="32" Height="32"/>
                         <TextBlock Text="游戏中心" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="228" Margin="0" >
                     <WrapPanel >
-                        <Image Source="resource/img/投稿.png" Width="28" Height="28"/>
+                        <Image Source="resource/img/投稿.png" Width="32" Height="32"/>
                         <TextBlock Text="投稿工具" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
