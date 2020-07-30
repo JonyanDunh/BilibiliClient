@@ -146,5 +146,14 @@
   <ItemGroup>
     <Resource Include="resource\img\搜索.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\img\cover.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\img\播放量.png" />
+    <Resource Include="resource\img\收藏数.png" />
+    <Resource Include="resource\img\点赞数.png" />
+    <Resource Include="resource\img\硬币数.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
