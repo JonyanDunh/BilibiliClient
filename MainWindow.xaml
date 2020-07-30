@@ -51,7 +51,7 @@
                             </Grid.RenderTransform>
                             <Label Name="lbl" Content="{TemplateBinding Content}" Background="Transparent" 
                                    Height="66"                           
-                                   Width="182" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" />
+                                   Width="182" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True"/>
