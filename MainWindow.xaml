@@ -14,48 +14,6 @@
         WindowStyle="None"
         MouseMove="Window_MouseMove">
     <Window.Resources>
-        <Style x:Key="TXTSTYLE"
-               TargetType="{x:Type TextBox}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Label Background="{TemplateBinding Background}" />
-                            <Border BorderBrush="#FED4E0"
-                                    BorderThickness="1,1,0,1"
-                                    CornerRadius="15,0,0,15">
-                                <Image Source="resource/img/搜索.png"
-                                       Width="30"
-                                       Height="30">
-                                    <Image.Clip>
-                                        <RectangleGeometry RadiusX="30"
-                                                           RadiusY="30"
-                                                           Rect="0,0,30,30" />
-                                    </Image.Clip>
-                                </Image>
-                            </Border>
-                            <Border Grid.Column="1"
-                                    x:Name="Bd"
-                                    BorderBrush="#FED4E0"
-                                    BorderThickness="0,1,1,1"
-                                    Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                    SnapsToDevicePixels="true"
-                                    CornerRadius="0,15,15,0">
-                                <ScrollViewer x:Name="PART_ContentHost"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <!--<Border BorderBrush="#FED4E0" Background="Beige" BorderThickness="1" CornerRadius="15">
-                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
-            </Border>-->
-        </Style>
         <Style x:Key="ButtonStyle"
                TargetType="{x:Type Button}">
             <Setter Property="VerticalAlignment"
@@ -446,14 +404,77 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <!--搜索栏-->
-            <TextBox  Style="{StaticResource TXTSTYLE}"
-                      TextWrapping="Wrap"
-                      Text="你感兴趣的视频都在P站"
-                      Margin="25,8"
-                      FontSize="16"
-                      VerticalContentAlignment="Center"
-                      FontFamily="Microsoft YaHei Light"
-                      Grid.Row="0" />
+            <Grid Grid.Row="0"
+                  x:Name="search_bar"
+                  Margin="15,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="#FED4E0"
+                        BorderThickness="1,1,0,1"
+                        CornerRadius="15,0,0,15">
+                    <Image Source="resource/img/搜索.png"
+                           Width="30"
+                           Height="30">
+                        <Image.Clip>
+                            <RectangleGeometry RadiusX="30"
+                                               RadiusY="30"
+                                               Rect="0,0,30,30" />
+                        </Image.Clip>
+                    </Image>
+                </Border>
+                <Border Grid.Column="1"
+                        x:Name="Bd"
+                        BorderBrush="#FED4E0"
+                        BorderThickness="0,1,1,1"
+                        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                        SnapsToDevicePixels="true"
+                        CornerRadius="0,15,15,0">
+                    <TextBox BorderBrush="{x:Null}"
+                             BorderThickness="0"
+                             x:Name="search_textbox"
+                             FontSize="16"
+                             VerticalContentAlignment="Center"
+                             FontFamily="Microsoft YaHei Light"
+                             Grid.Row="0"
+                             Margin="0,0,14,0">
+                        <TextBox.Resources>
+                            <VisualBrush x:Key="HelpBrush"
+                                         TileMode="None"
+                                         Opacity="0.3"
+                                         Stretch="None"
+                                         AlignmentX="Left">
+                                <VisualBrush.Visual>
+                                    <TextBlock  FontStyle="Italic"
+                                                Text="你感兴趣的视频都在P站" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </TextBox.Resources>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Text"
+                                             Value="{x:Null}">
+                                        <Setter Property="Background"
+                                                Value="{StaticResource HelpBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text"
+                                             Value="">
+                                        <Setter Property="Background"
+                                                Value="{StaticResource HelpBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Control.IsFocused"
+                                             Value="true">
+                                        <Setter Property="Background"
+                                                Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Border>
+            </Grid>
             <!--右边页面-->
             <Frame x:Name="right_frame"
                    Source="index.xaml"
