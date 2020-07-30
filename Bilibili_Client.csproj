@@ -143,5 +143,8 @@
   <ItemGroup>
     <Resource Include="ee60f891e14cf1c21dc020e4a10df2bf.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\img\搜索.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
