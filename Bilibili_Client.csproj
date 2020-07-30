@@ -111,7 +111,7 @@
     <Resource Include="resource\img\记录.png" />
     <Resource Include="resource\img\设置.png" />
     <Resource Include="resource\img\首页.png" />
-    <Resource Include="resource\img\麦克风.png" />
+    <Resource Include="resource\img\直播.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\漫画.png" />
@@ -120,7 +120,7 @@
     <Resource Include="resource\img\排行榜.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\直播.png" />
+    <Resource Include="resource\img\相机.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\会员购.png" />
@@ -139,9 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\PILIPILI_LOGO.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ee60f891e14cf1c21dc020e4a10df2bf.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\搜索.png" />
