@@ -155,5 +155,8 @@
     <Resource Include="resource\img\点赞数.png" />
     <Resource Include="resource\img\硬币数.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\img\转发数.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
