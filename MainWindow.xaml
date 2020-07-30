@@ -51,7 +51,9 @@
                             </Grid.RenderTransform>
                             <Label Name="lbl" Content="{TemplateBinding Content}" Background="Transparent" 
                                    Height="66"                           
-                                   Width="182" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" />
+                                   Width="182" 
+                                   HorizontalContentAlignment="Left"  
+                                   VerticalContentAlignment="Center" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True"/>
@@ -110,61 +112,61 @@
                 <Button  Style="{StaticResource ButtonStyle}" FontSize="21" FontFamily="Microsoft YaHei" Click="index_button" FontWeight="Bold" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228"  >
                     <WrapPanel >
                         <Image Source="resource/img/首页.png" Width="32" Height="32"/>
-                        <TextBlock Text="首页" VerticalAlignment="Center" />
+                        <TextBlock Text=" 首页" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button  Style="{StaticResource ButtonStyle}"  FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228">
                     <WrapPanel >
                         <Image Source="resource/img/动态.png" Width="32" Height="32"/>
-                        <TextBlock Text="动态" VerticalAlignment="Center" />
+                        <TextBlock Text=" 动态" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228"  >
                     <WrapPanel >
                         <Image Source="resource/img/排行榜.png" Width="32" Height="32"/>
-                        <TextBlock Text="排行" VerticalAlignment="Center" />
+                        <TextBlock Text=" 排行" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228"  >
                     <WrapPanel >
                         <Image Source="resource/img/分类.png" Width="32" Height="32"/>
-                        <TextBlock Text="分类" VerticalAlignment="Center" />
+                        <TextBlock Text=" 分类" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0">
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" >
                     <WrapPanel >
                         <Image Source="resource/img/直播.png" Width="32" Height="32"/>
-                        <TextBlock Text="直播" VerticalAlignment="Center" />
+                        <TextBlock Text=" 直播" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0">
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="5" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" >
                     <WrapPanel >
                         <Image Source="resource/img/番剧.png" Width="32" Height="32"/>
-                        <TextBlock Text="番剧" VerticalAlignment="Center" />
+                        <TextBlock Text=" 番剧" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="6" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0" Width="228">
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="6" VerticalAlignment="Stretch" HorizontalAlignment="Center"  Width="228">
                     <WrapPanel >
                         <Image Source="resource/img/漫画.png" Width="32" Height="32"/>
-                        <TextBlock Text="漫画" VerticalAlignment="Center" />
+                        <TextBlock Text=" 漫画" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold"  Grid.Row="7" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" >
                     <WrapPanel >
                         <Image Source="resource/img/会员购.png" Width="32" Height="32"/>
-                        <TextBlock Text="会员购" VerticalAlignment="Center" />
+                        <TextBlock Text=" 会员购" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="8" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228" Margin="0" >
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="8" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="228"  >
                     <WrapPanel >
                         <Image Source="resource/img/游戏.png" Width="32" Height="32"/>
-                        <TextBlock Text="游戏中心" VerticalAlignment="Center" />
+                        <TextBlock Text=" 游戏中心" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="9" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="228" Margin="0" >
+                <Button Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="9" VerticalAlignment="Stretch" HorizontalAlignment="Center"  Width="228"  >
                     <WrapPanel >
                         <Image Source="resource/img/投稿.png" Width="32" Height="32"/>
-                        <TextBlock Text="投稿工具" VerticalAlignment="Center" />
+                        <TextBlock Text=" 投稿工具" VerticalAlignment="Center" />
                     </WrapPanel>
                 </Button>
                 <Button Foreground="White" Style="{StaticResource ButtonStyle}" FontSize="20" FontFamily="Microsoft YaHei"  FontWeight="Bold" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Stretch" Width="228" >
@@ -175,7 +177,7 @@
                                 <RectangleGeometry RadiusX="48" RadiusY="48" Rect="0,0,48,48"/>
                             </Image.Clip>
                         </Image>
-                        <TextBlock Text="JonyanDunh" VerticalAlignment="Center" />
+                        <TextBlock Text="  JonyanDunh" VerticalAlignment="Center" />
                     </WrapPanel>
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -207,7 +209,7 @@
             <!--分割线-->
             <GridSplitter  VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  Grid.Row="0"  Height="2"   />
             <!--中间页面-->
-            <Frame x:Name="middle_frame" Grid.Row="1"  Margin="0" Source="index.xaml"></Frame>
+            <Frame x:Name="middle_frame" Grid.Row="1"   Source="index.xaml"></Frame>
         </Grid>
         <GridSplitter HorizontalAlignment="Left" Grid.Column="2"  Width="2"   />
         <!--右边组-->
