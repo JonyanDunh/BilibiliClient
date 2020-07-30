@@ -12,23 +12,26 @@
       Title="index">
 
     <Grid>
-        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 BorderThickness="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="2"
                                  Rows="6" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
+            <!--整个外边框-->
             <Border Width="475"
                     BorderBrush="#FF7DB6F0"
                     BorderThickness="1"
-                    CornerRadius="15"
-                    >
+                    CornerRadius="15">
+                <!--框内组-->
                 <Grid Width="440">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <!--左边头像列-->
                     <Grid Grid.Column="0">
                         <Image Source="resource/img/头像.png"
                                Width="44"
@@ -41,6 +44,7 @@
                             </Image.Clip>
                         </Image>
                     </Grid>
+                    <!--右边组-->
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="36"></RowDefinition>
@@ -48,6 +52,7 @@
                             <RowDefinition Height="302"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
+                        <!--up名字-->
                         <Grid Grid.Row="0">
                             <Label x:Name="video_up"
                                    HorizontalContentAlignment="Left"
@@ -59,20 +64,23 @@
                                    VerticalAlignment="Top"
                                    FontSize="14" />
                         </Grid>
+                        <!--视频简介-->
                         <Grid Grid.Row="1">
-                            <TextBlock x:Name="video_Introduction"
+                            <TextBlock x:Name="video_introduction"
                                        TextWrapping="WrapWithOverflow"
                                        FontSize="14"
                                        FontFamily="Microsoft YaHei UI Light"
                                        Text="好想离开这个世界啊&#13;每天每夜都在想着你,你什么时候回来?......"
                                        FontWeight="Bold" />
                         </Grid>
+                        <!--（视频封面|视频）&标题信息栏-->
                         <Grid Grid.Row="2">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="243"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
+                                <!--（视频封面|视频）-->
                                 <Grid Grid.Row="0">
                                     <Border BorderBrush="#FED4E0"
                                             BorderThickness="2,2,2,0"
@@ -93,6 +101,7 @@
                                               Grid.Row="1"
                                               Background="Black"
                                               Height="1" />
+                                <!--标题&信息栏-->
                                 <Grid Grid.Row="1">
                                     <Border BorderBrush="#FED4E0"
                                             BorderThickness="2,0,2, 2"
@@ -102,6 +111,7 @@
                                                 <RowDefinition Height="30"></RowDefinition>
                                                 <RowDefinition Height="*"></RowDefinition>
                                             </Grid.RowDefinitions>
+                                            <!--标题栏-->
                                             <Grid Grid.Row="0">
                                                 <Label x:Name="video_title"
                                                        HorizontalContentAlignment="Left"
@@ -112,6 +122,7 @@
                                                        Height="30"
                                                        VerticalAlignment="Top" />
                                             </Grid>
+                                            <!--信息栏-->
                                             <Grid Grid.Row="1">
                                                 <Label x:Name="video_bvid"
                                                        HorizontalContentAlignment="Left"
@@ -130,920 +141,161 @@
                                 </Grid>
                             </Grid>
                         </Grid>
+                        <!--四连-->
                         <Grid Grid.Row="3">
-                            <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <!--播放量数模块-->
+                            <Grid Grid.Column="0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
+                                    <!--播放量LOGO-->
                                     <Grid Grid.Column="0">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/播放量.png"
-                                                       Margin="0,18"
-                                                       Height="24"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label x:Name="video_Play_volume"
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Image Source="resource/img/播放量.png"
+                                               Margin="0,18"
+                                               Height="24"
+                                               RenderTransformOrigin="0.4,0.589" />
                                     </Grid>
+                                    <!--播放量数-->
                                     <Grid Grid.Column="1">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/点赞数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label x:Name="video_like"
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="2">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/硬币数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label x:Name="video_coins"
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="3">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/收藏数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label x:Name="video_favorites"
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="4">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/转发数.png"
-                                                       Margin="0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label x:Name="video_shares"
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Label x:Name="video_Play_volume"
+                                               HorizontalContentAlignment="Left"
+                                               VerticalContentAlignment="Center"
+                                               FontSize="14"
+                                               FontFamily="Microsoft YaHei"
+                                               Content="20"
+                                               Height="30"
+                                               VerticalAlignment="Top"
+                                               FontWeight="Bold">
+                                        </Label>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-<!---->
-            <Border Width="475"
-                    BorderBrush="#FF7DB6F0"
-                    BorderThickness="1"
-                    CornerRadius="15">
-                <Grid Width="440">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Image Source="resource/img/头像.png"
-                               Width="44"
-                               Height="44"
-                               Margin="-5,19,11,367">
-                            <Image.Clip>
-                                <RectangleGeometry RadiusX="44"
-                                                   RadiusY="44"
-                                                   Rect="0,0,44,44" />
-                            </Image.Clip>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="36"></RowDefinition>
-                            <RowDefinition Height="38"></RowDefinition>
-                            <RowDefinition Height="302"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Label 
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Bottom"
-                                   FontFamily="Microsoft YaHei"
-                                   FontWeight="Bold"
-                                   Content="@Jonyan Dunh"
-                                   Height="36"
-                                   VerticalAlignment="Top"
-                                   FontSize="14" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <TextBlock 
-                                       TextWrapping="WrapWithOverflow"
-                                       FontSize="14"
-                                       FontFamily="Microsoft YaHei UI Light"
-                                       Text="好想离开这个世界啊&#13;每天每夜都在想着你,你什么时候回来?......"
-                                       FontWeight="Bold" />
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="243"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <Border BorderBrush="#FED4E0"
-                                            BorderThickness="2,2,2,0"
-                                            CornerRadius="15,15,0,0">
-                                        <Image Source="resource/img/cover.jpg"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center">
-                                            <Image.Clip>
-                                                <RectangleGeometry RadiusX="15"
-                                                                   RadiusY="15"
-                                                                   Rect="0,0,390,243" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
-                                </Grid>
-                                <GridSplitter HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top"
-                                              Grid.Row="1"
-                                              Background="Black"
-                                              Height="1" />
-                                <Grid Grid.Row="1">
-                                    <Border BorderBrush="#FED4E0"
-                                            BorderThickness="2,0,2, 2"
-                                            CornerRadius="0,0,15,15">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"></RowDefinition>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Grid Grid.Row="0">
-                                                <Label 
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="16"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="当程序员遇上网抑云"
-                                                       Height="30"
-                                                       VerticalAlignment="Top" />
-                                            </Grid>
-                                            <Grid Grid.Row="1">
-                                                <Label 
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="12"
-                                                       Foreground="Gray"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="BV17x411w7KC"
-                                                       Height="27"
-                                                       VerticalAlignment="Top" />
-                                            </Grid>
-
-                                        </Grid>
-                                    </Border>
-
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <Grid Grid.Row="1">
+                            <!--点赞数模块-->
+                            <Grid Grid.Column="1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
+                                    <!--点赞LOGO-->
                                     <Grid Grid.Column="0">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/播放量.png"
-                                                       Margin="0,18"
-                                                       Height="24"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label 
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Image Source="resource/img/点赞数.png"
+                                               Margin="10,18,0,18"
+                                               Height="20"
+                                               RenderTransformOrigin="0.4,0.589" />
                                     </Grid>
+                                    <!--点赞数-->
                                     <Grid Grid.Column="1">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/点赞数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label 
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="2">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/硬币数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label 
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="3">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/收藏数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label 
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="4">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/转发数.png"
-                                                       Margin="0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label
-                                                       HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Label x:Name="video_like"
+                                               HorizontalContentAlignment="Left"
+                                               VerticalContentAlignment="Center"
+                                               FontSize="14"
+                                               FontFamily="Microsoft YaHei"
+                                               Content="20"
+                                               Height="30"
+                                               VerticalAlignment="Top"
+                                               FontWeight="Bold">
+                                        </Label>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-            <!---->
-            <Border Width="475"
-                    BorderBrush="#FF7DB6F0"
-                    BorderThickness="1"
-                    CornerRadius="15">
-                <Grid Width="440">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Image Source="resource/img/头像.png"
-                               Width="44"
-                               Height="44"
-                               Margin="-5,19,11,367">
-                            <Image.Clip>
-                                <RectangleGeometry RadiusX="44"
-                                                   RadiusY="44"
-                                                   Rect="0,0,44,44" />
-                            </Image.Clip>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="36"></RowDefinition>
-                            <RowDefinition Height="38"></RowDefinition>
-                            <RowDefinition Height="302"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Label HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Bottom"
-                                   FontFamily="Microsoft YaHei"
-                                   FontWeight="Bold"
-                                   Content="@Jonyan Dunh"
-                                   Height="36"
-                                   VerticalAlignment="Top"
-                                   FontSize="14" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <TextBlock TextWrapping="WrapWithOverflow"
-                                       FontSize="14"
-                                       FontFamily="Microsoft YaHei UI Light"
-                                       Text="好想离开这个世界啊&#13;每天每夜都在想着你,你什么时候回来?......"
-                                       FontWeight="Bold" />
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="243"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <Border BorderBrush="#FED4E0"
-                                            BorderThickness="2,2,2,0"
-                                            CornerRadius="15,15,0,0">
-                                        <Image Source="resource/img/cover.jpg"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center">
-                                            <Image.Clip>
-                                                <RectangleGeometry RadiusX="15"
-                                                                   RadiusY="15"
-                                                                   Rect="0,0,390,243" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
-                                </Grid>
-                                <GridSplitter HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top"
-                                              Grid.Row="1"
-                                              Background="Black"
-                                              Height="1" />
-                                <Grid Grid.Row="1">
-                                    <Border BorderBrush="#FED4E0"
-                                            BorderThickness="2,0,2, 2"
-                                            CornerRadius="0,0,15,15">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"></RowDefinition>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Grid Grid.Row="0">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="16"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="当程序员遇上网抑云"
-                                                       Height="30"
-                                                       VerticalAlignment="Top" />
-                                            </Grid>
-                                            <Grid Grid.Row="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="12"
-                                                       Foreground="Gray"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="BV17x411w7KC"
-                                                       Height="27"
-                                                       VerticalAlignment="Top" />
-                                            </Grid>
-
-                                        </Grid>
-                                    </Border>
-
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <Grid Grid.Row="1">
+                            <!--硬币数模块-->
+                            <Grid Grid.Column="2">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
+                                    <!--硬币LOGO-->
                                     <Grid Grid.Column="0">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/播放量.png"
-                                                       Margin="0,18"
-                                                       Height="24"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Image Source="resource/img/硬币数.png"
+                                               Margin="10,18,0,18"
+                                               Height="20"
+                                               RenderTransformOrigin="0.4,0.589" />
                                     </Grid>
+                                    <!--硬币数-->
                                     <Grid Grid.Column="1">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/点赞数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="2">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/硬币数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="3">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/收藏数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="4">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/转发数.png"
-                                                       Margin="0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Label x:Name="video_coins"
+                                               HorizontalContentAlignment="Left"
+                                               VerticalContentAlignment="Center"
+                                               FontSize="14"
+                                               FontFamily="Microsoft YaHei"
+                                               Content="20"
+                                               Height="30"
+                                               VerticalAlignment="Top"
+                                               FontWeight="Bold">
+                                        </Label>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-            <Border Width="475"
-                    BorderBrush="#FF7DB6F0"
-                    BorderThickness="1"
-                    CornerRadius="15">
-                <Grid Width="440">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Image Source="resource/img/头像.png"
-                               Width="44"
-                               Height="44"
-                               Margin="-5,19,11,367">
-                            <Image.Clip>
-                                <RectangleGeometry RadiusX="44"
-                                                   RadiusY="44"
-                                                   Rect="0,0,44,44" />
-                            </Image.Clip>
-                        </Image>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="36"></RowDefinition>
-                            <RowDefinition Height="38"></RowDefinition>
-                            <RowDefinition Height="302"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Label HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Bottom"
-                                   FontFamily="Microsoft YaHei"
-                                   FontWeight="Bold"
-                                   Content="@Jonyan Dunh"
-                                   Height="36"
-                                   VerticalAlignment="Top"
-                                   FontSize="14" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <TextBlock TextWrapping="WrapWithOverflow"
-                                       FontSize="14"
-                                       FontFamily="Microsoft YaHei UI Light"
-                                       Text="好想离开这个世界啊&#13;每天每夜都在想着你,你什么时候回来?......"
-                                       FontWeight="Bold" />
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="243"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <Border BorderBrush="#FED4E0"
-                                            BorderThickness="2,2,2,0"
-                                            CornerRadius="15,15,0,0">
-                                        <Image Source="resource/img/cover.jpg"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center">
-                                            <Image.Clip>
-                                                <RectangleGeometry RadiusX="15"
-                                                                   RadiusY="15"
-                                                                   Rect="0,0,390,243" />
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
-                                </Grid>
-                                <GridSplitter HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Top"
-                                              Grid.Row="1"
-                                              Background="Black"
-                                              Height="1" />
-                                <Grid Grid.Row="1">
-                                    <Border BorderBrush="#FED4E0"
-                                            BorderThickness="2,0,2, 2"
-                                            CornerRadius="0,0,15,15">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="30"></RowDefinition>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Grid Grid.Row="0">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="16"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="当程序员遇上网抑云"
-                                                       Height="30"
-                                                       VerticalAlignment="Top" />
-                                            </Grid>
-                                            <Grid Grid.Row="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="12"
-                                                       Foreground="Gray"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="BV17x411w7KC"
-                                                       Height="27"
-                                                       VerticalAlignment="Top" />
-                                            </Grid>
-
-                                        </Grid>
-                                    </Border>
-
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <Grid Grid.Row="1">
+                            <!--收藏数模块-->
+                            <Grid Grid.Column="3">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
+                                    <!--收藏LOGO-->
                                     <Grid Grid.Column="0">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/播放量.png"
-                                                       Margin="0,18"
-                                                       Height="24"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Image Source="resource/img/收藏数.png"
+                                               Margin="10,18,0,18"
+                                               Height="20"
+                                               RenderTransformOrigin="0.4,0.589" />
                                     </Grid>
+                                    <!--收藏数-->
                                     <Grid Grid.Column="1">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/点赞数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="2">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/硬币数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="3">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/收藏数.png"
-                                                       Margin="10,18,0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Grid.Column="4">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid Grid.Column="0">
-                                                <Image Source="resource/img/转发数.png"
-                                                       Margin="0,18"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Grid>
-                                            <Grid Grid.Column="1">
-                                                <Label HorizontalContentAlignment="Left"
-                                                       VerticalContentAlignment="Center"
-                                                       FontSize="14"
-                                                       FontFamily="Microsoft YaHei"
-                                                       Content="20"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                                </Label>
-                                            </Grid>
-                                        </Grid>
+                                        <Label x:Name="video_favorites"
+                                               HorizontalContentAlignment="Left"
+                                               VerticalContentAlignment="Center"
+                                               FontSize="14"
+                                               FontFamily="Microsoft YaHei"
+                                               Content="20"
+                                               Height="30"
+                                               VerticalAlignment="Top"
+                                               FontWeight="Bold">
+                                        </Label>
                                     </Grid>
                                 </Grid>
                             </Grid>
+                            <!--转发数模块-->
+                            <Grid Grid.Column="4">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <!--转发LOGO-->
+                                    <Grid Grid.Column="0">
+                                        <Image Source="resource/img/转发数.png"
+                                               Margin="0,18"
+                                               Height="20"
+                                               RenderTransformOrigin="0.4,0.589" />
+                                    </Grid>
+                                    <!--转发数-->
+                                    <Grid Grid.Column="1">
+                                        <Label x:Name="video_shares"
+                                               HorizontalContentAlignment="Left"
+                                               VerticalContentAlignment="Center"
+                                               FontSize="14"
+                                               FontFamily="Microsoft YaHei"
+                                               Content="20"
+                                               Height="30"
+                                               VerticalAlignment="Top"
+                                               FontWeight="Bold">
+                                        </Label>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
                         </Grid>
                     </Grid>
                 </Grid>
