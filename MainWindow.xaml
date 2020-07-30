@@ -464,11 +464,6 @@
                                         <Setter Property="Background"
                                                 Value="{StaticResource HelpBrush}" />
                                     </Trigger>
-                                    <Trigger Property="Control.IsFocused"
-                                             Value="true">
-                                        <Setter Property="Background"
-                                                Value="Transparent" />
-                                    </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </TextBox.Style>
