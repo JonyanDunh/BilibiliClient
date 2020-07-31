@@ -4,6 +4,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -27,7 +28,9 @@ namespace Bilibili_Client
         public index()
         {
             InitializeComponent();
-            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index");
+            Thread thread = new Thread(Home_Recommendation);//把点名的函数加入一个新的子线程
+            thread.Start();//线程开始
+            /*var client = new RestClient("https://app.bilibili.com/x/v2/feed/index");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
@@ -58,7 +61,48 @@ namespace Bilibili_Client
                ));
             }
 
-            content_box.ItemsSource = double_row_videos;
+            content_box.ItemsSource = double_row_videos;*/
+        }
+        private void Home_Recommendation()
+        {
+            List<double_row_video> double_row_videos = new List<double_row_video>();
+           /* while (true)
+            { */
+            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+            Newtonsoft.Json.Linq.JToken items = recommend["data"]["items"];
+            for (int i = 0; i < items.Count(); i++)
+            {
+
+               double_row_videos.Add(new double_row_video(
+               gets_up_info(items[i]["args"]["up_id"].ToString()).head_img,//up头像
+               items[i]["args"]["up_name"].ToString(),//up名字
+               "",//up是否有认证
+               GetTime(gets_video_info(items[i]["param"].ToString()).release_time),//发布时间
+               gets_video_info(items[i]["param"].ToString()).introduction,//介绍
+               items[i]["cover"].ToString(),//封面
+               items[i]["cover_right_text"].ToString(),//时长
+               items[i]["title"].ToString(),//标题
+               items[i]["args"]["rname"].ToString() + " > " + items[0]["args"]["tname"].ToString(),//分区
+               items[i]["cover_left_text_1"].ToString(),//播放量
+               items[i]["cover_left_text_2"].ToString(),//弹幕数
+               gets_video_info(items[i]["param"].ToString()).comments,//评论数
+               Get_video_tags(items[i]["param"].ToString())
+               ));
+                Action action1 = () =>//创建委托,委托主线程更新UI
+                {
+
+                    content_box.ItemsSource = double_row_videos;
+                    this.content_box.Items.Refresh();
+                };
+                content_box.Dispatcher.BeginInvoke(action1);
+            }
+           // }
+
+
         }
         public class double_row_video
         {

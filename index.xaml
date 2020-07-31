@@ -230,11 +230,12 @@
                         </Grid>
                         <Grid Grid.Row="3">
                             <!--TAG栏-->
-                            <ItemsControl ItemsSource="{Binding tag_control}"
+                            <ItemsControl Grid.ColumnSpan="2" ItemsSource="{Binding tag_control}"
                                           Margin="0,5">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <UniformGrid Rows="1" />
+                                        <UniformGrid Rows="1"
+                                                     Grid.ColumnSpan="2" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
@@ -243,7 +244,7 @@
                                                 Background="#FB7299"
                                                 HorizontalAlignment="Left"
                                                 Margin="0"
-                                                Padding="1,0">
+                                                Padding="0">
                                             <Label MaxWidth="80"
                                                    Content="{Binding video_tags}"
                                                    FontSize="14"
