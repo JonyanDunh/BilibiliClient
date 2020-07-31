@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Background="Transparent"
         ResizeMode="NoResize"
-        Title="Randroca"
+        Title="PILIPILI客户端"
         Height="900"
         Width="1600"
         AllowsTransparency="True"
         WindowStyle="None"
-        MouseMove="Window_MouseMove">
+        >
     <Window.Resources>
         <Style x:Key="ButtonStyle"
                TargetType="{x:Type Button}">

@@ -23,6 +23,20 @@ namespace Bilibili_Client
         public index()
         {
             InitializeComponent();
+            /*List<Middle> middles = new List<Middle>();
+            middles.Add(new Middle("First"));
+            middles.Add(new Middle("First"));
+            middles.Add(new Middle("First"));
+            middles.Add(new Middle("First"));
+            content_box.ItemsSource = middles;*/
+        }
+        public class Middle
+        {
+            public string video_up { get; private set; }
+            public Middle(string fir)
+            {
+                video_up = fir;
+            }
         }
     }
 }

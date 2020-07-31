@@ -10,16 +10,8 @@
       d:DesignWidth="989"
       Background="White"
       Title="index">
-
-    <Grid>
-        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 BorderThickness="0">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="2"
-                                 Rows="6" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+    <Page.Resources>
+        <DataTemplate x:Key="double_row">
             <!--整个外边框-->
             <Border Width="475"
                     BorderBrush="#FF7DB6F0"
@@ -55,11 +47,12 @@
                         <!--up名字-->
                         <Grid Grid.Row="0">
                             <Label x:Name="video_up"
+                                    
                                    HorizontalContentAlignment="Left"
                                    VerticalContentAlignment="Bottom"
                                    FontFamily="Microsoft YaHei"
                                    FontWeight="Bold"
-                                   Content="@Jonyan Dunh"
+                                   Content="{Binding video_up}"
                                    Height="36"
                                    VerticalAlignment="Top"
                                    FontSize="14" />
@@ -300,6 +293,17 @@
                     </Grid>
                 </Grid>
             </Border>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <ListBox x:Name="content_box" ItemTemplate="{StaticResource double_row}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 BorderThickness="0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2"
+                                 Rows="6" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
         </ListBox>
     </Grid>
 </Page>
