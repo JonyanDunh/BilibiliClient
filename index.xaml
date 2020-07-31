@@ -13,7 +13,6 @@
     <Page.Resources>
         <DataTemplate x:Key="double_row">
             <!--整个外边框-->
-
             <Border Width="474"
                     BorderBrush="#FF7DB6F0"
                     BorderThickness="1"
@@ -48,15 +47,25 @@
                             <RowDefinition Height="302"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <!--up名字-->
+                        <!--up名字&认证&发布时间-->
                         <Grid Grid.Row="0">
                             <TextBlock x:Name="video_up"
                                        Block.TextAlignment="Left"
                                        FontFamily="Helvetica Neue"
-                                       FontWeight="Bold"
-                                       Text="{Binding video_up}"
-                                       FontSize="16"
-                                       Margin="0,16,0,0" />
+                                       Margin="0,16,0,0">
+                                    <TextBlock FontWeight="Bold"
+                                               FontSize="16"
+                                               Text="{Binding video_up}" />
+                                        <Image  Height="19"
+                                                Source="{Binding up_certification}"
+                                                Margin="0,0,0,-4"
+                                                 />
+                                    <Run FontSize="14"
+                                         Text="·" />
+                                    <TextBlock Foreground="Gray"
+                                         FontSize="14"
+                                         Text="{Binding video_release_time}" />
+                            </TextBlock>
                         </Grid>
                         <!--视频简介-->
                         <Grid Grid.Row="1">
@@ -70,22 +79,37 @@
                         <Grid Grid.Row="2">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="243"></RowDefinition>
+                                    <RowDefinition Height="242.5"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <!--（视频封面|视频）-->
+                                <!--（视频封面|视频）&&时长-->
                                 <Grid Grid.Row="0">
                                     <Border BorderBrush="#FFD1D1D1"
                                             BorderThickness="1,1,1,0"
                                             CornerRadius="15,15,0,0">
                                         <Image Source="{Binding video_cover}"
-                                               Margin="0">
+                                               Margin="0,0,0.5,0"
+                                               Width="390"
+                                               Height="243">
                                             <Image.Clip>
                                                 <RectangleGeometry RadiusX="15"
                                                                    RadiusY="15"
-                                                                   Rect="0,0,390,243" />
+                                                                   Rect="0,0,388,242
+                                                                       " />
                                             </Image.Clip>
                                         </Image>
+                                    </Border>
+                                    <!--视频时长-->
+                                    <Border CornerRadius="5"
+                                            Margin="0,204,23,17"
+                                            Background="#FF403D3D"
+                                            HorizontalAlignment="Right">
+                                        <Label Width="auto"
+                                               Content="{Binding video_duration}"
+                                               FontSize="10"
+                                               Foreground="White"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center" />
                                     </Border>
                                 </Grid>
                                 <GridSplitter HorizontalAlignment="Stretch"
@@ -124,14 +148,15 @@
                                                         <ColumnDefinition Width="*" />
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
+                                                    <!--分区模块-->
                                                     <Grid Grid.Column="0">
-                                                        <Label  x:Name="video_bvid"
+                                                        <Label  x:Name="video_partition"
                                                                 HorizontalContentAlignment="Left"
                                                                 VerticalContentAlignment="Top"
                                                                 FontSize="12"
                                                                 Foreground="Gray"
                                                                 FontFamily="Microsoft YaHei"
-                                                                Content="{Binding video_bvid}"
+                                                                Content="{Binding video_partition}"
                                                                 Height="27"
                                                                 VerticalAlignment="Top" />
                                                     </Grid>
@@ -203,154 +228,38 @@
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <!--五连-->
                         <Grid Grid.Row="3">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <!--播放量数模块-->
-                                <!--点赞数模块-->
-                                <Grid Grid.Column="0">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <!--点赞LOGO-->
-                                        <Grid Grid.Column="0">
-                                            <Button Height="39"
-                                                    Background="Transparent"
-                                                    BorderThickness="0"
-                                                    VerticalAlignment="Top"
-                                                    Margin="10,0,0,0">
-                                                <Image Source="resource/img/点赞数.png"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Button>
-                                        </Grid>
-                                        <!--点赞数-->
-                                        <Grid Grid.Column="1">
-                                            <TextBlock x:Name="video_like"
-                                                       FontFamily="Helvetica Neue"
-                                                       Margin="0,6,0,0"
-                                                       FontSize="14"
-                                                       Text="{Binding video_likes}"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                            </TextBlock>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <!--硬币数模块-->
-                                <Grid Grid.Column="1">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <!--硬币LOGO-->
-                                        <Grid Grid.Column="0">
-                                            <Button Height="39"
-                                                    Background="Transparent"
-                                                    BorderThickness="0"
-                                                    VerticalAlignment="Top"
-                                                    Margin="10,0,0,0">
-                                                <Image Source="resource/img/硬币数.png"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Button>
-                                        </Grid>
-                                        <!--硬币数-->
-                                        <Grid Grid.Column="1">
-                                            <TextBlock x:Name="video_coins"
-                                                       FontSize="14"
-                                                       FontFamily="Helvetica Neue"
-                                                       Margin="0,6,0,0"
-                                                       Text="{Binding video_coins}"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                            </TextBlock>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <!--收藏数模块-->
-                                <Grid Grid.Column="2">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <!--收藏LOGO-->
-                                        <Grid Grid.Column="0">
-                                            <Button Height="39"
-                                                    Background="Transparent"
-                                                    BorderThickness="0"
-                                                    VerticalAlignment="Top"
-                                                    Margin="10,0,0,0">
-                                                <Image Source="resource/img/收藏数.png"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Button>
-                                        </Grid>
-                                        <!--收藏数-->
-                                        <Grid Grid.Column="1">
-                                            <TextBlock x:Name="video_favorites"
-                                                       FontFamily="Helvetica Neue"
-                                                       Margin="0,6,0,0"
-                                                       FontSize="14"
-                                                       Text="{Binding video_favorites}"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                            </TextBlock>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <!--转发数模块-->
-                                <Grid Grid.Column="3">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <!--转发LOGO-->
-                                        <Grid Grid.Column="0">
-                                            <Button Height="39"
-                                                    Background="Transparent"
-                                                    BorderThickness="0"
-                                                    VerticalAlignment="Top"
-                                                    Margin="10,0,0,0">
-                                                <Image Source="resource/img/转发数.png"
-                                                       Height="20"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Button>
-                                        </Grid>
-                                        <!--转发数-->
-                                        <Grid Grid.Column="1">
-                                            <TextBlock x:Name="video_shares"
-                                                       FontSize="14"
-                                                       FontFamily="Helvetica Neue"
-                                                       Margin="0,6,0,0"
-                                                       Text="{Binding video_shares}"
-                                                       Height="30"
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                            </TextBlock>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
+                            <!--TAG栏-->
+                            <ItemsControl ItemsSource="{Binding tag_control}"
+                                          Margin="0,5">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Rows="1" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate >
+                                        <Border CornerRadius="5"
+                                                Background="#FB7299"
+                                                HorizontalAlignment="Left"
+                                                Margin="0"
+                                                Padding="1,0">
+                                            <Label MaxWidth="80"
+                                                   Content="{Binding video_tags}"
+                                                   FontSize="14"
+                                                   Foreground="White"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Center" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
                     </Grid>
                 </Grid>
             </Border>
         </DataTemplate>
+
     </Page.Resources>
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -362,10 +271,10 @@
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" />
+
                     </ItemsPanelTemplate>
+
                 </ItemsControl.ItemsPanel>
-
-
             </ItemsControl>
         </ScrollViewer>
     </Grid>
