@@ -11,190 +11,210 @@
       Background="White"
       Title="index">
     <Page.Resources>
-        <Style TargetType="{x:Type ListBoxItem}">
-            <Setter Property="FocusVisualStyle"
-                    Value="{x:Null}" />
-        </Style>
         <DataTemplate x:Key="double_row">
+            <!--整个外边框-->
 
-        </DataTemplate>
-    </Page.Resources>
-    <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ItemsControl  x:Name="content_box"
-                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                           BorderThickness="0"
-                           BorderBrush="#FFC9CCD4">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <!--整个外边框-->
-                <Border Width="474"
-                        BorderBrush="#FF7DB6F0"
-                        BorderThickness="1"
-                        CornerRadius="15"
-                        Margin="0,10,0,0"
-                        Height="418">
-                    <!--框内组-->
-                    <Grid Width="440">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <!--左边头像列-->
-                        <Grid Grid.Column="0">
-                            <Image Source="{Binding head_img_url}"
-                                   Width="48"
-                                   Margin="-3,21,5,0"
-                                   Height="48"
-                                   VerticalAlignment="Top">
-                                <Image.Clip>
-                                    <RectangleGeometry RadiusX="100"
-                                                       RadiusY="100"
-                                                       Rect="0,0,48,48" />
-                                </Image.Clip>
-                            </Image>
+            <Border Width="474"
+                    BorderBrush="#FF7DB6F0"
+                    BorderThickness="1"
+                    CornerRadius="15"
+                    Margin="0,10,0,0"
+                    Height="418">
+                <!--框内组-->
+                <Grid Width="440">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--左边头像列-->
+                    <Grid Grid.Column="0">
+                        <Image Source="{Binding head_img_url}"
+                               Width="48"
+                               Margin="-3,21,5,0"
+                               Height="48"
+                               VerticalAlignment="Top">
+                            <Image.Clip>
+                                <RectangleGeometry RadiusX="100"
+                                                   RadiusY="100"
+                                                   Rect="0,0,48,48" />
+                            </Image.Clip>
+                        </Image>
+                    </Grid>
+                    <!--右边组-->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="36"></RowDefinition>
+                            <RowDefinition Height="38"></RowDefinition>
+                            <RowDefinition Height="302"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--up名字-->
+                        <Grid Grid.Row="0">
+                            <TextBlock x:Name="video_up"
+                                       Block.TextAlignment="Left"
+                                       FontFamily="Helvetica Neue"
+                                       FontWeight="Bold"
+                                       Text="{Binding video_up}"
+                                       FontSize="16"
+                                       Margin="0,16,0,0" />
                         </Grid>
-                        <!--右边组-->
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="36"></RowDefinition>
-                                <RowDefinition Height="38"></RowDefinition>
-                                <RowDefinition Height="302"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <!--up名字-->
-                            <Grid Grid.Row="0">
-                                <TextBlock x:Name="video_up"
-                                           Block.TextAlignment="Left"
-                                           FontFamily="Helvetica Neue"
-                                           FontWeight="Bold"
-                                           Text="{Binding video_up}"
-                                           FontSize="16"
-                                           Margin="0,16,0,0" />
-                            </Grid>
-                            <!--视频简介-->
-                            <Grid Grid.Row="1">
-                                <TextBlock x:Name="video_introduction"
-                                           TextWrapping="WrapWithOverflow"
-                                           FontSize="16"
-                                           Text="{Binding video_introduction}"
-                                           FontFamily="Helvetica Neue" />
-                            </Grid>
-                            <!--（视频封面|视频）&标题信息栏-->
-                            <Grid Grid.Row="2">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="243"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <!--（视频封面|视频）-->
-                                    <Grid Grid.Row="0">
-                                        <Border BorderBrush="#FFD1D1D1"
-                                                BorderThickness="1,1,1,0"
-                                                CornerRadius="15,15,0,0">
-                                            <Image Source="{Binding video_cover}"
-                                                   Margin="1,0,0,0">
-                                                <Image.Clip>
-                                                    <RectangleGeometry RadiusX="15"
-                                                                       RadiusY="15"
-                                                                       Rect="0,0,390,243" />
-                                                </Image.Clip>
-                                            </Image>
-                                        </Border>
-                                    </Grid>
-                                    <GridSplitter HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Top"
-                                                  Grid.Row="1"
-                                                  Background="#FFD1D1D1"
-                                                  Height="1" />
-                                    <!--标题&信息栏-->
-                                    <Grid Grid.Row="1">
-                                        <Border BorderBrush="#FFD1D1D1"
-                                                BorderThickness="1,0,1, 1"
-                                                CornerRadius="0,0,15,15">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="30"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <!--标题栏-->
-                                                <Grid Grid.Row="0">
-                                                    <Label x:Name="video_title"
-                                                           HorizontalContentAlignment="Left"
-                                                           VerticalContentAlignment="Bottom"
-                                                           FontSize="14"
-                                                           Content="{Binding video_title}"
-                                                           Height="30"
-                                                           VerticalAlignment="Top"
-                                                           FontFamily="Helvetica Neue"
-                                                           FontWeight="Bold" />
-                                                </Grid>
-                                                <!--信息栏-->
-                                                <Grid Grid.Row="1">
-                                                    <Label x:Name="video_bvid"
-                                                           HorizontalContentAlignment="Left"
-                                                           VerticalContentAlignment="Top"
-                                                           FontSize="12"
-                                                           Foreground="Gray"
-                                                           FontFamily="Microsoft YaHei"
-                                                           Content="{Binding video_bvid}"
-                                                           Height="27"
-                                                           VerticalAlignment="Top" />
-                                                </Grid>
-
+                        <!--视频简介-->
+                        <Grid Grid.Row="1">
+                            <TextBlock x:Name="video_introduction"
+                                       TextWrapping="WrapWithOverflow"
+                                       FontSize="16"
+                                       Text="{Binding video_introduction}"
+                                       FontFamily="Helvetica Neue" />
+                        </Grid>
+                        <!--（视频封面|视频）&标题信息栏-->
+                        <Grid Grid.Row="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="243"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <!--（视频封面|视频）-->
+                                <Grid Grid.Row="0">
+                                    <Border BorderBrush="#FFD1D1D1"
+                                            BorderThickness="1,1,1,0"
+                                            CornerRadius="15,15,0,0">
+                                        <Image Source="{Binding video_cover}"
+                                               Margin="0">
+                                            <Image.Clip>
+                                                <RectangleGeometry RadiusX="15"
+                                                                   RadiusY="15"
+                                                                   Rect="0,0,390,243" />
+                                            </Image.Clip>
+                                        </Image>
+                                    </Border>
+                                </Grid>
+                                <GridSplitter HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Top"
+                                              Grid.Row="1"
+                                              Background="#FFD1D1D1"
+                                              Height="1" />
+                                <!--标题&信息栏-->
+                                <Grid Grid.Row="1">
+                                    <Border BorderBrush="#FFD1D1D1"
+                                            BorderThickness="1,0,1, 1"
+                                            CornerRadius="0,0,15,15">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <!--标题栏-->
+                                            <Grid Grid.Row="0">
+                                                <Label x:Name="video_title"
+                                                       HorizontalContentAlignment="Left"
+                                                       VerticalContentAlignment="Bottom"
+                                                       FontSize="14"
+                                                       Content="{Binding video_title}"
+                                                       Height="30"
+                                                       VerticalAlignment="Top"
+                                                       FontFamily="Helvetica Neue"
+                                                       FontWeight="Bold" />
                                             </Grid>
-                                        </Border>
+                                            <!--信息栏-->
+                                            <Grid Grid.Row="1">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Grid.Column="0">
+                                                        <Label  x:Name="video_bvid"
+                                                                HorizontalContentAlignment="Left"
+                                                                VerticalContentAlignment="Top"
+                                                                FontSize="12"
+                                                                Foreground="Gray"
+                                                                FontFamily="Microsoft YaHei"
+                                                                Content="{Binding video_bvid}"
+                                                                Height="27"
+                                                                VerticalAlignment="Top" />
+                                                    </Grid>
+                                                    <!--播放量模块-->
+                                                    <Grid Grid.Column="1">
+                                                        <!--播放量LOGO-->
+                                                        <Image Source="resource/img/播放量.png"
+                                                               Height="20"
+                                                               RenderTransformOrigin="0.4,0.589"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center" />
+                                                        <!--播放量-->
+                                                        <Label x:Name="video_play_volume"
+                                                               FontSize="12"
+                                                               FontFamily="Microsoft YaHei"
+                                                               Foreground="Gray"
+                                                               Content="{Binding video_play_volume}"
+                                                               Height="28"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               Margin="24,0,0,0"
+                                                               Width="73" />
+                                                    </Grid>
+                                                    <!--弹幕数模块-->
+                                                    <Grid Grid.Column="2">
+                                                        <!--弹幕数LOGO-->
+                                                        <Image Source="resource/img/弹幕数.png"
+                                                               Height="14"
+                                                               RenderTransformOrigin="0.4,0.589"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center" />
+                                                        <!--弹幕数-->
+                                                        <Label x:Name="video_barrages"
+                                                               FontSize="12"
+                                                               FontFamily="Microsoft YaHei"
+                                                               Foreground="Gray"
+                                                               Content="{Binding video_play_barrages}"
+                                                               Height="28"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               Margin="24,0,0,0"
+                                                               Width="73" />
+                                                    </Grid>
+                                                    <!--评论数模块-->
+                                                    <Grid Grid.Column="3">
+                                                        <!--评论数LOGO-->
+                                                        <Image Source="resource/img/评论数.png"
+                                                               Height="20"
+                                                               RenderTransformOrigin="0.4,0.589"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center" />
+                                                        <!--评论数-->
+                                                        <Label x:Name="video_comments"
+                                                               FontSize="12"
+                                                               FontFamily="Microsoft YaHei"
+                                                               Foreground="Gray"
+                                                               Content="{Binding video_play_comments}"
+                                                               Height="28"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               Margin="24,0,0,0"
+                                                               Width="73" />
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
 
-                                    </Grid>
                                 </Grid>
                             </Grid>
-                            <!--四连-->
-                            <Grid Grid.Row="3">
+                        </Grid>
+                        <!--五连-->
+                        <Grid Grid.Row="3">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <!--播放量数模块-->
-                                <Grid Grid.Column="0">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <!--播放量LOGO-->
-                                        <Grid Grid.Column="0">
-                                            <Button Height="39"
-                                                    Background="Transparent"
-                                                    BorderThickness="0"
-                                                    VerticalAlignment="Top">
-                                                <Image Source="resource/img/播放量.png"
-                                                       Height="24"
-                                                       RenderTransformOrigin="0.4,0.589" />
-                                            </Button>
-                                        </Grid>
-                                        <!--播放量数-->
-                                        <Grid Grid.Column="1">
-                                            <TextBlock x:Name="video_play_volume"
-                                                       FontSize="14"
-                                                       FontFamily="Helvetica Neue"
-                                                       Margin="0,6,0,0"
-                                                       Text="{Binding video_play_volume}"
-                                                       Height="30
-                                                   "
-                                                       VerticalAlignment="Top"
-                                                       FontWeight="Bold">
-                                            </TextBlock>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
                                 <!--点赞数模块-->
-                                <Grid Grid.Column="1">
+                                <Grid Grid.Column="0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -205,7 +225,8 @@
                                             <Button Height="39"
                                                     Background="Transparent"
                                                     BorderThickness="0"
-                                                    VerticalAlignment="Top">
+                                                    VerticalAlignment="Top"
+                                                    Margin="10,0,0,0">
                                                 <Image Source="resource/img/点赞数.png"
                                                        Height="20"
                                                        RenderTransformOrigin="0.4,0.589" />
@@ -217,7 +238,7 @@
                                                        FontFamily="Helvetica Neue"
                                                        Margin="0,6,0,0"
                                                        FontSize="14"
-                                                       Text="{Binding video_like}"
+                                                       Text="{Binding video_likes}"
                                                        Height="30"
                                                        VerticalAlignment="Top"
                                                        FontWeight="Bold">
@@ -226,7 +247,7 @@
                                     </Grid>
                                 </Grid>
                                 <!--硬币数模块-->
-                                <Grid Grid.Column="2">
+                                <Grid Grid.Column="1">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -237,7 +258,8 @@
                                             <Button Height="39"
                                                     Background="Transparent"
                                                     BorderThickness="0"
-                                                    VerticalAlignment="Top">
+                                                    VerticalAlignment="Top"
+                                                    Margin="10,0,0,0">
                                                 <Image Source="resource/img/硬币数.png"
                                                        Height="20"
                                                        RenderTransformOrigin="0.4,0.589" />
@@ -258,7 +280,7 @@
                                     </Grid>
                                 </Grid>
                                 <!--收藏数模块-->
-                                <Grid Grid.Column="3">
+                                <Grid Grid.Column="2">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -269,7 +291,8 @@
                                             <Button Height="39"
                                                     Background="Transparent"
                                                     BorderThickness="0"
-                                                    VerticalAlignment="Top">
+                                                    VerticalAlignment="Top"
+                                                    Margin="10,0,0,0">
                                                 <Image Source="resource/img/收藏数.png"
                                                        Height="20"
                                                        RenderTransformOrigin="0.4,0.589" />
@@ -290,7 +313,7 @@
                                     </Grid>
                                 </Grid>
                                 <!--转发数模块-->
-                                <Grid Grid.Column="4">
+                                <Grid Grid.Column="3">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -301,7 +324,8 @@
                                             <Button Height="39"
                                                     Background="Transparent"
                                                     BorderThickness="0"
-                                                    VerticalAlignment="Top">
+                                                    VerticalAlignment="Top"
+                                                    Margin="10,0,0,0">
                                                 <Image Source="resource/img/转发数.png"
                                                        Height="20"
                                                        RenderTransformOrigin="0.4,0.589" />
@@ -321,11 +345,27 @@
                                         </Grid>
                                     </Grid>
                                 </Grid>
-
                             </Grid>
                         </Grid>
                     </Grid>
-                </Border>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemTemplate="{StaticResource double_row}"
+                          x:Name="content_box"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          BorderThickness="0"
+                          BorderBrush="#FFC9CCD4">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+
             </ItemsControl>
         </ScrollViewer>
     </Grid>
