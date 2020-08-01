@@ -224,8 +224,98 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-<!--主界面三列推荐-->
+    <!--主窗口左列表按钮效果-->
+    <Style x:Key="ButtonStyle"
+           TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate  TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="Storyboard1">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                           Storyboard.TargetName="grid">
+                                <SplineDoubleKeyFrame KeyTime="0:0:0.2"
+                                                      Value="1.25" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                           Storyboard.TargetName="grid">
+                                <SplineDoubleKeyFrame KeyTime="0:0:0.2"
+                                                      Value="1.25" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="Storyboard2">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                           Storyboard.TargetName="grid">
+                                <SplineDoubleKeyFrame KeyTime="0:0:0.2"
+                                                      Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                           Storyboard.TargetName="grid">
+                                <SplineDoubleKeyFrame KeyTime="0:0:0.2"
+                                                      Value="1" />
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="grid"
+                          RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <Label Name="lbl"
+                               Content="{TemplateBinding Content}"
+                               Background="Transparent"
+                               Height="66"
+                               Width="182"
+                               HorizontalContentAlignment="Left"
+                               VerticalContentAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused"
+                                 Value="True" />
+                        <Trigger Property="IsDefaulted"
+                                 Value="True" />
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="lbl"
+                                    Value="#330091FF" />
+                            <Trigger.ExitActions>
+                                <BeginStoryboard x:Name="Storyboard_Copy1_BeginStoryboard"
+                                                 Storyboard="{StaticResource Storyboard2}" />
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="lbl"
+                                    Value="#000000FF" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--主界面三列推荐-->
     <DataTemplate x:Key="Three_column_recommendations">
         <!--整个视频模块-->
         <Grid Width="304"
@@ -241,7 +331,7 @@
                         BorderBrush="#FFD1D1D1"
                         BorderThickness="0"
                         CornerRadius="10,10,0,0">
-                    <Image Source="{Binding video_cover}"
+                    <Image Name="cover_img" Source="{Binding video_cover}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top">
                         <Image.Clip>
@@ -357,6 +447,7 @@
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Width="22"
+                                   
                                    Margin="6,0,0,0">
                                 <Image.Clip>
                                     <RectangleGeometry RadiusX="100"
@@ -365,7 +456,8 @@
                                 </Image.Clip>
                             </Image>
                             <!--UP名字&发布时间-->
-                            <Label FontFamily="Microsoft YaHei"
+                            <Label 
+                                FontFamily="Microsoft YaHei"
                                    VerticalContentAlignment="Center"
                                    Foreground="Gray"
                                    Content="{Binding video_up}"

@@ -9,7 +9,8 @@
       d:DesignHeight="837"
       d:DesignWidth="989"
       Background="#FFFFFBFB"
-      Title="index">
+      Title="index"
+      >
     <Page.Resources>
 
         <ResourceDictionary>
@@ -20,7 +21,8 @@
 
     </Page.Resources>
     <Grid>
-        <ScrollViewer Template="{StaticResource MyScrollViewer}" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="index_scrollViewer" Template="{StaticResource MyScrollViewer}" VerticalScrollBarVisibility="Auto"
+                      ScrollChanged="ScrollChanged">
             <ItemsControl ItemTemplate="{StaticResource Three_column_recommendations}"
                           x:Name="content_box"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -32,7 +34,6 @@
 
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                
             </ItemsControl>
         </ScrollViewer>
     </Grid>

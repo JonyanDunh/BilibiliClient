@@ -8,6 +8,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace Bilibili_Client
@@ -15,8 +18,10 @@ namespace Bilibili_Client
     /// <summary>
     /// index.xaml 的交互逻辑
     /// </summary>
+    
     public partial class index : Page
     {
+        ManualResetEvent Thread_blocking = new ManualResetEvent(false);//线程阻塞
         class up_info
         {
             public String head_img;   // up头像
@@ -33,11 +38,17 @@ namespace Bilibili_Client
             InitializeComponent();
             Thread thread = new Thread(Home_Recommendation);//加载推荐视频的函数加入一个新的子线程
             thread.Start();//线程开始
+            
+
+
         }
         private void Home_Recommendation()
         {
-
-            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=1596246654&flush=0&column=4&device=pad&pull=false&build=5520400&mobi_app=iphone&platform=ios&ts=1596246653");
+            while(true)
+            {
+                Thread_blocking.Reset();
+                Thread_blocking.WaitOne();
+                var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=1596246654&flush=0&column=4&device=pad&pull=false&build=5520400&mobi_app=iphone&platform=ios&ts=1596246653");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
@@ -47,31 +58,30 @@ namespace Bilibili_Client
             {
                 new Thread((obj) =>
                 {
-
                     List<double_row_video> double_row_video = new List<double_row_video>
                     {
                         new double_row_video(
                   items[(int)obj]["avatar"]["cover"].ToString(),//up头像
                   items[(int)obj]["desc"].ToString(),//up名字
-                  "",//up是否有认证
-                  //GetTime(gets_video_info(items[(int)obj]["param"].ToString()).release_time),//发布时间
-                  //gets_video_info(items[(int)obj]["param"].ToString()).introduction,//介绍
-                  items[(int)obj]["cover"].ToString(),//封面
+                 items[(int)obj]["cover"].ToString(),//封面
                   items[(int)obj]["cover_left_text_1"].ToString(),//时长
-                  items[(int)obj]["title"].ToString(),//标题
+                  items[(int)obj]["title"].ToString().Length>17?items[(int)obj]["title"].ToString().Substring(0,17)+"...":items[(int)obj]["title"].ToString(),//标题
                   items[(int)obj]["args"]["rname"].ToString(),//分区
                   items[(int)obj]["cover_left_text_2"].ToString(),//播放量
                   items[(int)obj]["cover_left_text_3"].ToString()//弹幕数
-                 // gets_video_info(items[(int)obj]["param"].ToString()).comments,//评论数
-                 // Get_video_tags(items[(int)obj]["param"].ToString())//TAGS
                   )
                        };
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
-                        content_box.Items.Add(double_row_video);
+                        
+                        content_box.Items.Add(double_row_video);//按照模板加入一个item
+                        
                     });
 
                 }).Start(i);
+               
+            }
+                
 
             }
 
@@ -80,14 +90,10 @@ namespace Bilibili_Client
         {
             public string head_img_url { get; private set; }
             public string video_up { get; private set; }
-            public string video_introduction { get; private set; }
             public string video_cover { get; private set; }
             public string video_title { get; private set; }
             public string video_play_volume { get; private set; }
             public string video_barrages { get; private set; }
-            public string video_comments { get; private set; }
-            public string video_release_time { get; private set; }
-            public string up_certification { get; private set; }
             public string video_duration { get; private set; }
             public string video_partition { get; private set; }
             public List<tag> tag_control { set; get; }
@@ -96,31 +102,24 @@ namespace Bilibili_Client
             public double_row_video(
                 string up_head, //up头像
                 string up,//up名字
-                string certification,//up是否有认证
-                //string release_time,//发布时间
-                //string introduction, //介绍
                 string cover,//封面
                 string duration,//时长
                 string title,//标题
                 string partition,//分区
                 string play_volume, //播放量
                 string barrages //弹幕数
-               // string comments ,//评论数
-                //List<tag> video_tags//视频标签
+                                //List<tag> video_tags//视频标签
                 )
             {
                 head_img_url = up_head;//up头像
                 video_up = up;//up名字
-                up_certification = certification;//up是否有认证
-                //video_release_time = release_time;//发布时间
-               // video_introduction = introduction;//介绍
+
                 video_cover = cover;//封面
                 video_duration = duration;//时长
                 video_title = title;//标题
                 video_partition = partition;//分区
                 video_play_volume = play_volume;//播放量
                 video_barrages = barrages;//弹幕数
-                //video_play_comments = comments;//评论数
                 //tag_control = video_tags;//视频标签
 
             }
@@ -154,7 +153,7 @@ namespace Bilibili_Client
             IRestResponse response = client.Execute(request);
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
             video_info videoinfo = new video_info();
-            videoinfo.head_img= recommend["data"]["owner"]["face"].ToString();
+            videoinfo.head_img = recommend["data"]["owner"]["face"].ToString();
             videoinfo.introduction = recommend["data"]["desc"].ToString();
             videoinfo.comments = recommend["data"]["stat"]["reply"].ToString();
             videoinfo.release_time = recommend["data"]["pubdate"].ToString();
@@ -192,6 +191,27 @@ namespace Bilibili_Client
             return video_tag;
         }
 
+        public delegate void TransfDelegate(String value);
+        public event TransfDelegate TransfEvent;
+        private void  button1_Click(object sender, EventArgs e)
+        {
 
+
+        }
+
+        private void ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset)
+                Thread_blocking.Set();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            Image img = GetChildObject<Image>(content_box, "cover_img");
+            //img.Source = new BitmapImage(new Uri("pack://application:,,,/resource/img/BILIBILI_LOGO.png"));
+            RenderOptions.SetBitmapScalingMode(img, BitmapScalingMode.LowQuality);
+        }
+        public T GetChildObject<T>(DependencyObject obj, string name) where T : FrameworkElement { DependencyObject child = null; T grandChild = null; for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++) { child = VisualTreeHelper.GetChild(obj, i); if (child is T && (((T)child).Name == name | string.IsNullOrEmpty(name))) { return (T)child; } else { grandChild = GetChildObject<T>(child, name); if (grandChild != null) return grandChild; } } return null; }
     }
 }

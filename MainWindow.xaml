@@ -5,135 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
-        Background="Transparent"
-        ResizeMode="NoResize"
+        x:Name="mainwindow"
+        Background="White"
         Title="PILIPILI客户端"
         Height="900"
-        Width="1600"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        >
+        Width="1608" MinWidth="1011.1">
     <Window.Resources>
-        <Style x:Key="ButtonStyle"
-               TargetType="{x:Type Button}">
-            <Setter Property="VerticalAlignment"
-                    Value="Center" />
-            <Setter Property="HorizontalAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="FocusVisualStyle"
-                    Value="{x:Null}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate  TargetType="{x:Type Button}">
-                        <ControlTemplate.Resources>
-                            <Storyboard x:Key="Storyboard1">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                               Storyboard.TargetName="grid">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2"
-                                                          Value="1.25" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                               Storyboard.TargetName="grid">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2"
-                                                          Value="1.25" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                            <Storyboard x:Key="Storyboard2">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                               Storyboard.TargetName="grid">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2"
-                                                          Value="1" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                               Storyboard.TargetName="grid">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2"
-                                                          Value="1" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </ControlTemplate.Resources>
-                        <Grid x:Name="grid"
-                              RenderTransformOrigin="0.5,0.5">
-                            <Grid.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform />
-                                    <SkewTransform />
-                                    <RotateTransform />
-                                    <TranslateTransform />
-                                </TransformGroup>
-                            </Grid.RenderTransform>
-                            <Label Name="lbl"
-                                   Content="{TemplateBinding Content}"
-                                   Background="Transparent"
-                                   Height="66"
-                                   Width="182"
-                                   HorizontalContentAlignment="Left"
-                                   VerticalContentAlignment="Center" />
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused"
-                                     Value="True" />
-                            <Trigger Property="IsDefaulted"
-                                     Value="True" />
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        TargetName="lbl"
-                                        Value="#330091FF" />
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard x:Name="Storyboard_Copy1_BeginStoryboard"
-                                                     Storyboard="{StaticResource Storyboard2}" />
-                                </Trigger.ExitActions>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
-                                </Trigger.EnterActions>
-                            </Trigger>
-                            <Trigger Property="IsPressed"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        TargetName="lbl"
-                                        Value="#000000FF" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled"
-                                     Value="False" />
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="233.4" />
-            <ColumnDefinition Width="988.8" />
-            <ColumnDefinition Width="377.7" />
+            <ColumnDefinition Width="988.8*" MinWidth="400" />
+            <ColumnDefinition Width="377.7"   />
         </Grid.ColumnDefinitions>
-        <!-- 主边框-->
-        <Border  Background="White"
-                 CornerRadius="10"
-                 BorderThickness="5"
-                 BorderBrush="#FED4E0"
-                 Grid.ColumnSpan="3">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="0"
-                                  BlurRadius="8" />
-            </Border.Effect>
-
-        </Border>
 
         <!--左边组-->
         <Grid x:Name="left_grid"
               Grid.Column="0"
-              Margin="5,5,0,5">
+              Margin="0">
             <!--PILIPILI_Logo-->
             <Image Source="resource/img/PILIPILI_LOGO.png"
-                   Margin="47,10,47,820"
+                   Margin="47,10,47,0"
                    RenderTransformOrigin="0.5,0.5"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center" />
+                   x:Name="logo"
+                   VerticalAlignment="Top" />
             <Grid  x:Name="button_grid"
                    Margin="0,95,0,0"
                    HorizontalAlignment="Center">
@@ -157,8 +57,7 @@
                          FontWeight="Bold"
                          Grid.Row="0"
                          VerticalAlignment="Stretch"
-                         HorizontalAlignment="Center"
-                         Width="228">
+                         HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/首页.png"
                                Width="32"
@@ -173,8 +72,7 @@
                          FontWeight="Bold"
                          Grid.Row="1"
                          VerticalAlignment="Stretch"
-                         HorizontalAlignment="Center"
-                         Width="228">
+                         HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/动态.png"
                                Width="32"
@@ -189,8 +87,7 @@
                         FontWeight="Bold"
                         Grid.Row="2"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/排行榜.png"
                                Width="32"
@@ -205,8 +102,7 @@
                         FontWeight="Bold"
                         Grid.Row="3"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/分类.png"
                                Width="32"
@@ -221,8 +117,7 @@
                         FontWeight="Bold"
                         Grid.Row="4"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/直播.png"
                                Width="32"
@@ -237,8 +132,7 @@
                         FontWeight="Bold"
                         Grid.Row="5"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/番剧.png"
                                Width="32"
@@ -253,8 +147,7 @@
                         FontWeight="Bold"
                         Grid.Row="6"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/漫画.png"
                                Width="32"
@@ -269,8 +162,7 @@
                         FontWeight="Bold"
                         Grid.Row="7"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/会员购.png"
                                Width="32"
@@ -285,8 +177,7 @@
                         FontWeight="Bold"
                         Grid.Row="8"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/游戏.png"
                                Width="32"
@@ -301,8 +192,7 @@
                         FontWeight="Bold"
                         Grid.Row="9"
                         VerticalAlignment="Stretch"
-                        HorizontalAlignment="Center"
-                        Width="228">
+                        HorizontalAlignment="Stretch">
                     <WrapPanel>
                         <Image Source="resource/img/投稿.png"
                                Width="32"
@@ -318,8 +208,7 @@
                         FontWeight="Bold"
                         Grid.Row="10"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Stretch"
-                        Width="228">
+                        VerticalAlignment="Stretch">
 
                     <WrapPanel>
                         <Image Source="resource/img/头像.png"
@@ -338,7 +227,7 @@
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
                                     BorderThickness="0"
-                                    CornerRadius="30"
+                                    CornerRadius="5"
                                     Name="PART_Background">
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="0,1"
@@ -360,60 +249,94 @@
                 </Button>
             </Grid>
         </Grid>
-        <GridSplitter HorizontalAlignment="Right"
-                      Grid.Column="0"
-                      Width="2" />
         <!--中间-->
         <Grid x:Name="middle_grid"
               Grid.Column="1"
-              Margin="0,5">
+              Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="53"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <!--标题栏-->
-            <!--标题-->
+            <Grid Grid.Row="0">
+                <!--标题-->
             <Label x:Name="middle_title"
                    HorizontalContentAlignment="Center"
                    VerticalContentAlignment="Center"
                    FontSize="21"
                    FontFamily="Microsoft YaHei"
                    FontWeight="Bold"
-                   Grid.Row="0"
                    Content="首页"
                    Margin="0,0,900,0" />
-            <!--分割线-->
-            <GridSplitter  VerticalAlignment="Bottom"
-                           HorizontalAlignment="Stretch"
-                           Grid.Row="0"
-                           Height="2" />
+                <Button Foreground="White"
+                        FontSize="20"
+                        FontFamily="Microsoft YaHei"
+                        FontWeight="Bold"
+                        Grid.Row="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Height="40"
+                        Width="40"
+                        Margin="0,0,30,0"
+                        Click="index_button"
+                        x:Name="Refresh_button">
+
+                    <WrapPanel>
+                        <Image Source="resource/img/刷新.png"
+                               Width="24"
+                               Height="24">
+                        </Image>
+                    </WrapPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                    BorderThickness="0"
+                                    CornerRadius="50"
+                                    Name="PART_Background">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0,1"
+                                                         StartPoint="0,0">
+                                        <GradientStop Color="#FED4E0"
+                                                      Offset="0.0" />
+                                        <GradientStop Color="#FFFBE1E9"
+                                                      Offset="0.5" />
+                                        <GradientStop Color="#FFFBE1E9"
+                                                      Offset="0.0" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter  Content="{TemplateBinding ContentControl.Content}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
             <!--中间页面-->
+            <Grid Grid.Row="1">
             <Frame x:Name="middle_frame"
                    Grid.Row="1"
-                   Source="index.xaml"></Frame>
+                   Source=""></Frame>
+                </Grid>
         </Grid>
-        <GridSplitter HorizontalAlignment="Left"
-                      Grid.Column="2"
-                      Width="2" />
         <!--右边组-->
         <Grid x:Name="right_grid"
-              Grid.Column="2"
-              Margin="0,5,5,5">
+              Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="53"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <!--搜索栏-->
             <Grid Grid.Row="0"
-                  x:Name="search_bar"
-                  Margin="15,8">
+                  x:Name="search_bar">
+                <Grid Margin="10,10,15,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Border BorderBrush="#FED4E0"
                         BorderThickness="1,1,0,1"
-                        CornerRadius="15,0,0,15">
+                        CornerRadius="5,0,0,5">
                     <Image Source="resource/img/搜索.png"
                            Width="30"
                            Height="30">
@@ -430,7 +353,7 @@
                         BorderThickness="0,1,1,1"
                         Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
                         SnapsToDevicePixels="true"
-                        CornerRadius="0,15,15,0">
+                        CornerRadius="0,5,5,0">
                     <TextBox BorderBrush="{x:Null}"
                              BorderThickness="0"
                              x:Name="search_textbox"
@@ -438,7 +361,7 @@
                              VerticalContentAlignment="Center"
                              FontFamily="Microsoft YaHei Light"
                              Grid.Row="0"
-                             Margin="0,0,14,0">
+                                 Margin="0,0,-1,0">
                         <TextBox.Resources>
                             <VisualBrush x:Key="HelpBrush"
                                          TileMode="None"
@@ -469,6 +392,7 @@
                         </TextBox.Style>
                     </TextBox>
                 </Border>
+                </Grid>
             </Grid>
             <!--右边页面-->
             <!--<Frame x:Name="right_frame"

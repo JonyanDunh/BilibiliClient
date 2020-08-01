@@ -181,5 +181,8 @@
   <ItemGroup>
     <Resource Include="resource\img\认证.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\img\刷新.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
