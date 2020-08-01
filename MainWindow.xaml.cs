@@ -49,8 +49,8 @@ namespace Bilibili_Client
         private void index_button(object sender, RoutedEventArgs e)
         {
 
-            if(index_page.index_scrollViewer.ScrollableHeight== index_page.index_scrollViewer.ContentVerticalOffset)
-            MessageBox.Show("到底了");
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
 
 

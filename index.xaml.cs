@@ -95,11 +95,14 @@ namespace Bilibili_Client
                         content_box.Items.Add(double_row_video);//按照模板加入一个item
                         
                     });
+                   
 
                 }).Start(i);
                
             }
+                
                 Thread_blocking.Reset();
+               
 
             }
 
