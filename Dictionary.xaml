@@ -472,4 +472,21 @@
             </Grid>
         </Grid>
     </DataTemplate>
+    <DataTemplate x:Key="Mainwindow_left_button">
+        <Button FontSize="21"
+                Style="{StaticResource ButtonStyle}"
+                FontFamily="Microsoft YaHei"
+                FontWeight="Bold"
+                Grid.Row="0"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch">
+            <WrapPanel>
+                <Image Source="{Binding left_button_img}"
+                       Width="32"
+                       Height="32" />
+                <TextBlock Text="{Binding left_button_name}"
+                           VerticalAlignment="Center" />
+            </WrapPanel>
+        </Button>
+    </DataTemplate>
 </ResourceDictionary>

@@ -136,7 +136,7 @@
     <Resource Include="resource\img\漫画.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\排行榜.png" />
+    <Resource Include="resource\img\排行.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\相机.png" />
@@ -145,7 +145,7 @@
     <Resource Include="resource\img\会员购.png" />
     <Resource Include="resource\img\番剧.png" />
     <Resource Include="resource\img\动态.png" />
-    <Resource Include="resource\img\游戏.png" />
+    <Resource Include="resource\img\游戏中心.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\我的.png" />
@@ -154,7 +154,7 @@
     <Resource Include="resource\img\头像.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\投稿.png" />
+    <Resource Include="resource\img\投稿工具.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\PILIPILI_LOGO.png" />
