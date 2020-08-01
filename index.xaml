@@ -8,11 +8,11 @@
       mc:Ignorable="d"
       d:DesignHeight="837"
       d:DesignWidth="989"
-      Background="White"
+      Background="#FFFFFBFB"
       Title="index">
     <Page.Resources>
         <DataTemplate x:Key="double_row">
-            <!--整个外边框-->
+            <!--整个视频模块-->
             <Grid Width="304"
                   Height="284"
                   Margin="0,18,0,0">
@@ -22,8 +22,9 @@
                 </Grid.RowDefinitions>
                 <!--（视频封面|视频）&&时长-->
                 <Grid Grid.Row="0">
-                    <Border BorderBrush="#FFD1D1D1"
-                            BorderThickness="1,1,1,0"
+                    <Border Background="White"
+                            BorderBrush="#FFD1D1D1"
+                            BorderThickness="0"
                             CornerRadius="10,10,0,0">
                         <Image Source="{Binding video_cover}"
                                HorizontalAlignment="Right"
@@ -48,16 +49,12 @@
                                Foreground="White" />
                     </Border>
                 </Grid>
-                <GridSplitter HorizontalAlignment="Stretch"
-                              VerticalAlignment="Top"
-                              Grid.Row="1"
-                              Background="#FFD1D1D1"
-                              Height="1" />
                 <!--标题&信息栏-->
                 <Grid Grid.Row="1">
                     <Border BorderBrush="#FFD1D1D1"
-                            BorderThickness="1,0,1, 1"
-                            CornerRadius="0,0,10,10">
+                            BorderThickness="0"
+                            CornerRadius="0,0,10,10"
+                            Background="White">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"></RowDefinition>
@@ -72,7 +69,7 @@
                                        Content="{Binding video_title}"
                                        Height="30"
                                        VerticalAlignment="Top"
-                                       FontFamily="Helvetica Neue"
+                                       FontFamily="Microsoft YaHei"
                                        FontWeight="Bold" />
                             </Grid>
                             <!--信息栏-->
@@ -95,13 +92,14 @@
                                                Margin="6,0,0,0"
                                                Width="20" />
                                         <!--播放量-->
-                                        <Label FontSize="10"
-                                               FontFamily="Microsoft YaHei"
+                                        <Label FontFamily="Microsoft YaHei"
                                                Foreground="Gray"
                                                Content="{Binding video_play_volume}"
                                                VerticalContentAlignment="Center"
                                                Margin="26,0,0,0"
-                                               HorizontalAlignment="Left" />
+                                               HorizontalAlignment="Left"
+                                               FontSize="10"
+                                               FontWeight="Bold" />
                                     </Grid>
                                     <!--弹幕数模块-->
                                     <Grid Grid.Column="1">
@@ -121,7 +119,8 @@
                                                VerticalContentAlignment="Center"
                                                Margin="22,0,0,0"
                                                HorizontalAlignment="Left"
-                                               Width="76" />
+                                               Width="76"
+                                               FontWeight="Bold" />
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <!--弹幕数-->
@@ -129,7 +128,8 @@
                                                Foreground="Gray"
                                                Content="{Binding video_partition}"
                                                VerticalContentAlignment="Center"
-                                               HorizontalAlignment="Left" />
+                                               HorizontalAlignment="Left"
+                                               FontWeight="Bold" />
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -149,14 +149,14 @@
                                                            Rect="0,0,22,22" />
                                     </Image.Clip>
                                 </Image>
-                                <!--播放量-->
-                                <Label FontSize="10"
-                                       FontFamily="Microsoft YaHei"
+                                <!--UP名字&发布时间-->
+                                <Label FontFamily="Microsoft YaHei"
                                        VerticalContentAlignment="Center"
                                        Foreground="Gray"
                                        Content="{Binding video_up}"
                                        Margin="26,0,0,0"
-                                       HorizontalAlignment="Left" />
+                                       HorizontalAlignment="Left"
+                                       FontWeight="Bold" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -179,7 +179,7 @@
 
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-               
+                
             </ItemsControl>
         </ScrollViewer>
     </Grid>
