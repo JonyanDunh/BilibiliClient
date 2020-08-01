@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,10 +27,13 @@ namespace Bilibili_Client
             mainwindow.Width = (SystemParameters.PrimaryScreenWidth) * 0.83;
             mainwindow.Height = (SystemParameters.PrimaryScreenHeight) * 0.83;
             left_grid.Width = mainwindow.Width * 0.145;
-            right_grid.Width = mainwindow.Width * 0.234;
-            
+            right_grid.Width = mainwindow.Width * 0.234;    
             middle_frame.Navigate(index_page);
-
+            if (false == Directory.Exists(@"Data\Cache"))
+            {
+                //创建DATA文件夹
+                Directory.CreateDirectory(@"Data\Cache");
+            }
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e)//移动窗口

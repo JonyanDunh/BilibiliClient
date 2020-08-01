@@ -5,12 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace Bilibili_Client
@@ -38,7 +37,16 @@ namespace Bilibili_Client
             InitializeComponent();
             Thread thread = new Thread(Home_Recommendation);//加载推荐视频的函数加入一个新的子线程
             thread.Start();//线程开始
-            
+            if (false == Directory.Exists(@"Data\Cache\Img\Avatar\"))
+            {
+                //创建DATA文件夹
+                Directory.CreateDirectory(@"Data\Cache\Img\Avatar\");
+            }
+            if (false == Directory.Exists(@"Data\Cache\Img\Cover\"))
+            {
+                //创建DATA文件夹
+                Directory.CreateDirectory(@"Data\Cache\Img\Cover\");
+            }
 
 
         }
@@ -46,7 +54,6 @@ namespace Bilibili_Client
         {
             while(true)
             {
-                Thread_blocking.Reset();
                 Thread_blocking.WaitOne();
                 var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=1596246654&flush=0&column=4&device=pad&pull=false&build=5520400&mobi_app=iphone&platform=ios&ts=1596246653");
             client.Timeout = -1;
@@ -54,16 +61,27 @@ namespace Bilibili_Client
             IRestResponse response = client.Execute(request);
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
             Newtonsoft.Json.Linq.JToken items = recommend["data"]["items"];
-            for (int i = 1; i < items.Count(); i++)
+                for (int i = 1; i <= items.Count()-1; i++)
             {
                 new Thread((obj) =>
                 {
+                    WebClient myWebClient = new WebClient();
+                    string avatar_path = System.Environment.CurrentDirectory+@"\Data\Cache\Img\Avatar\" + items[(int)obj]["args"]["up_id"].ToString() + ".png";
+                    string cover_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Cover\" + items[(int)obj]["args"]["aid"].ToString() + ".png";
+                    if (!System.IO.File.Exists(avatar_path))
+                    {
+                        myWebClient.DownloadFile(items[(int)obj]["avatar"]["cover"].ToString(), avatar_path);
+                    }
+                    if (!System.IO.File.Exists(cover_path))
+                    {
+                        myWebClient.DownloadFile(items[(int)obj]["cover"].ToString(), cover_path);
+                    }
                     List<double_row_video> double_row_video = new List<double_row_video>
                     {
                         new double_row_video(
-                  items[(int)obj]["avatar"]["cover"].ToString(),//up头像
+                  avatar_path,//up头像
                   items[(int)obj]["desc"].ToString(),//up名字
-                 items[(int)obj]["cover"].ToString(),//封面
+                  cover_path,//封面
                   items[(int)obj]["cover_left_text_1"].ToString(),//时长
                   items[(int)obj]["title"].ToString().Length>17?items[(int)obj]["title"].ToString().Substring(0,17)+"...":items[(int)obj]["title"].ToString(),//标题
                   items[(int)obj]["args"]["rname"].ToString(),//分区
@@ -81,7 +99,7 @@ namespace Bilibili_Client
                 }).Start(i);
                
             }
-                
+                Thread_blocking.Reset();
 
             }
 
@@ -191,27 +209,11 @@ namespace Bilibili_Client
             return video_tag;
         }
 
-        public delegate void TransfDelegate(String value);
-        public event TransfDelegate TransfEvent;
-        private void  button1_Click(object sender, EventArgs e)
-        {
-
-
-        }
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset)
                 Thread_blocking.Set();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            Image img = GetChildObject<Image>(content_box, "cover_img");
-            //img.Source = new BitmapImage(new Uri("pack://application:,,,/resource/img/BILIBILI_LOGO.png"));
-            RenderOptions.SetBitmapScalingMode(img, BitmapScalingMode.LowQuality);
-        }
-        public T GetChildObject<T>(DependencyObject obj, string name) where T : FrameworkElement { DependencyObject child = null; T grandChild = null; for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++) { child = VisualTreeHelper.GetChild(obj, i); if (child is T && (((T)child).Name == name | string.IsNullOrEmpty(name))) { return (T)child; } else { grandChild = GetChildObject<T>(child, name); if (grandChild != null) return grandChild; } } return null; }
     }
 }
