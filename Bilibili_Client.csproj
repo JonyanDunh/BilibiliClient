@@ -65,6 +65,10 @@
     <Compile Include="video.xaml.cs">
       <DependentUpon>video.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="index.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
