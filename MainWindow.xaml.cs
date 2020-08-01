@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace Bilibili_Client
 {
@@ -20,9 +21,15 @@ namespace Bilibili_Client
 
     public partial class MainWindow : Window
     {
+        // 实例化计时器
+        private DispatcherTimer showTimer = new DispatcherTimer();
         index index_page = new index();
         public MainWindow()
         {
+            // 定义定时器,TimeSpan最后一个值是时间，单位秒，3表示3秒检测一次
+            showTimer.Tick += new EventHandler(TimerGC);
+            showTimer.Interval = new TimeSpan(0, 0, 0, 1);
+            showTimer.Start();
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;//显示位置屏幕居中
             mainwindow.Width = (SystemParameters.PrimaryScreenWidth) * 0.83;
@@ -87,5 +94,21 @@ namespace Bilibili_Client
             }
         }
 
+        private void textBox1_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+
+            /*search_logo.BorderThickness.Left = 1;
+            search_logo.BorderThickness.Top = 1;
+            search_logo.BorderThickness.Right = 0;
+            search_logo.BorderThickness.Bottom = 1;
+            search_textbox_border.BorderThickness*/
+        }
+        // 定时器 GC
+        private void TimerGC(object sender, EventArgs e)
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
     }
 }
