@@ -37,13 +37,13 @@ namespace Bilibili_Client
         private void Home_Recommendation()
         {
 
-            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index");
+            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=1596246654&flush=0&column=4&device=pad&pull=false&build=5520400&mobi_app=iphone&platform=ios&ts=1596246653");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
             Newtonsoft.Json.Linq.JToken items = recommend["data"]["items"];
-            for (int i = 0; i <= items.Count() - 1; i++)
+            for (int i = 1; i < items.Count(); i++)
             {
                 new Thread((obj) =>
                 {
@@ -51,19 +51,19 @@ namespace Bilibili_Client
                     List<double_row_video> double_row_video = new List<double_row_video>
                     {
                         new double_row_video(
-                  gets_video_info(items[(int)obj]["param"].ToString()).head_img,//up头像
-                  items[(int)obj]["args"]["up_name"].ToString(),//up名字
+                  items[(int)obj]["avatar"]["cover"].ToString(),//up头像
+                  items[(int)obj]["desc"].ToString(),//up名字
                   "",//up是否有认证
-                  GetTime(gets_video_info(items[(int)obj]["param"].ToString()).release_time),//发布时间
-                  gets_video_info(items[(int)obj]["param"].ToString()).introduction,//介绍
+                  //GetTime(gets_video_info(items[(int)obj]["param"].ToString()).release_time),//发布时间
+                  //gets_video_info(items[(int)obj]["param"].ToString()).introduction,//介绍
                   items[(int)obj]["cover"].ToString(),//封面
-                  items[(int)obj]["cover_right_text"].ToString(),//时长
+                  items[(int)obj]["cover_left_text_1"].ToString(),//时长
                   items[(int)obj]["title"].ToString(),//标题
-                  items[(int)obj]["args"]["rname"].ToString() + " > " + items[0]["args"]["tname"].ToString(),//分区
-                  items[(int)obj]["cover_left_text_1"].ToString(),//播放量
-                  items[(int)obj]["cover_left_text_2"].ToString(),//弹幕数
-                  gets_video_info(items[(int)obj]["param"].ToString()).comments,//评论数
-                  Get_video_tags(items[(int)obj]["param"].ToString())//TAGS
+                  items[(int)obj]["args"]["rname"].ToString(),//分区
+                  items[(int)obj]["cover_left_text_2"].ToString(),//播放量
+                  items[(int)obj]["cover_left_text_3"].ToString()//弹幕数
+                 // gets_video_info(items[(int)obj]["param"].ToString()).comments,//评论数
+                 // Get_video_tags(items[(int)obj]["param"].ToString())//TAGS
                   )
                        };
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -84,8 +84,8 @@ namespace Bilibili_Client
             public string video_cover { get; private set; }
             public string video_title { get; private set; }
             public string video_play_volume { get; private set; }
-            public string video_play_barrages { get; private set; }
-            public string video_play_comments { get; private set; }
+            public string video_barrages { get; private set; }
+            public string video_comments { get; private set; }
             public string video_release_time { get; private set; }
             public string up_certification { get; private set; }
             public string video_duration { get; private set; }
@@ -97,31 +97,31 @@ namespace Bilibili_Client
                 string up_head, //up头像
                 string up,//up名字
                 string certification,//up是否有认证
-                string release_time,//发布时间
-                string introduction, //介绍
+                //string release_time,//发布时间
+                //string introduction, //介绍
                 string cover,//封面
                 string duration,//时长
                 string title,//标题
                 string partition,//分区
                 string play_volume, //播放量
-                string barrages, //弹幕数
-                string comments ,//评论数
-                List<tag> video_tags//视频标签
+                string barrages //弹幕数
+               // string comments ,//评论数
+                //List<tag> video_tags//视频标签
                 )
             {
                 head_img_url = up_head;//up头像
                 video_up = up;//up名字
                 up_certification = certification;//up是否有认证
-                video_release_time = release_time;//发布时间
-                video_introduction = introduction;//介绍
+                //video_release_time = release_time;//发布时间
+               // video_introduction = introduction;//介绍
                 video_cover = cover;//封面
                 video_duration = duration;//时长
                 video_title = title;//标题
                 video_partition = partition;//分区
                 video_play_volume = play_volume;//播放量
-                video_play_barrages = barrages;//弹幕数
-                video_play_comments = comments;//评论数
-                tag_control = video_tags;//视频标签
+                video_barrages = barrages;//弹幕数
+                //video_play_comments = comments;//评论数
+                //tag_control = video_tags;//视频标签
 
             }
         }
