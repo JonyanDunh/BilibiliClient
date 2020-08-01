@@ -48,7 +48,7 @@
             </ItemsControl>
 
             <Grid Height="60"
-                  Background="#FFE7C8EE"
+                  Background="#FFF4E3F7"
                   VerticalAlignment="Bottom">
                 <Image Source="resource/img/头像.png"
                        Width="48"

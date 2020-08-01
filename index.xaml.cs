@@ -66,7 +66,7 @@ namespace Bilibili_Client
                 new Thread((obj) =>
                 {
                     WebClient myWebClient = new WebClient();
-                    string avatar_path = System.Environment.CurrentDirectory+@"\Data\Cache\Img\Avatar\" + items[(int)obj]["args"]["up_id"].ToString() + ".png";
+                    string avatar_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Avatar\" + items[(int)obj]["args"]["up_id"].ToString() + ".png";
                     string cover_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Cover\" + items[(int)obj]["args"]["aid"].ToString() + ".png";
                     if (!System.IO.File.Exists(avatar_path))
                     {
@@ -99,11 +99,9 @@ namespace Bilibili_Client
 
                 }).Start(i);
                
-            }
-                
+            } 
                 Thread_blocking.Reset();
                
-
             }
 
         }
