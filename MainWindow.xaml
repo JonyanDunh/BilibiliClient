@@ -9,7 +9,9 @@
         Background="White"
         Title="PILIPILI客户端"
         Height="900"
-        Width="1608" MinWidth="1011.1">
+        Width="1608" MinWidth="1011.1"
+        WindowStyle="None"
+        >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -140,7 +142,7 @@
             <Frame x:Name="middle_frame"
                    Grid.Row="1"
 ></Frame>
-                </Grid>
+             </Grid>
         </Grid>
         <!--右边组-->
         <Grid x:Name="right_grid"

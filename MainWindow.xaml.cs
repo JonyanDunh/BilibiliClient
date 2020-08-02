@@ -37,6 +37,7 @@ namespace Bilibili_Client
             left_grid.Width = mainwindow.Width * 0.145;
             right_grid.Width = mainwindow.Width * 0.234;    
             middle_frame.Navigate(index_page);
+            
             if (false == Directory.Exists(@"Data\Cache"))
             {
                 //创建DATA文件夹
@@ -96,13 +97,6 @@ namespace Bilibili_Client
 
         private void textBox1_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            
-
-            /*search_logo.BorderThickness.Left = 1;
-            search_logo.BorderThickness.Top = 1;
-            search_logo.BorderThickness.Right = 0;
-            search_logo.BorderThickness.Bottom = 1;
-            search_textbox_border.BorderThickness*/
         }
         // 定时器 GC
         private void TimerGC(object sender, EventArgs e)
