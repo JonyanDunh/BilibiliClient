@@ -164,7 +164,8 @@ namespace Bilibili_Client
             request.AddParameter("seccode", verification_key.seccode);
             IRestResponse response = client.Execute(request);
             Console.WriteLine(response.Content);
-
+            client = null;
+            request = null;
         }
 
 
