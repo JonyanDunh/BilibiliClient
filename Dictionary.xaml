@@ -484,7 +484,7 @@
                 <Image Source="{Binding left_button_img}"
                        Width="32"
                        Height="32" />
-                <TextBlock Text="{Binding left_button_name}"
+                <TextBlock  Text="{Binding left_button_content}"
                            VerticalAlignment="Center" />
             </WrapPanel>
         </Button>

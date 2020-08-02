@@ -28,7 +28,6 @@ namespace Bilibili_Client
         {
             while(true)
             {
-                
                 Thread_blocking.WaitOne();
             var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?device=pad&mobi_app=iphone");
             var request = new RestRequest(Method.GET);
@@ -42,15 +41,15 @@ namespace Bilibili_Client
                         List<double_row_video> double_row_video = new List<double_row_video>
                         {
                             new double_row_video(
-                      items[(int)obj]["avatar"]["cover"].ToString()+"@22w_22h_1c_95q",//up头像
-                      items[(int)obj]["desc"].ToString(),//up名字
-                      items[(int)obj]["cover"].ToString()+"@320w_200h_1c_95q",//封面
-                      items[(int)obj]["cover_left_text_1"].ToString(),//时长
-                      items[(int)obj]["title"].ToString().Length>17?items[(int)obj]["title"].ToString().Substring(0,17)+"...":items[(int)obj]["title"].ToString(),//标题
-                      items[(int)obj]["args"]["rname"].ToString(),//分区
-                      items[(int)obj]["cover_left_text_2"].ToString(),//播放量
-                      items[(int)obj]["cover_left_text_3"].ToString()//弹幕数
-                      )
+                      items[obj]["avatar"]["cover"].ToString()+"@22w_22h_1c_95q",//up头像
+                      items[obj]["desc"].ToString(),//up名字
+                      items[obj]["cover"].ToString()+"@320w_200h_1c_95q",//封面
+                      items[obj]["cover_left_text_1"].ToString(),//时长
+                      items[obj]["title"].ToString().Length>17?items[obj]["title"].ToString().Substring(0,17)+"...":items[obj]["title"].ToString(),//标题
+                      items[obj]["args"]["rname"].ToString(),//分区
+                      items[obj]["cover_left_text_2"].ToString(),//播放量
+                      items[obj]["cover_left_text_3"].ToString()//弹幕数
+                                               )
                            };
                         this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
