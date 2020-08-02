@@ -6,9 +6,7 @@
       xmlns:System="clr-namespace:System;assembly=mscorlib"
       x:Class="Bilibili_Client.index"
       mc:Ignorable="d"
-      d:DesignHeight="837"
-      d:DesignWidth="989"
-      Background="#FFFFFBFB"
+      Background="Transparent"
       Title="index"
       >
     <Page.Resources>

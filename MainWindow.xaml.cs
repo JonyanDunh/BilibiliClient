@@ -14,16 +14,12 @@ namespace Bilibili_Client
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow3
-    { 
-
-    }
-
     public partial class MainWindow : Window
     {
         // 实例化计时器
         private DispatcherTimer showTimer = new DispatcherTimer();
         index index_page = new index();
+        login login_page = new login();
         public MainWindow()
         {
             // 定义定时器,TimeSpan最后一个值是时间，单位秒，3表示3秒检测一次
@@ -36,7 +32,7 @@ namespace Bilibili_Client
             mainwindow.Height = (SystemParameters.PrimaryScreenHeight) * 0.83;
             left_grid.Width = mainwindow.Width * 0.145;
             right_grid.Width = mainwindow.Width * 0.234;    
-            middle_frame.Navigate(index_page);
+            middle_frame.Navigate(login_page);
             
             if (false == Directory.Exists(@"Data\Cache"))
             {
