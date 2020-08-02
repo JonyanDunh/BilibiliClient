@@ -76,17 +76,17 @@ namespace Bilibili_Client
         public class left_button_class
         {
             public string left_button_img { get; private set; }
-            public string left_button_name { get; private set; }
+            public string left_button_content { get; private set; }
 
 
 
             public left_button_class(
                 string button_img, 
-                string button_name
+                string button_content
                 )
             {
                 left_button_img = button_img;
-                left_button_name = button_name;
+                left_button_content = button_content;
 
             }
         }
