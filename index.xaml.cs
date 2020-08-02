@@ -6,11 +6,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+
+
 
 namespace Bilibili_Client
 {
@@ -54,34 +58,75 @@ namespace Bilibili_Client
         {
             while(true)
             {
-                Thread_blocking.WaitOne();
-                var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=1596246654&flush=0&column=4&device=pad&pull=false&build=5520400&mobi_app=iphone&platform=ios&ts=1596246653");
-            client.Timeout = -1;
+            Thread_blocking.WaitOne();
+            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=1596246654&flush=0&column=4&device=pad&pull=false&build=5520400&mobi_app=iphone&platform=ios&ts=1596246653");
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
             Newtonsoft.Json.Linq.JToken items = recommend["data"]["items"];
                 for (int i = 1; i <= items.Count()-1; i++)
             {
-                new Thread((obj) =>
-                {
-                    WebClient myWebClient = new WebClient();
-                    string avatar_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Avatar\" + items[(int)obj]["args"]["up_id"].ToString() + ".png";
-                    string cover_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Cover\" + items[(int)obj]["args"]["aid"].ToString() + ".png";
-                    if (!System.IO.File.Exists(avatar_path))
+                    /*new Thread((obj) =>
+                    {*/
+                    int obj = i;
+                        WebClient myWebClient = new WebClient();
+                     string avatar_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Avatar\" + items[(int)obj]["args"]["up_id"].ToString() + ".png";
+                     string cover_path = System.Environment.CurrentDirectory + @"\Data\Cache\Img\Cover\" + items[(int)obj]["args"]["aid"].ToString() + ".png";
+                     if (!System.IO.File.Exists(avatar_path))
+                     {
+                         myWebClient.DownloadFile(items[(int)obj]["avatar"]["cover"].ToString(), avatar_path);
+                     }
+                     if (!System.IO.File.Exists(cover_path))
+                     {
+                         myWebClient.DownloadFile(items[(int)obj]["cover"].ToString(), cover_path);
+                     }
+
+
+
+                    BitmapImage coverbitmap = new BitmapImage();
+                    if (File.Exists(cover_path))
                     {
-                        myWebClient.DownloadFile(items[(int)obj]["avatar"]["cover"].ToString(), avatar_path);
+                        coverbitmap.BeginInit();
+                        coverbitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        using (Stream ms = new MemoryStream(File.ReadAllBytes(cover_path)))
+                        {
+
+                            coverbitmap.StreamSource = ms;
+                            coverbitmap.DecodePixelHeight = 312;
+                            coverbitmap.DecodePixelWidth = 500;
+                            coverbitmap.EndInit();
+                            coverbitmap.Freeze();
+                            ms.Close();
+                            ms.Dispose();
+                            GC.Collect();
+
+                        }
                     }
-                    if (!System.IO.File.Exists(cover_path))
+                    BitmapImage avatarbitmap = new BitmapImage();
+                    if (File.Exists(avatar_path))
                     {
-                        myWebClient.DownloadFile(items[(int)obj]["cover"].ToString(), cover_path);
+                        avatarbitmap.BeginInit();
+                        avatarbitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        using (Stream ms = new MemoryStream(File.ReadAllBytes(avatar_path)))
+                        {
+
+                            avatarbitmap.StreamSource = ms;
+                            avatarbitmap.DecodePixelHeight = 22;
+                            avatarbitmap.DecodePixelWidth = 22;
+                            avatarbitmap.EndInit();
+                            avatarbitmap.Freeze();
+                            ms.Close();
+                            ms.Dispose();                 
+                            GC.Collect();
+
+                        }
                     }
                     List<double_row_video> double_row_video = new List<double_row_video>
                     {
                         new double_row_video(
-                  avatar_path,//up头像
+                   avatarbitmap,//up头像
                   items[(int)obj]["desc"].ToString(),//up名字
-                  cover_path,//封面
+                   coverbitmap,//封面
                   items[(int)obj]["cover_left_text_1"].ToString(),//时长
                   items[(int)obj]["title"].ToString().Length>17?items[(int)obj]["title"].ToString().Substring(0,17)+"...":items[(int)obj]["title"].ToString(),//标题
                   items[(int)obj]["args"]["rname"].ToString(),//分区
@@ -91,15 +136,19 @@ namespace Bilibili_Client
                        };
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                     {
-                        
-                        content_box.Items.Add(double_row_video);//按照模板加入一个item
-                        
-                    });
-                   
 
-                }).Start(i);
-               
-            } 
+                        content_box.Items.Add(double_row_video);//按照模板加入一个item
+                        double_row_video = null;
+                    });
+                    coverbitmap = null;
+                    avatarbitmap = null;
+                    //}).Start(i);
+                }
+                client = null;
+                request = null;
+                response = null;
+                recommend = null;
+                items = null;
                 Thread_blocking.Reset();
                
             }
@@ -107,9 +156,10 @@ namespace Bilibili_Client
         }
         public class double_row_video
         {
-            public string head_img_url { get; private set; }
+            public ImageSource head_img_url { get; private set; }
+            public ImageSource video_cover { get; private set; }
             public string video_up { get; private set; }
-            public string video_cover { get; private set; }
+            
             public string video_title { get; private set; }
             public string video_play_volume { get; private set; }
             public string video_barrages { get; private set; }
@@ -119,9 +169,9 @@ namespace Bilibili_Client
 
 
             public double_row_video(
-                string up_head, //up头像
+                ImageSource up_head, //up头像
                 string up,//up名字
-                string cover,//封面
+                ImageSource cover,//封面
                 string duration,//时长
                 string title,//标题
                 string partition,//分区
@@ -215,6 +265,28 @@ namespace Bilibili_Client
         {
             if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset)
                 Thread_blocking.Set();
+            
+        }
+        public static BitmapImage GetImage(string imagePath)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            if (File.Exists(imagePath))
+            {
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                using (Stream ms = new MemoryStream(File.ReadAllBytes(imagePath)))
+                {
+
+                    bitmap.StreamSource = ms;
+                    bitmap.DecodePixelHeight = 200;
+                    bitmap.DecodePixelHeight = 200;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    GC.Collect();
+                    
+                }
+            }
+            return bitmap;
         }
     }
 }
