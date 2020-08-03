@@ -18,6 +18,7 @@ namespace Bilibili_Client
     public partial class index : Page
     {
         ManualResetEvent Thread_blocking = new ManualResetEvent(true);//线程阻塞
+
         public index()
         {
             InitializeComponent();
@@ -26,16 +27,16 @@ namespace Bilibili_Client
         }
         private void Home_Recommendation()
         {
-            while(true)
+            while (true)
             {
                 Thread_blocking.WaitOne();
-            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?device=pad&mobi_app=iphone");
-            var request = new RestRequest(Method.GET);
-            IRestResponse response = client.Execute(request);
-            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+                var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?device=pad&mobi_app=iphone");
+                var request = new RestRequest(Method.GET);
+                IRestResponse response = client.Execute(request);
+                JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
                 JToken items = recommend["data"]["items"];
-                for (int i = 1; i < items.Count()-1; i++)
-            {
+                for (int i = 1; i < items.Count() - 1; i++)
+                {
                     new Thread((obj) =>
                     {
                         List<double_row_video> double_row_video = new List<double_row_video>
@@ -104,7 +105,7 @@ namespace Bilibili_Client
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset&& content_box.Items.Count>=18)
+            if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
                 Thread_blocking.Set();
         }
 

@@ -224,9 +224,10 @@
                 </Grid>
             </Grid>
             <!--右边页面-->
-            <!--<Frame x:Name="right_frame"
-                   Source="index.xaml"
-                   Grid.Row="1" />-->
+            <Grid Grid.Row="1">
+            <Frame x:Name="right_frame"
+                    />
+            </Grid>
         </Grid>
     </Grid>
 </Window>

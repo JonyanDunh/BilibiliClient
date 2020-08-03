@@ -210,7 +210,8 @@
                             <TextBlock FontSize="14"
                                     FontWeight="Bold"
                                        Margin="0,5">
-                                <Run Text="不想用账号密码登录?" />
+                                <Run Text="不想用账号密码登录?"
+                                     MouseDown="Qrcode" />
                                     <Run Foreground="#FF23A4EE"
                                          Text="扫码登陆"
                                          TextDecorations="Underline" />

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,8 +20,13 @@ namespace Bilibili_Client
     {
         // 实例化计时器
         private DispatcherTimer showTimer = new DispatcherTimer();
+
         index index_page = new index();
         login login_page = new login();
+        geetest geetest_page = new geetest();
+
+        private delegate void MainWindow_SendMessage_To_Login_page();//主窗口发送给登录窗口类
+        private MainWindow_SendMessage_To_Login_page mainWindow_SendMessage_To_Login_page;//
         public MainWindow()
         {
             // 定义定时器,TimeSpan最后一个值是时间，单位秒，3表示3秒检测一次
@@ -31,9 +38,14 @@ namespace Bilibili_Client
             mainwindow.Width = (SystemParameters.PrimaryScreenWidth) * 0.83;
             mainwindow.Height = (SystemParameters.PrimaryScreenHeight) * 0.83;
             left_grid.Width = mainwindow.Width * 0.145;
-            right_grid.Width = mainwindow.Width * 0.234;    
-            middle_frame.Navigate(login_page);
+            right_grid.Width = mainwindow.Width * 0.234;
             
+
+            Message();
+
+
+            middle_frame.Navigate(login_page);
+
             if (false == Directory.Exists(@"Data\Cache"))
             {
                 //创建DATA文件夹
@@ -52,7 +64,25 @@ namespace Bilibili_Client
             Left_button_class.Add(new left_button_class("resource/img/投稿工具.png", "投稿工具"));
             left_button_box.ItemsSource = Left_button_class;
         }
+        private void Message()
+        {
+            login_page.login_sendMessage_To_Mainwindow = MainWindow_Recevie_From_Login_Page;//把登录页面的发送函数和接受函数链接
+            mainWindow_SendMessage_To_Login_page = login_page.Login_Recevie_From_Mainwindow;//把发送函数与登录页面的接收函数链接
+            login_page.login_open_geetest_page = login_open_geetest_page;//登录页面控制主窗口打开验证页面
 
+            geetest_page.geetest_SendKey_To_Login_page = login_page.Login_Recevie_Key_From_Geetest_page;//把验证页面的发送Key函数和登录页面接受Key函数链接
+
+            login_page.sendKey_To_Geetest_page = geetest_page.Geetest_Get_Key_From_Login_Page;////把登录页面的发送函数和验证页面接受函数链接
+        }
+        private void MainWindow_Recevie_From_Login_Page()
+        {
+
+
+        }
+        private void login_open_geetest_page()
+        {
+            right_frame.Navigate(geetest_page);            
+        }
         private void Window_MouseMove(object sender, MouseEventArgs e)//移动窗口
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -66,8 +96,7 @@ namespace Bilibili_Client
         private void index_button(object sender, RoutedEventArgs e)
         {
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            mainWindow_SendMessage_To_Login_page();
 
 
 
@@ -81,7 +110,7 @@ namespace Bilibili_Client
 
 
             public left_button_class(
-                string button_img, 
+                string button_img,
                 string button_content
                 )
             {
@@ -100,5 +129,6 @@ namespace Bilibili_Client
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
+        
     }
 }

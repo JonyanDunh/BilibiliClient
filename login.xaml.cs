@@ -102,8 +102,11 @@ namespace Bilibili_Client
 
 
     }
+
     public class Bilibili
     {
+
+
         public class Verification_Key
         {
             public string gt;
@@ -141,12 +144,6 @@ namespace Bilibili_Client
             verification_key.key = recommend["data"]["result"]["key"].ToString();
             return verification_key;
         }
-        public Verification_Key Password_login_Verification(Verification_Key verification_key)
-        {
-
-
-            return verification_key;
-        }
         public void Password_login(string username, string password, string hash, Verification_Key verification_key)
         {
             Coding coding = new Coding();
@@ -170,20 +167,43 @@ namespace Bilibili_Client
 
 
     }
+
     public partial class login : Page
     {
+        public string test_str { get; set; }
+
+        public delegate void Login_SendMessage_To_Mainwindow();
+        public Login_SendMessage_To_Mainwindow login_sendMessage_To_Mainwindow;
+        public Login_SendMessage_To_Mainwindow login_open_geetest_page;
+
+        public delegate void SendKey_To_Geetest_page(Bilibili.Verification_Key verification_key);
+        public SendKey_To_Geetest_page sendKey_To_Geetest_page;
         public login()
         {
             InitializeComponent();
         }
+        public void Login_Recevie_From_Mainwindow()//从主窗口接收信息
+        {
+        }
 
+        Bilibili bilibili = new Bilibili();
+        public void Login_Recevie_Key_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
+        {
+            MessageBox.Show(verification_key.validate);
+            bilibili.Password_login("username", "password", bilibili.Password_login_Get_Hash(), verification_key);
+        }
 
         private void Login_buttons_Click(object sender, RoutedEventArgs e)
         {
-            Bilibili bilibili = new Bilibili();
-            bilibili.Password_login("username", "password", bilibili.Password_login_Get_Hash(), bilibili.Password_login_Verification(bilibili.Password_login_Get_Verification_Key()));
-
+           
+            login_open_geetest_page();
+            sendKey_To_Geetest_page(bilibili.Password_login_Get_Verification_Key());
+           
+            
         }
 
+        private void Qrcode(object sender, MouseButtonEventArgs e)
+        {
+        }
     }
 }
