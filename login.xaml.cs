@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
 using RestSharp;
 using System;
 using System.IO;
@@ -36,17 +33,7 @@ namespace Bilibili_Client
             }
             return stb.ToString();
         }
-        public string DecryptPublicKeyJava(string publicKeyPem, string data, string encoding = "UTF-8")
-        {
-            string publicKeyJava = File.ReadAllText(publicKeyPem);
-            RsaKeyParameters publicKeyParam = (RsaKeyParameters)PublicKeyFactory.CreateKey(Convert.FromBase64String(publicKeyJava));
-            Console.WriteLine(publicKeyParam);
-            byte[] cipherbytes = Convert.FromBase64String(data);
-            RsaEngine rsa = new RsaEngine();
-            rsa.Init(false, publicKeyParam);//参数true表示加密/false表示解密。
-            cipherbytes = rsa.ProcessBlock(cipherbytes, 0, cipherbytes.Length);
-            return Encoding.GetEncoding(encoding).GetString(cipherbytes);
-        }
+
         public string UrlEncode(string str)
         {
             StringBuilder builder = new StringBuilder();
@@ -114,13 +101,20 @@ namespace Bilibili_Client
         public void Password_login_Web(string username, string password, string hash, Verification_Key verification_key)
         {
             Coding coding = new Coding();
+            var rsa = new RSACryptoServiceProvider();
+            var public_key = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDjb4V7EidX/ym28t2ybo0U6t0n
+6p4ej8VjqKHg100va6jkNbNTrLQqMCQCAYtXMXXp2Fwkk6WR+12N9zknLjf+C9sx
+/+l48mjUU8RqahiFD1XT/u2e0m2EN029OhCgkHx3Fc/KlFSIbak93EH/XlYis0w+
+Xl69GV6klzgxW6d2xQIDAQAB";
+            rsa.FromX509PublicKey(Convert.FromBase64String(public_key));
+            var bytes = Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes("mangohappy"), false));
             var client = new RestClient("http://passport.bilibili.com/web/login/v2");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddParameter("captchaType", "6");
             request.AddParameter("username", username);
-            request.AddParameter("password", coding.DecryptPublicKeyJava(@"Data\PublicKey.pem", password));
+            request.AddParameter("password", Convert.ToBase64String(rsa.Encrypt(Encoding.UTF8.GetBytes(hash + password), false)));
             request.AddParameter("keep", "true");
             request.AddParameter("key", verification_key.key);
             request.AddParameter("goUrl", coding.UrlEncode("https://www.bilibili.com/"));
@@ -128,8 +122,8 @@ namespace Bilibili_Client
             request.AddParameter("validate", verification_key.validate);
             request.AddParameter("seccode", verification_key.seccode);
             IRestResponse response = client.Execute(request);
-           // MessageBox.Show(response.Content);
-            
+            MessageBox.Show(response.Content);
+
             client = null;
             request = null;
         }
@@ -149,30 +143,32 @@ namespace Bilibili_Client
         public login()
         {
             InitializeComponent();
-            
+
+
         }
         public void Login_Recevie_From_Mainwindow()//从主窗口接收信息
         {
 
         }
-        
 
-        
-       
+
+
+
         public void Login_Recevie_Key_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
         {
-             
-        bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key);
+
+            bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key);
         }
 
         private void Login_buttons_Click(object sender, RoutedEventArgs e)
         {
             login_open_geetest_page();
-            sendKey_To_Geetest_page(bilibili.Password_login_Get_Verification_Key()); 
+            sendKey_To_Geetest_page(bilibili.Password_login_Get_Verification_Key());
         }
 
         private void Qrcode(object sender, MouseButtonEventArgs e)
         {
         }
     }
+
 }
