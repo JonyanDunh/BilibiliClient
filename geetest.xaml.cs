@@ -65,7 +65,8 @@ namespace Bilibili_Client
             verification_keys = verification_key;
             ObjectForScriptingHelper helper = new ObjectForScriptingHelper(this);
             geetest_web.ObjectForScripting = helper;
-            geetest_web.Navigate(@"file:///D:/Github/geetest-validator/geetest.html?challenge="+ verification_key.challenge);
+            //geetest_web.Navigate(@"file:///D:/Github/geetest-validator/geetest.html?challenge="+ verification_key.challenge);
+            geetest_web.Source = new Uri(@"pack://siteoforigin:,,,/Web/geetest-validator/geetest.html?challenge=" + verification_key.challenge);
         }
         static void SetWebBrowserFeatures()
         {

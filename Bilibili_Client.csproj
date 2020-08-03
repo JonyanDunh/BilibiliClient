@@ -89,15 +89,14 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -198,6 +197,32 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web\geetest-validator\.git\config" />
+    <None Include="Web\geetest-validator\.git\description" />
+    <None Include="Web\geetest-validator\.git\FETCH_HEAD" />
+    <None Include="Web\geetest-validator\.git\HEAD" />
+    <None Include="Web\geetest-validator\.git\hooks\applypatch-msg.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\commit-msg.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\fsmonitor-watchman.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\post-update.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\pre-applypatch.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\pre-commit.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\pre-push.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\pre-rebase.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\pre-receive.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\prepare-commit-msg.sample" />
+    <None Include="Web\geetest-validator\.git\hooks\update.sample" />
+    <None Include="Web\geetest-validator\.git\index" />
+    <None Include="Web\geetest-validator\.git\info\exclude" />
+    <None Include="Web\geetest-validator\.git\logs\HEAD" />
+    <None Include="Web\geetest-validator\.git\logs\refs\heads\master" />
+    <None Include="Web\geetest-validator\.git\logs\refs\remotes\origin\HEAD" />
+    <None Include="Web\geetest-validator\.git\objects\pack\pack-7a075c8fadce6ee855e2307d15e60cd3f1fade4d.idx" />
+    <None Include="Web\geetest-validator\.git\objects\pack\pack-7a075c8fadce6ee855e2307d15e60cd3f1fade4d.pack" />
+    <None Include="Web\geetest-validator\.git\ORIG_HEAD" />
+    <None Include="Web\geetest-validator\.git\packed-refs" />
+    <None Include="Web\geetest-validator\.git\refs\heads\master" />
+    <None Include="Web\geetest-validator\.git\refs\remotes\origin\HEAD" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -286,6 +311,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\二维码.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web\geetest-validator\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\geetest-validator\geetest.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\geetest-validator\js\gt.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web\geetest-validator\js\jquery.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\geetest-validator\.git\objects\info\" />
+    <Folder Include="Web\geetest-validator\.git\refs\tags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

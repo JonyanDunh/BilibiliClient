@@ -208,7 +208,7 @@
                     <Grid Grid.Row="2">
                         <Grid Margin="0,5">
                             <TextBlock FontSize="14"
-                                    FontWeight="Bold"
+                                       FontWeight="Bold"
                                        Margin="0,5">
                                 <Run Text="不想用账号密码登录?"
                                      MouseDown="Qrcode" />
@@ -219,6 +219,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
+                
             </Border>
         </Grid>
     </Grid>

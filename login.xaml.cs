@@ -1,26 +1,17 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using RestSharp;
-using RestSharp.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Bilibili_Client
 {
@@ -45,43 +36,16 @@ namespace Bilibili_Client
             }
             return stb.ToString();
         }
-        public string RSAEncrypt(string content, string publicKeyPem, string charset = "UTF-8")
+        public string DecryptPublicKeyJava(string publicKeyPem, string data, string encoding = "UTF-8")
         {
-            try
-            {
-                string sPublicKeyPEM = File.ReadAllText(publicKeyPem);
-
-                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-                rsa.PersistKeyInCsp = false;
-
-                byte[] data = Encoding.GetEncoding(charset).GetBytes(content);
-                int maxBlockSize = rsa.KeySize / 8 - 11; //加密块最大长度限制
-                if (data.Length <= maxBlockSize)
-                {
-                    byte[] cipherbytes = rsa.Encrypt(data, false);
-                    return Convert.ToBase64String(cipherbytes);
-                }
-
-                MemoryStream plaiStream = new MemoryStream(data);
-                MemoryStream crypStream = new MemoryStream();
-                Byte[] buffer = new Byte[maxBlockSize];
-                int blockSize = plaiStream.Read(buffer, 0, maxBlockSize);
-                while (blockSize > 0)
-                {
-                    Byte[] toEncrypt = new Byte[blockSize];
-                    Array.Copy(buffer, 0, toEncrypt, 0, blockSize);
-                    Byte[] cryptograph = rsa.Encrypt(toEncrypt, false);
-                    crypStream.Write(cryptograph, 0, cryptograph.Length);
-                    blockSize = plaiStream.Read(buffer, 0, maxBlockSize);
-                }
-
-                return Convert.ToBase64String(crypStream.ToArray(), Base64FormattingOptions.None);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-
+            string publicKeyJava = File.ReadAllText(publicKeyPem);
+            RsaKeyParameters publicKeyParam = (RsaKeyParameters)PublicKeyFactory.CreateKey(Convert.FromBase64String(publicKeyJava));
+            Console.WriteLine(publicKeyParam);
+            byte[] cipherbytes = Convert.FromBase64String(data);
+            RsaEngine rsa = new RsaEngine();
+            rsa.Init(false, publicKeyParam);//参数true表示加密/false表示解密。
+            cipherbytes = rsa.ProcessBlock(cipherbytes, 0, cipherbytes.Length);
+            return Encoding.GetEncoding(encoding).GetString(cipherbytes);
         }
         public string UrlEncode(string str)
         {
@@ -121,11 +85,14 @@ namespace Bilibili_Client
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
-            Console.WriteLine(response.Content);
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
             client = null;
             request = null;
             response = null;
+            StreamWriter sw = File.CreateText(@"Data\PublicKey.pem");
+            sw.Write(recommend["key"]);
+            sw.Flush();
+            sw.Close();
             return recommend["hash"].ToString();
         }
         public Verification_Key Password_login_Get_Verification_Key()
@@ -144,7 +111,7 @@ namespace Bilibili_Client
             verification_key.key = recommend["data"]["result"]["key"].ToString();
             return verification_key;
         }
-        public void Password_login(string username, string password, string hash, Verification_Key verification_key)
+        public void Password_login_Web(string username, string password, string hash, Verification_Key verification_key)
         {
             Coding coding = new Coding();
             var client = new RestClient("http://passport.bilibili.com/web/login/v2");
@@ -153,53 +120,55 @@ namespace Bilibili_Client
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddParameter("captchaType", "6");
             request.AddParameter("username", username);
-            request.AddParameter("password", coding.RSAEncrypt(hash + password, "PublicKey.pem"));
-            request.AddParameter("keep", "1");
+            request.AddParameter("password", coding.DecryptPublicKeyJava(@"Data\PublicKey.pem", password));
+            request.AddParameter("keep", "true");
             request.AddParameter("key", verification_key.key);
+            request.AddParameter("goUrl", coding.UrlEncode("https://www.bilibili.com/"));
             request.AddParameter("challenge", verification_key.challenge);
             request.AddParameter("validate", verification_key.validate);
             request.AddParameter("seccode", verification_key.seccode);
             IRestResponse response = client.Execute(request);
-            Console.WriteLine(response.Content);
+           // MessageBox.Show(response.Content);
+            
             client = null;
             request = null;
         }
-
 
     }
 
     public partial class login : Page
     {
-        public string test_str { get; set; }
-
         public delegate void Login_SendMessage_To_Mainwindow();
         public Login_SendMessage_To_Mainwindow login_sendMessage_To_Mainwindow;
         public Login_SendMessage_To_Mainwindow login_open_geetest_page;
 
         public delegate void SendKey_To_Geetest_page(Bilibili.Verification_Key verification_key);
         public SendKey_To_Geetest_page sendKey_To_Geetest_page;
+
+        Bilibili bilibili = new Bilibili();
         public login()
         {
             InitializeComponent();
+            
         }
         public void Login_Recevie_From_Mainwindow()//从主窗口接收信息
         {
-        }
 
-        Bilibili bilibili = new Bilibili();
+        }
+        
+
+        
+       
         public void Login_Recevie_Key_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
         {
-            MessageBox.Show(verification_key.validate);
-            bilibili.Password_login("username", "password", bilibili.Password_login_Get_Hash(), verification_key);
+             
+        bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key);
         }
 
         private void Login_buttons_Click(object sender, RoutedEventArgs e)
         {
-           
             login_open_geetest_page();
-            sendKey_To_Geetest_page(bilibili.Password_login_Get_Verification_Key());
-           
-            
+            sendKey_To_Geetest_page(bilibili.Password_login_Get_Verification_Key()); 
         }
 
         private void Qrcode(object sender, MouseButtonEventArgs e)
