@@ -57,7 +57,6 @@ namespace Bilibili_Client
     public class Bilibili
     {
 
-
         public class Verification_Key
         {
             public string gt;
@@ -65,6 +64,8 @@ namespace Bilibili_Client
             public string key;
             public string seccode;
             public string validate;
+            public string Id;//Id为手机号或tmp_code
+            public int Sms_type = 0;
         }
         public string Password_login_Get_Hash()
         {
@@ -76,16 +77,12 @@ namespace Bilibili_Client
             client = null;
             request = null;
             response = null;
-            StreamWriter sw = File.CreateText(@"Data\PublicKey.pem");
-            sw.Write(recommend["key"]);
-            sw.Flush();
-            sw.Close();
             return recommend["hash"].ToString();
         }
-        public Verification_Key Password_login_Get_Verification_Key()
+        public Verification_Key Get_Verification_Key(int plat)
         {
             Verification_Key verification_key = new Verification_Key();
-            var client = new RestClient("http://passport.bilibili.com/web/captcha/combine?plat=6");
+            var client = new RestClient("http://passport.bilibili.com/web/captcha/combine?plat="+plat);
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
@@ -98,7 +95,7 @@ namespace Bilibili_Client
             verification_key.key = recommend["data"]["result"]["key"].ToString();
             return verification_key;
         }
-        public void Password_login_Web(string username, string password, string hash, Verification_Key verification_key)
+        public void Password_login_Web(string username, string password, string hash, Verification_Key verification_key,login login)
         {
             Coding coding = new Coding();
             var rsa = new RSACryptoServiceProvider();
@@ -122,12 +119,66 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             request.AddParameter("validate", verification_key.validate);
             request.AddParameter("seccode", verification_key.seccode);
             IRestResponse response = client.Execute(request);
-            MessageBox.Show(response.Content);
+            
+            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+            string code = recommend["code"].ToString();
+            if (string.Equals(code,"-2111"))
+            {
+                MessageBox.Show("您已开启二次验证，请验证");
+                Verification_Key Double_verification_key = Get_Verification_Key(7);
+                Double_verification_key.Sms_type = 18;
+                Double_verification_key.Id = (recommend["data"].ToString()).Substring((recommend["data"].ToString()).IndexOf("tmp_token=")+10,32);
+                login.Password_Login.Visibility = Visibility.Hidden;
+                login.Sms_Code_Login.Visibility = Visibility.Visible;
+                login.phone_textbox.Text = Double_verification_key.Id;
+                login.phone_textbox.IsReadOnly = true;
+                login.Sms_code_Send_buttons.Content = "请验证";
+                login.Sms_code_Send_buttons.IsEnabled = false;
+                login.Sms_Login_button.Content = "请验证";
+                login.Sms_Login_button.IsEnabled = false;
+                login.sendKey_To_Geetest_page(Double_verification_key);
+
+            }else
+                MessageBox.Show(response.Content);
 
             client = null;
             request = null;
         }
+        public void Send_Sms(Verification_Key verification_key, login login)//Id为手机号或tmp_code
+        {
+            if (verification_key.Sms_type == 18)//二次验证
+            {
+                var client = new RestClient("https://api.bilibili.com/x/safecenter/sms/send");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.AddParameter("type", "18");
+                request.AddParameter("captcha_type", "7");
+                request.AddParameter("captcha_key", verification_key.key);
+                request.AddParameter("captcha", "");
+                request.AddParameter("challenge", verification_key.challenge);
+                request.AddParameter("seccode", verification_key.seccode);
+                request.AddParameter("validate", verification_key.validate);
+                request.AddParameter("tmp_code", verification_key.Id);
+                IRestResponse response = client.Execute(request);
+                MessageBox.Show(response.Content);
+                JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+                string code = recommend["code"].ToString();
+                if (!string.Equals(code, "0"))
+                {
+                    login.Sms_code_Send_buttons.Content = "失败";
+                }
+            }
+            else if (verification_key.Sms_type == 21)//验证码登录
+            {
 
+
+            }
+        }
+        public void Sms_login(string Sms_Code)
+        {
+            
+        }
     }
 
     public partial class login : Page
@@ -144,7 +195,6 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         {
             InitializeComponent();
 
-
         }
         public void Login_Recevie_From_Mainwindow()//从主窗口接收信息
         {
@@ -152,22 +202,42 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         }
 
 
-
+        bool IsLogin=false;
 
         public void Login_Recevie_Key_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
         {
 
-            bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key);
+            bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key,this);
+        }
+        public void Login_Recevie_SmsKey_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
+        {
+            bilibili.Send_Sms(verification_key,this);
         }
 
-        private void Login_buttons_Click(object sender, RoutedEventArgs e)
+        private void Password_Login_buttons_Click(object sender, RoutedEventArgs e)
         {
             login_open_geetest_page();
-            sendKey_To_Geetest_page(bilibili.Password_login_Get_Verification_Key());
+            sendKey_To_Geetest_page(bilibili.Get_Verification_Key(6));
         }
 
         private void Qrcode(object sender, MouseButtonEventArgs e)
         {
+        }
+
+
+        private void Sms_code_Send(object sender, RoutedEventArgs e)
+        {
+            login_open_geetest_page();
+            Bilibili.Verification_Key verification_key = bilibili.Get_Verification_Key(6);
+            verification_key.Sms_type = 21;
+            verification_key.Id = phone_textbox.Text;
+            sendKey_To_Geetest_page(verification_key);
+
+        }
+
+        private void Sms_code_Login(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

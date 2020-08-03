@@ -1,127 +1,127 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-   <!--滚动条-->
-        <ControlTemplate x:Key="MyScrollViewer"
-                         TargetType="{x:Type ScrollViewer}">
-            <!--View区域背景色-->
-            <Grid x:Name="Grid"
-                  Background="{TemplateBinding Background}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Rectangle x:Name="Corner"
-                           Grid.Column="1"
-                           Fill="White"
-                           Grid.Row="1" />
-                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                        CanContentScroll="{TemplateBinding CanContentScroll}"
-                                        CanHorizontallyScroll="False"
-                                        CanVerticallyScroll="False"
-                                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                                        Content="{TemplateBinding Content}"
-                                        Grid.Column="0"
-                                        Margin="{TemplateBinding Padding}"
-                                        Grid.Row="0" />
-                <ScrollBar x:Name="PART_VerticalScrollBar"
-                           AutomationProperties.AutomationId="VerticalScrollBar"
-                           Cursor="Arrow"
-                           Grid.Column="1"
-                           Maximum="{TemplateBinding ScrollableHeight}"
-                           Minimum="0"
-                           Grid.Row="0"
-                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                           Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                           ViewportSize="{TemplateBinding ViewportHeight}"
-                           Style="{DynamicResource MyScrollBarStyle}" />
-                <ScrollBar x:Name="PART_HorizontalScrollBar"
-                           AutomationProperties.AutomationId="HorizontalScrollBar"
-                           Cursor="Arrow"
-                           Grid.Column="0"
-                           Maximum="{TemplateBinding ScrollableWidth}"
-                           Minimum="0"
-                           Orientation="Horizontal"
-                           Grid.Row="1"
-                           Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                           Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                           ViewportSize="{TemplateBinding ViewportWidth}"
-                           Style="{DynamicResource MyScrollBarStyle}" />
-            </Grid>
-        </ControlTemplate>
-        <SolidColorBrush x:Key="ScrollBarDisabledBackground"
-                         Color="#F4F4F4" />
-        <Style x:Key="VerticalScrollBarPageButton"
-               TargetType="{x:Type RepeatButton}">
-            <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
-            <Setter Property="Background"
-                    Value="Transparent" />
-            <Setter Property="Focusable"
-                    Value="false" />
-            <Setter Property="IsTabStop"
-                    Value="false" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Rectangle Fill="{TemplateBinding Background}"
-                                   Height="{TemplateBinding Height}"
-                                   Width="{TemplateBinding Width}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!--滚动条颜色、圆角等设置-->
-        <Style x:Key="ScrollBarThumb"
-               TargetType="{x:Type Thumb}">
-            <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
-            <Setter Property="IsTabStop"
-                    Value="false" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <!--滚动条颜色和圆角设置-->
-                        <Rectangle Name="thumbRect"
+    <!--滚动条-->
+    <ControlTemplate x:Key="MyScrollViewer"
+                     TargetType="{x:Type ScrollViewer}">
+        <!--View区域背景色-->
+        <Grid x:Name="Grid"
+              Background="{TemplateBinding Background}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Rectangle x:Name="Corner"
+                       Grid.Column="1"
+                       Fill="White"
+                       Grid.Row="1" />
+            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                    CanContentScroll="{TemplateBinding CanContentScroll}"
+                                    CanHorizontallyScroll="False"
+                                    CanVerticallyScroll="False"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    Content="{TemplateBinding Content}"
+                                    Grid.Column="0"
+                                    Margin="{TemplateBinding Padding}"
+                                    Grid.Row="0" />
+            <ScrollBar x:Name="PART_VerticalScrollBar"
+                       AutomationProperties.AutomationId="VerticalScrollBar"
+                       Cursor="Arrow"
+                       Grid.Column="1"
+                       Maximum="{TemplateBinding ScrollableHeight}"
+                       Minimum="0"
+                       Grid.Row="0"
+                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                       Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                       ViewportSize="{TemplateBinding ViewportHeight}"
+                       Style="{DynamicResource MyScrollBarStyle}" />
+            <ScrollBar x:Name="PART_HorizontalScrollBar"
+                       AutomationProperties.AutomationId="HorizontalScrollBar"
+                       Cursor="Arrow"
+                       Grid.Column="0"
+                       Maximum="{TemplateBinding ScrollableWidth}"
+                       Minimum="0"
+                       Orientation="Horizontal"
+                       Grid.Row="1"
+                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                       ViewportSize="{TemplateBinding ViewportWidth}"
+                       Style="{DynamicResource MyScrollBarStyle}" />
+        </Grid>
+    </ControlTemplate>
+    <SolidColorBrush x:Key="ScrollBarDisabledBackground"
+                     Color="#F4F4F4" />
+    <Style x:Key="VerticalScrollBarPageButton"
+           TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Focusable"
+                Value="false" />
+        <Setter Property="IsTabStop"
+                Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Rectangle Fill="{TemplateBinding Background}"
+                               Height="{TemplateBinding Height}"
+                               Width="{TemplateBinding Width}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--滚动条颜色、圆角等设置-->
+    <Style x:Key="ScrollBarThumb"
+           TargetType="{x:Type Thumb}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="IsTabStop"
+                Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <!--滚动条颜色和圆角设置-->
+                    <Rectangle Name="thumbRect"
                                Fill="#FFE7EFF7"
                                RadiusX="3"
-                                   RadiusY="3" />
-                        <!--鼠标拉动滚动条时的颜色-->
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Setter Property="Fill"
+                               RadiusY="3" />
+                    <!--鼠标拉动滚动条时的颜色-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Fill"
                                     Value="#FFF7EFFB"
                                     TargetName="thumbRect" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="HorizontalScrollBarPageButton"
-               TargetType="{x:Type RepeatButton}">
-            <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
-            <Setter Property="Background"
-                    Value="Transparent" />
-            <Setter Property="Focusable"
-                    Value="false" />
-            <Setter Property="IsTabStop"
-                    Value="false" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Rectangle Fill="{TemplateBinding Background}"
-                                   Height="{TemplateBinding Height}"
-                                   Width="{TemplateBinding Width}" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="HorizontalScrollBarPageButton"
+           TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="Focusable"
+                Value="false" />
+        <Setter Property="IsTabStop"
+                Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Rectangle Fill="{TemplateBinding Background}"
+                               Height="{TemplateBinding Height}"
+                               Width="{TemplateBinding Width}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="MyScrollBarStyle"
            TargetType="{x:Type ScrollBar}">
         <Setter Property="Background"
@@ -315,8 +315,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
-    <!--主界面三列推荐-->
+    <!--主页三列推荐-->
     <DataTemplate x:Key="Three_column_recommendations">
         <!--整个视频模块-->
         <Grid Width="304"
@@ -332,7 +331,8 @@
                         BorderBrush="#FFD1D1D1"
                         BorderThickness="0"
                         CornerRadius="10,10,0,0">
-                    <Image Name="cover_img" Source="{Binding video_cover}"
+                    <Image Name="cover_img"
+                           Source="{Binding video_cover}"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top">
                         <Image.Clip>
@@ -448,7 +448,6 @@
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Width="22"
-                                   
                                    Margin="6,0,0,0">
                                 <Image.Clip>
                                     <RectangleGeometry RadiusX="100"
@@ -457,8 +456,7 @@
                                 </Image.Clip>
                             </Image>
                             <!--UP名字&发布时间-->
-                            <Label 
-                                FontFamily="Microsoft YaHei"
+                            <Label FontFamily="Microsoft YaHei"
                                    VerticalContentAlignment="Center"
                                    Foreground="Gray"
                                    Content="{Binding video_up}"
@@ -472,6 +470,7 @@
             </Grid>
         </Grid>
     </DataTemplate>
+    <!--主窗口左列表按钮-->
     <DataTemplate x:Key="Mainwindow_left_button">
         <Button FontSize="21"
                 Style="{StaticResource ButtonStyle}"
@@ -485,7 +484,7 @@
                        Width="32"
                        Height="32" />
                 <TextBlock  Text="{Binding left_button_content}"
-                           VerticalAlignment="Center" />
+                            VerticalAlignment="Center" />
             </WrapPanel>
         </Button>
     </DataTemplate>

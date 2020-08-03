@@ -65,8 +65,10 @@ namespace Bilibili_Client
             login_page.login_open_geetest_page = login_open_geetest_page;//登录页面控制主窗口打开验证页面
 
             geetest_page.geetest_SendKey_To_Login_page = login_page.Login_Recevie_Key_From_Geetest_page;//把验证页面的发送Key函数和登录页面接受Key函数链接
+            geetest_page.geetest_SendSmsKey_To_Login_page = login_page.Login_Recevie_SmsKey_From_Geetest_page;//把验证页面的发送SmsKey函数和登录页面接受SmsKey函数链接
 
             login_page.sendKey_To_Geetest_page = geetest_page.Geetest_Get_Key_From_Login_Page;////把登录页面的发送函数和验证页面接受函数链接
+
         }
         private void MainWindow_Recevie_From_Login_Page()
         {

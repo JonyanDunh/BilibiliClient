@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace Bilibili_Client
 {
@@ -23,13 +24,19 @@ namespace Bilibili_Client
             page = main;
         }
 
-        //这个方法就是网页上要反问的方法
-        public void SendKey(string validateg, string seccode)
+        public void SendKey(string validateg, string seccode)//网页回调
         {
             page.verification_keys.validate = validateg;
             page.verification_keys.seccode = seccode;
-            page.geetest_SendKey_To_Login_page(page.verification_keys);
 
+            if (page.verification_keys.Sms_type == 0)
+            {
+                page.geetest_SendKey_To_Login_page(page.verification_keys);
+            }
+            else
+            {
+                page.geetest_SendSmsKey_To_Login_page(page.verification_keys);
+            }
         }
     }
 
@@ -37,6 +44,7 @@ namespace Bilibili_Client
     {
         public delegate void Geetest_SendKey_To_Login_page(Bilibili.Verification_Key verification_key);
         public Geetest_SendKey_To_Login_page geetest_SendKey_To_Login_page;
+        public Geetest_SendKey_To_Login_page geetest_SendSmsKey_To_Login_page;
 
         public Bilibili.Verification_Key verification_keys = new Bilibili.Verification_Key();
 
@@ -51,8 +59,7 @@ namespace Bilibili_Client
             verification_keys = verification_key;
             ObjectForScriptingHelper helper = new ObjectForScriptingHelper(this);
             geetest_web.ObjectForScripting = helper;
-            //geetest_web.Navigate(@"file:///D:/Github/geetest-validator/geetest.html?challenge="+ verification_key.challenge);
-            geetest_web.Source = new Uri(@"pack://siteoforigin:,,,/Web/geetest-validator/geetest.html?challenge=" + verification_key.challenge);
+            geetest_web.Source = new Uri(@"pack://siteoforigin:,,,/Web/geetest-validator/geetest.html?challenge=" + verification_keys.challenge+"&gt="+verification_keys.gt);
         }
         static void SetWebBrowserFeatures()
         {

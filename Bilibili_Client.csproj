@@ -313,6 +313,8 @@
     <Resource Include="resource\img\二维码.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resource\img\手机号.png" />
+    <Resource Include="resource\img\验证码.png" />
     <Content Include="Web\geetest-validator\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
