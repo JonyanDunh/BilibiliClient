@@ -13,6 +13,7 @@ using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using ThoughtWorks.QRCode.Codec;
@@ -289,6 +290,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             {
                 BiliCookie biliCookie = Get_Cookie(recommend["data"]["url"].ToString());
                 Qrcode_Login(biliCookie);
+                MessageBox.Show("");
                 Get_Scan_Login_Qrcode_status_Timer.Stop();
             }
             else if (string.Equals(recommend["status"].ToString(), "False"))
@@ -296,7 +298,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 string data = recommend["data"].ToString();
                 if (string.Equals(data, "-5"))
                 {
-                    Scan_login.Scan_status.Content = "扫描成功，请在手机上确认是否授权";
+                    Scan_login.Scan_status.Content = "扫描成功,请在手机上确认是否授权";
+                    Scan_login.Scan_status.Foreground= new SolidColorBrush(System.Windows.Media.Color.FromRgb(33, 211, 97));
                 }
                 else if (string.Equals(data, "-4"))
                 {
@@ -304,7 +307,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 }
                 else if (string.Equals(data, "-2"))
                 {
-                    Scan_login.Scan_status.Content = "二维码已失效,请点击刷新";
+                    Scan_login.Scan_status.Content = "二维码已失效,请点击二维码刷新";
+                    Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(208, 2, 27));
                 }
             }
         }
@@ -411,8 +415,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             encoder.QRCodeScale = 10;//大小(值越大生成的二维码图片像素越高)
             encoder.QRCodeVersion = 0;//版本(注意：设置为0主要是防止编码的字符串太长时发生错误)
             encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;//错误效验、错误更正(有4个等级)
-            encoder.QRCodeBackgroundColor = Color.White;
-            encoder.QRCodeForegroundColor = Color.FromArgb(251, 114, 153);
+            encoder.QRCodeBackgroundColor = System.Drawing.Color.White;
+            encoder.QRCodeForegroundColor = System.Drawing.Color.FromArgb(251, 114, 153);
 
             Bitmap bcodeBitmap = encoder.Encode(codeContent);
             BitmapImage bitmapImage = BitmapToBitmapImage(bcodeBitmap);
@@ -426,8 +430,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             for (i = 0; i < bitmap.Width; i++)
                 for (j = 0; j < bitmap.Height; j++)
                 {
-                    Color pixelColor = bitmap.GetPixel(i, j);
-                    Color newColor = Color.FromArgb(pixelColor.R, pixelColor.G, pixelColor.B);
+                    System.Drawing.Color pixelColor = bitmap.GetPixel(i, j);
+                    System.Drawing.Color newColor = System.Drawing.Color.FromArgb(pixelColor.R, pixelColor.G, pixelColor.B);
                     bitmapSource.SetPixel(i, j, newColor);
                 }
             MemoryStream ms = new MemoryStream();

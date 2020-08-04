@@ -20,8 +20,7 @@
 
         <ItemsControl Visibility="Visible"
                       x:Name="Password_Login"
-                      Margin="200"
-                      d:IsHidden="True">
+                      Margin="200">
             <Border Background="White"
                     CornerRadius="15"
                     Height="437">
@@ -495,7 +494,7 @@
                 </Grid>
             </Border>
         </ItemsControl>
-        <ItemsControl  Visibility="Visible"
+        <ItemsControl  Visibility="Hidden"
                        x:Name="QrCode_Login"
                        Margin="200">
             <Border Background="White"
@@ -526,10 +525,11 @@
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid  Margin="50,20,50,10">
-                                <Label x:Name="Scan_status" Content="请使用 哔哩哔哩客户端 扫码登录"
+                                <Label Foreground="#FB7299" x:Name="Scan_status" Content="请使用 哔哩哔哩客户端 扫码登录"
                                        VerticalContentAlignment="Center"
                                        HorizontalContentAlignment="Center"
-                                       Margin="50,0" />
+                                       Margin="50,0"
+                                       FontSize="14" />
                             </Grid>
                         </Grid>
                     </Grid>
