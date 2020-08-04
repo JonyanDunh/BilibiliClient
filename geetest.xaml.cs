@@ -13,17 +13,15 @@ namespace Bilibili_Client
     /// </summary>
     /// 
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-    [ComVisible(true)]//com+可见
+    [ComVisible(true)]
 
     public class ObjectForScriptingHelper
     {
         geetest page;
-
         public ObjectForScriptingHelper(geetest main)
         {
             page = main;
         }
-
         public void SendKey(string validateg, string seccode)//网页回调
         {
             page.verification_keys.validate = validateg;
@@ -39,7 +37,6 @@ namespace Bilibili_Client
             }
         }
     }
-
     public partial class geetest : Page
     {
         public delegate void Geetest_SendKey_To_Login_page(Bilibili.Verification_Key verification_key);
