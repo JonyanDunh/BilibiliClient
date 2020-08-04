@@ -19,10 +19,6 @@ using ThoughtWorks.QRCode.Codec;
 
 namespace Bilibili_Client
 {
-    /// <summary>
-    /// login.xaml 的交互逻辑
-    /// </summary>
-    /// 
 
     public class Coding
     {
@@ -178,7 +174,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             else
             {
                 BiliCookie biliCookie = Get_Cookie(response.Content);
-                Login_Success(biliCookie);
+                Login_Success(biliCookie,login);
             }
 
             client = null;
@@ -241,7 +237,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         }
 
         //手机验证码登录
-        public void Sms_login(string Sms_Code, string ID)
+        public void Sms_login(string Sms_Code, string ID, login login)
         {
             var client = new RestClient("http://passport.bilibili.com/web/login/rapid");
             client.Timeout = -1;
@@ -253,7 +249,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             request.AddParameter("smsCode", Sms_Code);
             IRestResponse response = client.Execute(request);
             BiliCookie biliCookie = Get_Cookie(response.Headers[4].ToString());
-            Login_Success(biliCookie);
+            Login_Success(biliCookie,login);
         }
 
         //获取登录二维码
@@ -288,8 +284,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             if (string.Equals(recommend["status"].ToString(), "True"))
             {
                 BiliCookie biliCookie = Get_Cookie(recommend["data"]["url"].ToString());
-                Qrcode_Login(biliCookie);
-                MessageBox.Show("");
+                Qrcode_Login(biliCookie, Scan_login);
                 Get_Scan_Login_Qrcode_status_Timer.Stop();
             }
             else if (string.Equals(recommend["status"].ToString(), "False"))
@@ -315,20 +310,21 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         }
 
         //二维码登录
-        public void Qrcode_Login(BiliCookie biliCookie)
+        public void Qrcode_Login(BiliCookie biliCookie,login login)
         {
-            Login_Success(biliCookie);
+            Login_Success(biliCookie,login);
 
         }
 
         //登录成功后的操作
-        public void Login_Success(BiliCookie biliCookie)
+        public void Login_Success(BiliCookie biliCookie, login login)
         {
             if (false == Directory.Exists(@"Data\User\Account\Cookie"))
             {
                 Directory.CreateDirectory(@"Data\User\Account\Cookie");
             }
-            System.IO.File.WriteAllText(@"Data\User\Account\Cookie\Login_User.Json", JsonConvert.SerializeObject(biliCookie), Encoding.UTF8);
+            File.WriteAllText(@"Data\User\Account\Cookie\Login_User.Json", JsonConvert.SerializeObject(biliCookie), Encoding.UTF8);
+            login.Login_Success();
 
         }
 
@@ -339,6 +335,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         public delegate void Login_SendMessage_To_Mainwindow();
         public Login_SendMessage_To_Mainwindow login_sendMessage_To_Mainwindow;
         public Login_SendMessage_To_Mainwindow login_open_geetest_page;
+        public Login_SendMessage_To_Mainwindow Login_Success;
 
         public delegate void SendKey_To_Geetest_page(Bilibili_Login.Verification_Key verification_key);
         public SendKey_To_Geetest_page sendKey_To_Geetest_page;
@@ -391,7 +388,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         //验证码登录按钮
         private void Sms_code_Login(object sender, RoutedEventArgs e)
         {
-            bilibili.Sms_login(smscode_textbox.Text, phone_textbox.Text);
+            bilibili.Sms_login(smscode_textbox.Text, phone_textbox.Text,this);
         }
 
         //点击二维码刷新二维码

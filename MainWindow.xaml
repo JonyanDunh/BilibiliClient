@@ -224,6 +224,7 @@
                            MouseDown="Open_User_Space"
                            Width="48"
                        Height="48"
+                       x:Name="User_Cover_Img"
                        HorizontalAlignment="Left">
                     <Image.Clip>
                         <RectangleGeometry RadiusX="48"
@@ -231,7 +232,8 @@
                                            Rect="0,0,48,48" />
                     </Image.Clip>
                 </Image>
-                <Label FontFamily="Microsoft YaHei"
+                <Label x:Name="User_Name_Label"
+                    FontFamily="Microsoft YaHei"
                            FontWeight="Bold"
                            FontSize="18"
                            Foreground="White"
@@ -262,7 +264,7 @@
                    FontFamily="Microsoft YaHei"
                    FontWeight="Bold"
                    Content="首页"
-                   Margin="0,0,900,0" />
+                       HorizontalAlignment="Left" />
                 <Button Foreground="White"
                         FontSize="20"
                         FontFamily="Microsoft YaHei"

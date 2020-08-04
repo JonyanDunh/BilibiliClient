@@ -136,6 +136,9 @@
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Space.xaml.cs">
+      <DependentUpon>Space.xaml</DependentUpon>
+    </Compile>
     <Compile Include="video.xaml.cs">
       <DependentUpon>video.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Space.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="video.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
