@@ -8,7 +8,6 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web;
 using System.Windows;
 using System.Windows.Controls;
@@ -62,9 +61,9 @@ namespace Bilibili_Client
 
     }//加密函数
 
-    public class Bilibili//哔哩哔哩登录类
+    public class Bilibili_Login//哔哩哔哩登录类
     {
-        private DispatcherTimer Get_Scan_Login_Qrcode_status_Timer = new DispatcherTimer();
+        public DispatcherTimer Get_Scan_Login_Qrcode_status_Timer = new DispatcherTimer();
         public login Scan_login;
         public string Scan_oauthKey;
 
@@ -304,11 +303,13 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 else if (string.Equals(data, "-4"))
                 {
                     Scan_login.Scan_status.Content = "请使用 哔哩哔哩客户端 扫码登录";
+                    Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));
                 }
                 else if (string.Equals(data, "-2"))
                 {
                     Scan_login.Scan_status.Content = "二维码已失效,请点击二维码刷新";
                     Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(208, 2, 27));
+                    Get_Scan_Login_Qrcode_status_Timer.Stop();
                 }
             }
         }
@@ -339,37 +340,86 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         public Login_SendMessage_To_Mainwindow login_sendMessage_To_Mainwindow;
         public Login_SendMessage_To_Mainwindow login_open_geetest_page;
 
-        public delegate void SendKey_To_Geetest_page(Bilibili.Verification_Key verification_key);
+        public delegate void SendKey_To_Geetest_page(Bilibili_Login.Verification_Key verification_key);
         public SendKey_To_Geetest_page sendKey_To_Geetest_page;
 
-        Bilibili bilibili = new Bilibili();
+        Bilibili_Login bilibili = new Bilibili_Login();
         public login()
         {
             InitializeComponent();
 
         }
-        public void Login_Recevie_From_Mainwindow()//从主窗口接收信息
+
+        //从主窗口接收信息
+        public void Login_Recevie_From_Mainwindow()
         {
 
         }
 
-
-        public void Login_Recevie_Key_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
+        //从验证页面接收信息
+        public void Login_Recevie_Key_From_Geetest_page(Bilibili_Login.Verification_Key verification_key)
         {
 
             bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key, this);
         }
-        public void Login_Recevie_SmsKey_From_Geetest_page(Bilibili.Verification_Key verification_key)//从验证页面接收信息
+
+        //从验证页面接收Key
+        public void Login_Recevie_SmsKey_From_Geetest_page(Bilibili_Login.Verification_Key verification_key)
         {
             bilibili.Send_Sms(verification_key, this);
         }
 
+        //密码登录按钮
         private void Password_Login_buttons_Click(object sender, RoutedEventArgs e)
         {
             login_open_geetest_page();
             sendKey_To_Geetest_page(bilibili.Get_Verification_Key(6));
         }
 
+        //验证码登录发送验证码
+        private void Sms_code_Send(object sender, RoutedEventArgs e)
+        {
+            login_open_geetest_page();
+            Bilibili_Login.Verification_Key verification_key = bilibili.Get_Verification_Key(6);
+            verification_key.Sms_type = 21;
+
+            verification_key.phone = phone_textbox.Text;
+            sendKey_To_Geetest_page(verification_key);
+
+        }
+
+        //验证码登录按钮
+        private void Sms_code_Login(object sender, RoutedEventArgs e)
+        {
+            bilibili.Sms_login(smscode_textbox.Text, phone_textbox.Text);
+        }
+
+        //点击二维码刷新二维码
+        private void Refresh_Qrcode(object sender, MouseButtonEventArgs e)
+        {
+            bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
+            bilibili.Get_Login_Qrcode(this);
+            Scan_status.Content = "请使用 哔哩哔哩客户端 扫码登录";
+            Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));
+        }
+
+        //切换到密码登录页面
+        private void Password(object sender, MouseButtonEventArgs e)
+        {
+            Password_Login.Visibility = Visibility.Visible;
+            Sms_Code_Login.Visibility = Visibility.Hidden;
+            QrCode_Login.Visibility = Visibility.Hidden;
+        }
+
+        //切换到验证码登录页面
+        private void Sms(object sender, MouseButtonEventArgs e)
+        {
+            Password_Login.Visibility = Visibility.Hidden;
+            Sms_Code_Login.Visibility = Visibility.Visible;
+            QrCode_Login.Visibility = Visibility.Hidden;
+        }
+
+        //切换到二维码登录页面
         private void Qrcode(object sender, MouseButtonEventArgs e)
         {
             Password_Login.Visibility = Visibility.Hidden;
@@ -378,36 +428,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             bilibili.Get_Login_Qrcode(this);
         }
 
-
-        private void Sms_code_Send(object sender, RoutedEventArgs e)
-        {
-            login_open_geetest_page();
-            Bilibili.Verification_Key verification_key = bilibili.Get_Verification_Key(6);
-            verification_key.Sms_type = 21;
-
-            verification_key.phone = phone_textbox.Text;
-            sendKey_To_Geetest_page(verification_key);
-
-        }
-
-        private void Sms_code_Login(object sender, RoutedEventArgs e)
-        {
-            bilibili.Sms_login(smscode_textbox.Text, phone_textbox.Text);
-        }
-
-        private void Sms(object sender, MouseButtonEventArgs e)
-        {
-            Password_Login.Visibility = Visibility.Hidden;
-            Sms_Code_Login.Visibility = Visibility.Visible;
-            QrCode_Login.Visibility = Visibility.Hidden;
-        }
-
-        private void Password(object sender, MouseButtonEventArgs e)
-        {
-            Password_Login.Visibility = Visibility.Visible;
-            Sms_Code_Login.Visibility = Visibility.Hidden;
-            QrCode_Login.Visibility = Visibility.Hidden;
-        }
+        //生成二维码函数
         public BitmapImage NewQRCodeByThoughtWorks(string codeContent, ImageFormat imgType)
         {
             QRCodeEncoder encoder = new QRCodeEncoder();
@@ -423,6 +444,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             bcodeBitmap.Dispose();
             return bitmapImage;
         }
+
+        //Bitmap转BitmapImage
         public BitmapImage BitmapToBitmapImage(Bitmap bitmap)
         {
             Bitmap bitmapSource = new Bitmap(bitmap.Width, bitmap.Height);

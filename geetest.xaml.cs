@@ -39,11 +39,11 @@ namespace Bilibili_Client
     }
     public partial class geetest : Page
     {
-        public delegate void Geetest_SendKey_To_Login_page(Bilibili.Verification_Key verification_key);
+        public delegate void Geetest_SendKey_To_Login_page(Bilibili_Login.Verification_Key verification_key);
         public Geetest_SendKey_To_Login_page geetest_SendKey_To_Login_page;
         public Geetest_SendKey_To_Login_page geetest_SendSmsKey_To_Login_page;
 
-        public Bilibili.Verification_Key verification_keys = new Bilibili.Verification_Key();
+        public Bilibili_Login.Verification_Key verification_keys = new Bilibili_Login.Verification_Key();
 
         public geetest()
         {
@@ -51,7 +51,7 @@ namespace Bilibili_Client
             SetWebBrowserFeatures();//IE11
             
         }
-        public void Geetest_Get_Key_From_Login_Page(Bilibili.Verification_Key verification_key)
+        public void Geetest_Get_Key_From_Login_Page(Bilibili_Login.Verification_Key verification_key)
         {
             verification_keys = verification_key;
             ObjectForScriptingHelper helper = new ObjectForScriptingHelper(this);

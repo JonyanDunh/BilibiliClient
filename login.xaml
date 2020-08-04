@@ -7,7 +7,8 @@
       mc:Ignorable="d"
       d:DesignHeight="837"
       d:DesignWidth="989"
-      Title="login">
+      Title="login"
+      >
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -433,7 +434,7 @@
                             </Grid>
                             <Grid Grid.Row="2">
                                 <Button Background="#FED4E0"
-                                        
+                                        IsEnabled="False"
                                         Content="登录"
                                         x:Name="Sms_Login_button"
                                         Opacity="0.8"
@@ -519,7 +520,9 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid  Margin="50,20,50,0">
-                                <Image x:Name="Qrcode_img" Source="resource/img/exported_qrcode_image_600.png" />
+                                <Image x:Name="Qrcode_img"
+                                       Source="resource/img/exported_qrcode_image_600.png"
+                                       MouseDown="Refresh_Qrcode" />
 
                             </Grid>
                         </Grid>
@@ -529,7 +532,8 @@
                                        VerticalContentAlignment="Center"
                                        HorizontalContentAlignment="Center"
                                        Margin="50,0"
-                                       FontSize="14" />
+                                       FontSize="14"
+                                        />
                             </Grid>
                         </Grid>
                     </Grid>

@@ -297,6 +297,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="resource\img\Bilibili_User_Cover.png" />
     <Content Include="resource\Web\geetest-validator\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

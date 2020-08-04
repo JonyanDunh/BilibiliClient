@@ -35,41 +35,212 @@
                    RenderTransformOrigin="0.5,0.5"
                    x:Name="logo"
                    VerticalAlignment="Top" />
-            <ItemsControl ItemTemplate="{StaticResource Mainwindow_left_button}" 
-                          x:Name="left_button_box"
+            <ItemsControl x:Name="left_button_box"
                           Margin="0,95,0,70"
                           HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="1"
                                      Rows="10" />
-
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <!--首页按钮-->
+                    <Button FontSize="21"
+                            x:Name="Index_Button"
+                            Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                        Click="Open_Index">
+                        <WrapPanel>
+                            <Image Source="resource/img/首页.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="首页"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--动态按钮-->
+                    <Button FontSize="21"
+                        x:Name="Dynamic_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/动态.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="动态"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--排行按钮-->
+                    <Button FontSize="21"
+                        x:Name="Ranking_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/排行.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="排行"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--分类按钮-->
+                    <Button FontSize="21"
+                        x:Name="Classification_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/分类.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="分类"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--直播按钮-->
+                    <Button FontSize="21"
+                        x:Name="Live_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/直播.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="直播"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--番剧按钮-->
+                    <Button FontSize="21"
+                        x:Name="Fanju_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/番剧.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="番剧"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--漫画按钮-->
+                    <Button FontSize="21"
+                        x:Name="Comics_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/漫画.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="漫画"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--会员购按钮-->
+                    <Button FontSize="21"
+                        x:Name="Member_Shopping_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/会员购.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="会员购"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--游戏中心按钮-->
+                    <Button FontSize="21"
+                        x:Name="Game_Center_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/游戏中心.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="游戏中心"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
+                    <!--投稿工具按钮-->
+                    <Button FontSize="21"
+                        x:Name="Contribution_Tool_Button"
+                        Style="{StaticResource ButtonStyle}"
+                            FontFamily="Microsoft YaHei"
+                            FontWeight="Bold"
+                            Grid.Row="0"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                        <WrapPanel>
+                            <Image Source="resource/img/投稿工具.png"
+                                   Width="32"
+                                   Height="32" />
+                            <TextBlock  Text="投稿工具"
+                                        VerticalAlignment="Center" />
+                        </WrapPanel>
+                    </Button>
             </ItemsControl>
-
             <Grid Height="60"
-                  Background="#FFF4E3F7"
+                  Background="#FFDAE5F0"
                   VerticalAlignment="Bottom">
-                <Image Source="resource/img/头像.png"
-                       Width="48"
+                <Grid Margin="20,0">
+                <Image Source="resource/img/Bilibili_User_Cover.png"
+                           MouseDown="Open_User_Space"
+                           Width="48"
                        Height="48"
-                       HorizontalAlignment="Left"
-                       Margin="20,0,0,0">
+                       HorizontalAlignment="Left">
                     <Image.Clip>
                         <RectangleGeometry RadiusX="48"
                                            RadiusY="48"
                                            Rect="0,0,48,48" />
                     </Image.Clip>
                 </Image>
-                <TextBlock FontFamily="Microsoft YaHei"
+                <Label FontFamily="Microsoft YaHei"
                            FontWeight="Bold"
-                           FontSize="20"
+                           FontSize="18"
                            Foreground="White"
-                           Text="JonyanDunh"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Right"
-                           Margin="0,0,20,0" />
+                           Content="登录账户"
+                       HorizontalContentAlignment="Left"
+                       VerticalContentAlignment="Center"
+                           MouseDown="Open_User_Space"
+                           Margin="50,0,0,0" />
+                </Grid>
             </Grid>
         </Grid>
         <!--中间-->
@@ -102,7 +273,7 @@
                         Height="40"
                         Width="40"
                         Margin="0,0,30,0"
-                        Click="index_button"
+                        Click="Index_Refresh_button"
                         x:Name="Refresh_button">
 
                     <WrapPanel>
@@ -140,9 +311,9 @@
             <Grid Grid.Row="1"
                   Background="#FFFFFBFB">
             <Frame x:Name="middle_frame"
-                   Grid.Row="1"
-                   
-></Frame>
+                       
+                       Grid.Row="1"
+                       NavigationUIVisibility="Hidden"></Frame>
              </Grid>
         </Grid>
         <!--右边组-->
@@ -189,8 +360,7 @@
                              VerticalContentAlignment="Center"
                              FontFamily="Microsoft YaHei Light"
                              Grid.Row="0"
-                                 Margin="0,0,-1,0"
-                                 PreviewMouseDown="textBox1_PreviewMouseDown">
+                                 Margin="0,0,-1,0">
                         <TextBox.Resources>
                             <VisualBrush x:Key="HelpBrush"
                                          TileMode="None"
@@ -226,7 +396,7 @@
             <!--右边页面-->
             <Grid Grid.Row="1">
             <Frame x:Name="right_frame"
-                    />
+                       NavigationUIVisibility="Hidden" />
             </Grid>
         </Grid>
     </Grid>

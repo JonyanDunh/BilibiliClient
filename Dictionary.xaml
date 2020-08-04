@@ -471,6 +471,7 @@
         </Grid>
     </DataTemplate>
     <!--主窗口左列表按钮-->
+   <!--
     <DataTemplate x:Key="Mainwindow_left_button">
         <Button FontSize="21"
                 Style="{StaticResource ButtonStyle}"
@@ -487,5 +488,5 @@
                             VerticalAlignment="Center" />
             </WrapPanel>
         </Button>
-    </DataTemplate>
+    </DataTemplate>-->
 </ResourceDictionary>
