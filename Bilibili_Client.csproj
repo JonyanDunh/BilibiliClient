@@ -137,6 +137,7 @@
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PasswordBoxMonitor.cs" />
     <Compile Include="Space.xaml.cs">
       <DependentUpon>Space.xaml</DependentUpon>
     </Compile>

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Bilibili_Client"
+      xmlns:PasswordStyle="clr-namespace:Bilibili_Client"
       mc:Ignorable="d"
       d:DesignHeight="837"
       d:DesignWidth="989"
@@ -157,7 +158,7 @@
                                                 Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
                                                 SnapsToDevicePixels="true"
                                                 CornerRadius="0,5,5,0">
-                                            <TextBox BorderBrush="{x:Null}"
+                                        <PasswordBox BorderBrush="{x:Null}"
                                                      BorderThickness="0"
                                                      x:Name="password_textbox"
                                                      FontSize="16"
@@ -166,8 +167,8 @@
                                                      VerticalContentAlignment="Center"
                                                      FontFamily="Microsoft YaHei Light"
                                                      Grid.Row="0"
-                                                     Margin="0,0,1,0">
-                                                <TextBox.Resources>
+                                                     Margin="0,0,0,0">
+                                            <PasswordBox.Resources>
                                                     <VisualBrush x:Key="HelpBrush"
                                                                  TileMode="None"
                                                                  Opacity="0.3"
@@ -180,24 +181,39 @@
                                                                         Text="密码" />
                                                         </VisualBrush.Visual>
                                                     </VisualBrush>
-                                                </TextBox.Resources>
-                                                <TextBox.Style>
-                                                    <Style TargetType="TextBox">
-                                                        <Style.Triggers>
-                                                            <Trigger Property="Text"
-                                                                     Value="{x:Null}">
-                                                                <Setter Property="Background"
-                                                                        Value="{StaticResource HelpBrush}" />
-                                                            </Trigger>
-                                                            <Trigger Property="Text"
-                                                                     Value="">
-                                                                <Setter Property="Background"
-                                                                        Value="{StaticResource HelpBrush}" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBox.Style>
-                                            </TextBox>
+                                                </PasswordBox.Resources>
+                                            <PasswordBox.Style>
+                                                <Style TargetType="PasswordBox">
+                                                    <Setter Property="Height" Value="23"></Setter>
+                                                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                                    <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                                    <Setter Property="PasswordStyle:PasswordBoxMonitor.IsMonitoring"  Value="True"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type PasswordBox}">
+                                                                <Border Name="Bd"  Background="{TemplateBinding Background}"  BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="true">
+                                                                    <Grid>
+                                                                        <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                                        <StackPanel Orientation="Horizontal" Visibility="Collapsed" Name="myStackPanel">
+                                                                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="LightGray" Text=" 请输入密码"/>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsEnabled" Value="false">
+                                                                        <Setter Property="Visibility" TargetName="myStackPanel" Value="Collapsed"/>
+                                                                    </Trigger>
+                                                                    <Trigger Property="PasswordStyle:PasswordBoxMonitor.PasswordLength" Value="0">
+                                                                        <Setter Property="Visibility" TargetName="myStackPanel" Value="Visible"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </PasswordBox.Style>
+                                        </PasswordBox>
                                         </Border>
                                     </Grid>
                                 </Grid>

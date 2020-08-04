@@ -80,7 +80,7 @@ namespace Bilibili_Client
         public void Login_Recevie_Key_From_Geetest_page(Bilibili_Login.Verification_Key verification_key)
         {
 
-            bilibili.Password_login_Web(account_textbox.Text, password_textbox.Text, bilibili.Password_login_Get_Hash(), verification_key, this);
+            bilibili.Password_login_Web(account_textbox.Text, password_textbox.Password, bilibili.Password_login_Get_Hash(), verification_key, this);
         }
 
         //从验证页面接收Key
@@ -184,6 +184,11 @@ namespace Bilibili_Client
             bitmapImage.StreamSource = new MemoryStream(ms.ToArray());
             bitmapImage.EndInit();
             return bitmapImage;
+        }
+
+        private void password_textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 
