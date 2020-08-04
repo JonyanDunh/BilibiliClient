@@ -86,6 +86,7 @@ namespace Bilibili_Client
         //(网页接口)密码登录
         public void Password_login_Web(string username, string password, string hash, Verification_Key verification_key, login login)
         {
+            
             Coding coding = new Coding();
             var rsa = new RSACryptoServiceProvider();
             var public_key = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDjb4V7EidX/ym28t2ybo0U6t0n
@@ -108,7 +109,6 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             request.AddParameter("validate", verification_key.validate);
             request.AddParameter("seccode", verification_key.seccode);
             IRestResponse response = client.Execute(request);
-
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
             string code = recommend["code"].ToString();
             if (string.Equals(code, "-2111"))
@@ -128,10 +128,14 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 login.sendKey_To_Geetest_page(Double_verification_key);*/
 
             }
-            else
+            else if (string.Equals(code, "0"))
             {
                 BiliCookie biliCookie = Get_Cookie(response.Content);
                 Login_Success(biliCookie, login);
+            }
+            else
+            {
+                MessageBox.Show(response.Content);
             }
 
             client = null;
