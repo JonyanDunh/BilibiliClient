@@ -40,10 +40,10 @@ namespace Bilibili_Client
 
             middle_frame.Navigate(login_page);
 
-            if (false == Directory.Exists(@"Data\Cache"))
+            if (false == Directory.Exists(@"Data\Cache\Img"))
             {
                 //创建DATA文件夹
-                Directory.CreateDirectory(@"Data\Cache");
+                Directory.CreateDirectory(@"Data\Cache\Img");
             }
             List<left_button_class> Left_button_class = new List<left_button_class>();
             Left_button_class.Add(new left_button_class("resource/img/首页.png", "首页"));

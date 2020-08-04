@@ -118,6 +118,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -315,6 +318,8 @@
   <ItemGroup>
     <Resource Include="resource\img\手机号.png" />
     <Resource Include="resource\img\验证码.png" />
+    <Resource Include="resource\img\exported_qrcode_image_600.png" />
+    <Resource Include="resource\img\550758fec170d499cef132620f0a766c.png" />
     <Content Include="Web\geetest-validator\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

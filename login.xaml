@@ -20,7 +20,8 @@
 
         <ItemsControl Visibility="Visible"
                       x:Name="Password_Login"
-                      Margin="200">
+                      Margin="200"
+                      d:IsHidden="True">
             <Border Background="White"
                     CornerRadius="15"
                     Height="437">
@@ -76,7 +77,8 @@
                                                  VerticalContentAlignment="Center"
                                                  FontFamily="Microsoft YaHei Light"
                                                  Grid.Row="0"
-                                                 Margin="0,0,-1,0">
+       
+                                                 Margin="0,0,1,0">
                                             <TextBox.Resources>
                                                 <VisualBrush x:Key="HelpBrush"
                                                              TileMode="None"
@@ -143,7 +145,7 @@
                                                  VerticalContentAlignment="Center"
                                                  FontFamily="Microsoft YaHei Light"
                                                  Grid.Row="0"
-                                                 Margin="0,0,-1,0">
+                                                 Margin="0,0,1,0">
                                             <TextBox.Resources>
                                                 <VisualBrush x:Key="HelpBrush"
                                                              TileMode="None"
@@ -190,7 +192,7 @@
                                         <ControlTemplate TargetType="{x:Type Button}">
                                             <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
                                                     BorderThickness="0"
-                                                    CornerRadius="20"
+                                                    CornerRadius="5"
                                                     Name="PART_Background">
                                                 <Border.Background>
                                                     <LinearGradientBrush EndPoint="0,1"
@@ -217,19 +219,28 @@
                         <Grid Margin="0,5">
                             <TextBlock FontSize="14"
                                        FontWeight="Bold"
-                                       Margin="0,5">
-                                <Run Text="不想用账号密码登录?"
-                                     MouseDown="Qrcode" />
-                                    <Run Foreground="#FF23A4EE"
-                                         Text="扫码登陆"
-                                         TextDecorations="Underline" />
+                                       Margin="0,5"
+                                       Text="不想用账号密码登录?"
+                                       HorizontalAlignment="Left">
                             </TextBlock>
+                            <TextBlock Foreground="#FF23A4EE"
+                                 Text="扫码登录"
+                                       TextDecorations="Underline"
+                                       MouseDown="Qrcode"
+                                       HorizontalAlignment="Left"
+                                       Margin="140,6,0,6" />
+                            <TextBlock Foreground="#FF23A4EE"
+                                       Text="验证码登录"
+                                       TextDecorations="Underline"
+                                       MouseDown="Sms"
+                                       HorizontalAlignment="Left"
+                                       Margin="200,6,0,6" />
                         </Grid>
                     </Grid>
                 </Grid>
             </Border>
         </ItemsControl>
-        <ItemsControl Visibility="Hidden"
+        <ItemsControl  Visibility="Hidden"
                       x:Name="Sms_Code_Login"
                       Margin="200">
             <Border Background="White"
@@ -283,7 +294,7 @@
                                                  VerticalContentAlignment="Center"
                                                  FontFamily="Microsoft YaHei Light"
                                                  Grid.Row="0"
-                                                 Margin="0,0,-1,0">
+                                                 Margin="0,0,1,0">
                                             <TextBox.Resources>
                                                 <VisualBrush x:Key="HelpBrush"
                                                              TileMode="None"
@@ -351,7 +362,7 @@
                                                      VerticalContentAlignment="Center"
                                                      FontFamily="Microsoft YaHei Light"
                                                      Grid.Row="0"
-                                                     Margin="0,0,-1,0">
+                                                     Margin="0,0,2,0">
                                                 <TextBox.Resources>
                                                     <VisualBrush x:Key="HelpBrush"
                                                                  TileMode="None"
@@ -423,6 +434,7 @@
                             </Grid>
                             <Grid Grid.Row="2">
                                 <Button Background="#FED4E0"
+                                        
                                         Content="登录"
                                         x:Name="Sms_Login_button"
                                         Opacity="0.8"
@@ -462,13 +474,85 @@
                         <Grid Margin="0,5">
                             <TextBlock FontSize="14"
                                        FontWeight="Bold"
-                                       Margin="0,5">
-                                <Run Text="不想用账号密码登录?"
-                                     MouseDown="Qrcode" />
-                                    <Run Foreground="#FF23A4EE"
-                                         Text="扫码登陆"
-                                         TextDecorations="Underline" />
+                                       Margin="0,5"
+                                       Text="不想用短信验证登录?"
+                                       HorizontalAlignment="Left">
                             </TextBlock>
+                            <TextBlock Foreground="#FF23A4EE"
+                                       Text="扫码登录"
+                                       TextDecorations="Underline"
+                                       MouseDown="Qrcode"
+                                       HorizontalAlignment="Left"
+                                       Margin="140,6,0,6" />
+                            <TextBlock Foreground="#FF23A4EE"
+                                       Text="密码登录"
+                                       TextDecorations="Underline"
+                                       MouseDown="Password"
+                                       HorizontalAlignment="Left"
+                                       Margin="200,6,0,6" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </ItemsControl>
+        <ItemsControl  Visibility="Visible"
+                       x:Name="QrCode_Login"
+                       Margin="200">
+            <Border Background="White"
+                    CornerRadius="15"
+                    Height="437">
+                <Grid Margin="70">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Label FontSize="24"
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"
+                               Content="扫码登录" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid  Margin="50,20,50,0">
+                                <Image x:Name="Qrcode_img" Source="resource/img/exported_qrcode_image_600.png" />
+
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid  Margin="50,20,50,10">
+                                <Label x:Name="Scan_status" Content="请使用 哔哩哔哩客户端 扫码登录"
+                                       VerticalContentAlignment="Center"
+                                       HorizontalContentAlignment="Center"
+                                       Margin="50,0" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid Margin="0,5">
+                            <TextBlock FontSize="14"
+                                       FontWeight="Bold"
+                                       Margin="0,5"
+                                       Text="不想扫码二维码登录?"
+                                       HorizontalAlignment="Left">
+                            </TextBlock>
+                            <TextBlock Foreground="#FF23A4EE"
+                                       Text="短信登录"
+                                       TextDecorations="Underline"
+                                       MouseDown="Sms"
+                                       HorizontalAlignment="Left"
+                                       Margin="140,6,0,6" />
+                            <TextBlock Foreground="#FF23A4EE"
+                                       Text="密码登录"
+                                       TextDecorations="Underline"
+                                       MouseDown="Password"
+                                       HorizontalAlignment="Left"
+                                       Margin="200,6,0,6" />
                         </Grid>
                     </Grid>
                 </Grid>
