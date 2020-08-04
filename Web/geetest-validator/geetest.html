@@ -1,0 +1,79 @@
+﻿<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body bgcolor="#FFFBFB">
+    <div>
+        <div id="captcha">
+            <div id="wait" class="show">
+                <div class="loading">
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                    <div class="loading-dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/gt.js"></script>
+
+    <script>
+
+
+        window.onerror = function (error, url, line) {
+            //      log(error + "url:" + url + "lineNo:" + line);
+            return true;
+        }
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+
+
+        var handler = function (captchaObj) {
+            captchaObj.appendTo('#captcha');
+            captchaObj.onReady(function () {
+                $("#wait").hide();
+            });
+            captchaObj.onSuccess(function () {
+                var result = captchaObj.getValidate();
+                window.external.SendKey(result.geetest_validate, result.geetest_seccode);
+            });
+            // 更多前端接口说明请参见：http://docs.geetest.com/install/client/web-front/
+        };
+        $('#wait').show();
+        var gt = getQueryVariable("gt");
+        var challenge = getQueryVariable("challenge");
+        // 调用 initGeetest 进行初始化
+        // 参数1：配置参数
+        // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它调用相应的接口
+        initGeetest({
+            // 以下 4 个配置参数为必须，不能缺少
+            gt: gt,
+            challenge: challenge,
+            offline: false, // 表示用户后台检测极验服务器是否宕机
+            new_captcha: true, // 用于宕机时表示是新验证码的宕机
+
+            product: "popup", // 产品形式，包括：float，popup
+            width: "50px",
+            https: true
+
+            // 更多前端配置参数说明请参见：http://docs.geetest.com/install/client/web-front/
+        }, handler);
+
+    </script>
+</body>
+
+</html>
