@@ -297,10 +297,18 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Web\geetest-validator\css\style.css" />
-    <Content Include="Web\geetest-validator\geetest.html" />
-    <Content Include="Web\geetest-validator\js\gt.js" />
-    <Content Include="Web\geetest-validator\js\jquery.js" />
+    <Content Include="resource\Web\geetest-validator\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\Web\geetest-validator\geetest.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\Web\geetest-validator\js\gt.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resource\Web\geetest-validator\js\jquery.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
