@@ -1,89 +1,14 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace Bilibili_Client
 {
-    
-    public class Bilibili
-    {
-        public class BiliCookie
-        {
-            public string DedeUserID;
-            public string SESSDATA;
-            public string bili_jct;
-        }
-        public bool Check_Login_status()
-        {
-            if (File.Exists(@"Data\User\Account\Cookie\Login_User.Json"))//如果存在用户数据文件
-            {
-                string Login_User_Json = File.ReadAllText(@"Data\User\Account\Cookie\Login_User.Json");
-                var client = new RestClient("http://api.bilibili.com/x/web-interface/nav");
-                var request = new RestRequest(Method.GET);
-                request.AddCookie("SESSDATA", ((JObject)JsonConvert.DeserializeObject(Login_User_Json))["SESSDATA"].ToString());
-                IRestResponse response = client.Execute(request);
-                if (string.Equals(((JObject)JsonConvert.DeserializeObject(response.Content))["code"].ToString(), "0"))
-                    return true;
-                else
-                    return false;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-        public void Set_User_Data(MainWindow mainWindow)
-        {
-            string Login_User_Json = File.ReadAllText(@"Data\User\Account\Cookie\Login_User.Json");
-            mainWindow.BiliCookie.SESSDATA = ((JObject)JsonConvert.DeserializeObject(Login_User_Json))["SESSDATA"].ToString();
-            mainWindow.BiliCookie.DedeUserID = ((JObject)JsonConvert.DeserializeObject(Login_User_Json))["DedeUserID"].ToString();
-            mainWindow.BiliCookie.bili_jct = ((JObject)JsonConvert.DeserializeObject(Login_User_Json))["bili_jct"].ToString();
-            var client = new RestClient("http://api.bilibili.com/x/web-interface/nav");
-            var request = new RestRequest(Method.GET);
-            request.AddCookie("SESSDATA", mainWindow.BiliCookie.SESSDATA);
-            IRestResponse response = client.Execute(request);
-            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
-            JToken data = recommend["data"];
-            string User_Cover = data["face"].ToString();
-            string User_Name= data["uname"].ToString();
-            mainWindow.User_Name_Label.Content = User_Name;
-            mainWindow.User_Cover_Img.Source = new BitmapImage(new Uri(User_Cover, UriKind.RelativeOrAbsolute)); 
-        }
-        public string Get_User_Data(string str1,string str2,bool If_Doubel, MainWindow mainWindow)
-        {
-            string SESSDATA = mainWindow.BiliCookie.SESSDATA;
-            if (If_Doubel)
-            {
-                var client = new RestClient("http://api.bilibili.com/x/web-interface/nav");
-                var request = new RestRequest(Method.GET);
-                request.AddCookie("SESSDATA", SESSDATA);
-                IRestResponse response = client.Execute(request);
-                return ((JObject)JsonConvert.DeserializeObject(response.Content))["data"][str1][str2].ToString();
-            }
-            else
-            {
-                var client = new RestClient("http://api.bilibili.com/x/web-interface/nav");
-                var request = new RestRequest(Method.GET);
-                request.AddCookie("SESSDATA", SESSDATA);
-                IRestResponse response = client.Execute(request);
-                return ((JObject)JsonConvert.DeserializeObject(response.Content))["data"][str1].ToString();
-            }
 
 
-
-        }
-
-
-    }
     public partial class MainWindow : Window
     {
 

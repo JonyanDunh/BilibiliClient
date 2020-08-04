@@ -130,6 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BliClass.cs" />
     <Compile Include="geetest.xaml.cs">
       <DependentUpon>geetest.xaml</DependentUpon>
     </Compile>
