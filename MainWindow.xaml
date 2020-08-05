@@ -60,7 +60,8 @@
                         <!--首页-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="首页">
+                                         Header="首页"
+                                         MouseDown="Open_Index">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/首页.png"
                                        Width="20"
@@ -196,7 +197,8 @@
                                      Margin="15,0,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center">
-                        <Image Source="resource/img/头像.png" />
+                        <Image Source="resource/img/头像.png"
+                                   MouseDown="Open_User_Space" />
                     </hc:Gravatar>
                     </Grid>
                     <Grid Grid.Column="1">
@@ -238,8 +240,8 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Frame NavigationUIVisibility="Hidden"
-                       Source="login.xaml" BorderThickness="0"/>
-                <hc:Drawer IsOpen="True" x:Name="Right_Drawer" Dock="Right"
+                       x:Name="middle_frame" BorderThickness="0"/>
+                <hc:Drawer  x:Name="Right_Drawer" Dock="Right"
                            ShowMode="Push" Width="377.7">
                     <Frame x:Name="right_frame"
                            NavigationUIVisibility="Hidden" />

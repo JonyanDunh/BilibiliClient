@@ -97,14 +97,15 @@ namespace Bilibili_Client
             geetest_page.geetest_web.Dispose();
             IsLogin = true;
             bilibili.Set_User_Data(this);
-            /*middle_frame.Navigate(space_page);
-            middle_title.Content = bilibili.Get_User_Data("uname", "", false, this) + "的个人空间";*/
+            middle_frame.Navigate(space_page);
+            middle_title.Text = bilibili.Get_User_Data("uname", "", false, this) + "的个人空间";
 
         }
         //登录页面打开极验页面
         private void login_open_geetest_page()
         {
-            //right_frame.Navigate(geetest_page);
+            Right_Drawer.IsOpen = true;
+            right_frame.Navigate(geetest_page);
         }
         private void Window_MouseMove(object sender, MouseEventArgs e)//移动窗口
         {
@@ -132,31 +133,26 @@ namespace Bilibili_Client
         {
             if (IsLogin)
             {
-                /*middle_frame.Navigate(space_page);
-                middle_title.Content = bilibili.Get_User_Data("uname", "", false, this)+"的个人空间";*/
+                middle_frame.Navigate(space_page);
+                middle_title.Text = bilibili.Get_User_Data("uname", "", false, this)+"的个人空间";
                
 
             }
             else
             {
-                //middle_frame.Navigate(login_page);
+                middle_frame.Navigate(login_page);
             }
         }
         //打开首页的按钮
-        private void Open_Index(object sender, RoutedEventArgs e)
+        private void Open_Index(object sender, MouseButtonEventArgs e)
         {
-            /*middle_frame.Navigate(index_page);
-            Index_Button.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));
-            middle_title.Content = "首页";*/
+            middle_frame.Navigate(index_page);
+            middle_title.Text = "首页";
         }
 
         private void test(object sender, RoutedEventArgs e)
         {
         }
 
-        private void Open_Index(object sender, MouseButtonEventArgs e)
-        {
-
-        }
     }
 }
