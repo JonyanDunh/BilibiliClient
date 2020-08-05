@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HandyControl.Tools;
+using HandyControl.Tools.Extension;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -26,10 +28,14 @@ namespace Bilibili_Client
         public MainWindow()
         {
             InitializeComponent();
-            initialization();//初始化内容
-            Adaptive();//屏幕自适应
-            Message();//建立信息槽
-            Create_data();//创建文件夹
+            /* initialization();//初始化内容*/
+             Adaptive();//屏幕自适应
+            /* Message();//建立信息槽
+             Create_data();//创建文件夹*/
+            
+
+
+
         }
 
         //初始化内容
@@ -39,8 +45,8 @@ namespace Bilibili_Client
             GCTimer.Tick += new EventHandler(TimerGC);
             GCTimer.Interval = new TimeSpan(0, 0, 0, 1);
             GCTimer.Start();
-            middle_frame.Navigate(index_page);//默认打开主页
-            Index_Button.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));//主页的按钮设置为粉色
+            /*middle_frame.Navigate(index_page);//默认打开主页
+            Index_Button.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));//主页的按钮设置为粉色*/
             if (bilibili.Check_Login_status())//判断是否登录
             {
                 IsLogin = true;
@@ -52,10 +58,10 @@ namespace Bilibili_Client
         private void Adaptive()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;//显示位置屏幕居中
-            mainwindow.Width = (SystemParameters.PrimaryScreenWidth) * 0.83;
-            mainwindow.Height = (SystemParameters.PrimaryScreenHeight) * 0.83;
-            left_grid.Width = mainwindow.Width * 0.145;
-            right_grid.Width = mainwindow.Width * 0.234;
+            /*mainwindow.Width = (SystemParameters.PrimaryScreenWidth) * 0.83;
+            mainwindow.Height = (SystemParameters.PrimaryScreenHeight) * 0.83;*/
+            /*left_grid.Width = mainwindow.Width * 0.145;
+            right_grid.Width = mainwindow.Width * 0.234;*/
         }
 
         //建立信息槽
@@ -91,14 +97,14 @@ namespace Bilibili_Client
             geetest_page.geetest_web.Dispose();
             IsLogin = true;
             bilibili.Set_User_Data(this);
-            middle_frame.Navigate(space_page);
-            middle_title.Content = bilibili.Get_User_Data("uname", "", false, this) + "的个人空间";
+            /*middle_frame.Navigate(space_page);
+            middle_title.Content = bilibili.Get_User_Data("uname", "", false, this) + "的个人空间";*/
 
         }
         //登录页面打开极验页面
         private void login_open_geetest_page()
         {
-            right_frame.Navigate(geetest_page);
+            //right_frame.Navigate(geetest_page);
         }
         private void Window_MouseMove(object sender, MouseEventArgs e)//移动窗口
         {
@@ -126,22 +132,26 @@ namespace Bilibili_Client
         {
             if (IsLogin)
             {
-                middle_frame.Navigate(space_page);
-                middle_title.Content = bilibili.Get_User_Data("uname", "", false, this)+"的个人空间";
+                /*middle_frame.Navigate(space_page);
+                middle_title.Content = bilibili.Get_User_Data("uname", "", false, this)+"的个人空间";*/
                
 
             }
             else
             {
-                middle_frame.Navigate(login_page);
+                //middle_frame.Navigate(login_page);
             }
         }
         //打开首页的按钮
         private void Open_Index(object sender, RoutedEventArgs e)
         {
-            middle_frame.Navigate(index_page);
+            /*middle_frame.Navigate(index_page);
             Index_Button.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));
-            middle_title.Content = "首页";
+            middle_title.Content = "首页";*/
+        }
+
+        private void test(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

@@ -5,402 +5,242 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         x:Name="mainwindow"
         Background="White"
         Title="PILIPILI客户端"
         Height="900"
-        Width="1608" MinWidth="1011.1"
+        Width="1360"
+        WindowStyle="None"
+        MinWidth="1011.1"
         >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Dictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Basic/Colors/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="233.4" />
-            <ColumnDefinition Width="988.8*" MinWidth="400" />
-            <ColumnDefinition Width="377.7"   />
+            <ColumnDefinition Width="318.4"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid  Grid.Column="0"
+              Background="#FFF3F8F9">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Viewbox>
+                    <Image  Height="24"
+                            Source="resource/img/BILIBILI_LOGO-PINK.png"
+                            Margin="20,0,150,0" />
+                </Viewbox>
+            </Grid>
+            <Grid  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid  Grid.Row="0">
+                    <hc:Divider LineStrokeThickness="2"
+                                Orientation="Horizontal"
+                                Height="1"
+                                Background="#FFFFFBFB"
+                                Margin="30,0"
+                                VerticalAlignment="Top" />
+                    <hc:SideMenu Height="336">
+                        <!--首页-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="首页">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/首页.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--动态-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="动态">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/动态.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--排行榜-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="排行榜">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/排行榜.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--直播-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="直播">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/直播.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--漫画-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="漫画">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/漫画.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--分区-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="分区">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/分区.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--投稿工具-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="投稿工具">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/投稿工具.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                    </hc:SideMenu>
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <hc:Divider LineStrokeThickness="2"
+                                Orientation="Horizontal"
+                                Height="1"
+                                Background="#FFFFFBFB"
+                                Margin="30,0"
+                                VerticalAlignment="Top" />
+                    <hc:SideMenu Height="192">
+                        <!--历史记录-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="历史记录">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/历史记录.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--稍后观看-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="稍后观看">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/稍后观看.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <!--收藏夹-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="收藏夹">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/收藏夹.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        
+                        <!--消息-->
+                        <hc:SideMenuItem Background="#FFF3F8F9"
+                                         FontSize="14"
+                                         Header="消息">
+                            <hc:SideMenuItem.Icon>
+                                <Image Source="resource/img/消息.png"
+                                       Width="20"
+                                       Height="20" />
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                    </hc:SideMenu>
+                    <hc:Divider LineStrokeThickness="2"
+                                Orientation="Horizontal"
+                                Height="1"
+                                Background="#FFFFFBFB"
+                                Margin="30,0"
+                                VerticalAlignment="Bottom" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                    <hc:Gravatar Height="60" Width="60" Style="{StaticResource GravatarCircleImg}"
+                                     Margin="15,0,0,0"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center">
+                        <Image Source="resource/img/头像.png" />
+                    </hc:Gravatar>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-        <!--左边组-->
-        <Grid x:Name="left_grid"
-              Grid.Column="0"
-              Margin="0">
-            <!--PILIPILI_Logo-->
-            <Image Source="resource/img/PILIPILI_LOGO.png"
-                   Margin="47,10,47,0"
-                   RenderTransformOrigin="0.5,0.5"
-                   x:Name="logo"
-                   VerticalAlignment="Top" />
-            <ItemsControl x:Name="left_button_box"
-                          Margin="0,95,0,70"
-                          HorizontalAlignment="Center">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="1"
-                                     Rows="10" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <!--首页按钮-->
-                    <Button FontSize="21"
-                            x:Name="Index_Button"
-                            Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch"
-                        Click="Open_Index">
-                        <WrapPanel>
-                            <Image Source="resource/img/首页.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="首页"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--动态按钮-->
-                    <Button FontSize="21"
-                        x:Name="Dynamic_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/动态.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="动态"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--排行按钮-->
-                    <Button FontSize="21"
-                        x:Name="Ranking_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/排行.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="排行"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--分类按钮-->
-                    <Button FontSize="21"
-                        x:Name="Classification_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/分类.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="分类"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--直播按钮-->
-                    <Button FontSize="21"
-                        x:Name="Live_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/直播.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="直播"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--番剧按钮-->
-                    <Button FontSize="21"
-                        x:Name="Fanju_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/番剧.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="番剧"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--漫画按钮-->
-                    <Button FontSize="21"
-                        x:Name="Comics_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/漫画.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="漫画"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--会员购按钮-->
-                    <Button FontSize="21"
-                        x:Name="Member_Shopping_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/会员购.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="会员购"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--游戏中心按钮-->
-                    <Button FontSize="21"
-                        x:Name="Game_Center_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/游戏中心.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="游戏中心"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-                    <!--投稿工具按钮-->
-                    <Button FontSize="21"
-                        x:Name="Contribution_Tool_Button"
-                        Style="{StaticResource ButtonStyle}"
-                            FontFamily="Microsoft YaHei"
-                            FontWeight="Bold"
-                            Grid.Row="0"
-                            VerticalAlignment="Stretch"
-                            HorizontalAlignment="Stretch">
-                        <WrapPanel>
-                            <Image Source="resource/img/投稿工具.png"
-                                   Width="32"
-                                   Height="32" />
-                            <TextBlock  Text="投稿工具"
-                                        VerticalAlignment="Center" />
-                        </WrapPanel>
-                    </Button>
-            </ItemsControl>
-            <Grid Height="60"
-                  Background="#FFDAE5F0"
-                  VerticalAlignment="Bottom">
-                <Grid Margin="20,0">
-                <Image Source="resource/img/Bilibili_User_Cover.png"
-                           MouseDown="Open_User_Space"
-                           Width="48"
-                       Height="48"
-                       x:Name="User_Cover_Img"
-                       HorizontalAlignment="Left">
-                    <Image.Clip>
-                        <RectangleGeometry RadiusX="48"
-                                           RadiusY="48"
-                                           Rect="0,0,48,48" />
-                    </Image.Clip>
-                </Image>
-                <Label x:Name="User_Name_Label"
-                    FontFamily="Microsoft YaHei"
-                           FontWeight="Bold"
-                           FontSize="18"
-                           Foreground="White"
-                           Content="登录账户"
-                       HorizontalContentAlignment="Left"
-                       VerticalContentAlignment="Center"
-                           MouseDown="Open_User_Space"
-                           Margin="50,0,0,0" />
+                            <Grid Grid.Row="0">
+                                <TextBlock HorizontalAlignment="Left"
+                                           Text="Jonyan Dunh"
+                                           Style="{StaticResource TextBlockSubTitleBold}"
+                                           VerticalAlignment="Bottom" />
+
+                            </Grid>
+                            <Grid Grid.Row="1">
+                            <ProgressBar  Style="{DynamicResource ProgressBarFlat}"
+                                      Value="40"
+                                      Margin="0,0,15,30"
+                                      VerticalAlignment="Bottom" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
-        <!--中间-->
-        <Grid x:Name="middle_grid"
-              Grid.Column="1"
-              Margin="0">
+        <Grid Grid.Column="1"
+              Background="#FFFFFBFB">
             <Grid.RowDefinitions>
-                <RowDefinition Height="53"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <!--标题栏-->
-            <Grid Background="#FFF9FCFF"
-                  Grid.Row="0">
-                <!--标题-->
-            <Label x:Name="middle_title"
-                   HorizontalContentAlignment="Center"
-                   VerticalContentAlignment="Center"
-                   FontSize="21"
-                   FontFamily="Microsoft YaHei"
-                   FontWeight="Bold"
-                   Content="首页"
-                       HorizontalAlignment="Left" />
-                <Button Foreground="White"
-                        FontSize="20"
-                        FontFamily="Microsoft YaHei"
-                        FontWeight="Bold"
-                        Grid.Row="10"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Height="40"
-                        Width="40"
-                        Margin="0,0,30,0"
-                        Click="Index_Refresh_button"
-                        x:Name="Refresh_button">
-
-                    <WrapPanel>
-                        <Image Source="resource/img/刷新.png"
-                               Width="24"
-                               Height="24">
-                        </Image>
-                    </WrapPanel>
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
-                                    BorderThickness="0"
-                                    CornerRadius="50"
-                                    Name="PART_Background">
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="0,1"
-                                                         StartPoint="0,0">
-                                        <GradientStop Color="#FED4E0"
-                                                      Offset="0.0" />
-                                        <GradientStop Color="#FFFBE1E9"
-                                                      Offset="0.5" />
-                                        <GradientStop Color="#FFFBE1E9"
-                                                      Offset="0.0" />
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <ContentPresenter  Content="{TemplateBinding ContentControl.Content}"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+            <Grid Grid.Row="0">
+                <TextBlock HorizontalAlignment="Left"
+                           Margin="30,5,5,5"
+                           Text="首页"
+                           Style="{StaticResource TextBlockLargeBold}" />
             </Grid>
-            <!--中间页面-->
-            <Grid Grid.Row="1"
-                  Background="#FFFFFBFB">
-            <Frame x:Name="middle_frame"
-                       
-                       Grid.Row="1"
-                       NavigationUIVisibility="Hidden"></Frame>
-             </Grid>
-        </Grid>
-        <!--右边组-->
-        <Grid x:Name="right_grid"
-              Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="53"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <!--搜索栏-->
-            <Grid Background="#FFF9FCFF" Grid.Row="0"
-                  x:Name="search_bar">
-                <Grid Margin="10,10,15,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="#FED4E0"
-                        Background="White"
-                            x:Name="search_logo"
-                            BorderThickness="1,1,0,1"
-                        CornerRadius="5,0,0,5">
-                    <Image Source="resource/img/搜索.png"
-                           Width="30"
-                           Height="30">
-                        <Image.Clip>
-                            <RectangleGeometry RadiusX="30"
-                                               RadiusY="30"
-                                               Rect="0,0,30,30" />
-                        </Image.Clip>
-                    </Image>
-                </Border>
-                <Border Grid.Column="1"
-                        x:Name="search_textbox_border"
-                        BorderBrush="#FED4E0"
-                        BorderThickness="0,1,1,1"
-                        Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                        SnapsToDevicePixels="true"
-                        CornerRadius="0,5,5,0">
-                    <TextBox BorderBrush="{x:Null}"
-                             BorderThickness="0"
-                             x:Name="search_textbox"
-                             FontSize="16"
-                             VerticalContentAlignment="Center"
-                             FontFamily="Microsoft YaHei Light"
-                             Grid.Row="0"
-                                 Margin="0,0,-1,0">
-                        <TextBox.Resources>
-                            <VisualBrush x:Key="HelpBrush"
-                                         TileMode="None"
-                                         Opacity="0.3"
-                                         Stretch="None"
-                                         AlignmentX="Left">
-                                <VisualBrush.Visual>
-                                    <TextBlock  FontStyle="Italic"
-                                                Text="你感兴趣的视频都在P站" />
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </TextBox.Resources>
-                        <TextBox.Style>
-                            <Style TargetType="TextBox">
-                                <Style.Triggers>
-                                    <Trigger Property="Text"
-                                             Value="{x:Null}">
-                                        <Setter Property="Background"
-                                                Value="{StaticResource HelpBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="Text"
-                                             Value="">
-                                        <Setter Property="Background"
-                                                Value="{StaticResource HelpBrush}" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-                    </TextBox>
-                </Border>
-                </Grid>
-            </Grid>
-            <!--右边页面-->
             <Grid Grid.Row="1">
-            <Frame x:Name="right_frame"
-                       NavigationUIVisibility="Hidden" />
+                <Frame NavigationUIVisibility="Hidden"
+                       Source="login.xaml" BorderThickness="0"/>
+                
             </Grid>
+
         </Grid>
     </Grid>
 </Window>

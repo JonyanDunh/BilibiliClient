@@ -105,8 +105,9 @@ namespace Bilibili_Client
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
-                Thread_blocking.Set();
+            /* if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
+                 Thread_blocking.Set();*/
+           
         }
 
 

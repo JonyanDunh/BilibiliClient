@@ -320,7 +320,7 @@
         <!--整个视频模块-->
         <Grid Width="304"
               Height="284"
-              Margin="0,18,0,0">
+              Margin="5,10,5,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="190"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>

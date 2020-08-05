@@ -115,7 +115,7 @@ namespace Bilibili_Client
         //验证码登录按钮
         private void Sms_code_Login(object sender, RoutedEventArgs e)
         {
-            bilibili.Sms_login(smscode_textbox.Text, phone_textbox.Text,this);
+            bilibili.Sms_login(smscode_textbox.Password, phone_textbox.Text,this);
         }
 
         //点击二维码刷新二维码
@@ -123,7 +123,7 @@ namespace Bilibili_Client
         {
             bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
             bilibili.Get_Login_Qrcode(this);
-            Scan_status.Content = "请使用 哔哩哔哩客户端 扫码登录";
+            Scan_status.Text = "请使用 哔哩哔哩客户端 扫码登录";
             Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));
         }
 

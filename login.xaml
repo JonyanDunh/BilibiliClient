@@ -5,223 +5,55 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Bilibili_Client"
       xmlns:PasswordStyle="clr-namespace:Bilibili_Client"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
       mc:Ignorable="d"
       d:DesignHeight="837"
       d:DesignWidth="989"
-      Title="login"
-      >
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
+      Title="login">
     <Grid>
 
         <!--密码登录-->
-         <!--<Viewbox>-->
-            <ItemsControl Width="589" Height="437" Visibility="Visible"
+        <Viewbox>
+            <ItemsControl Visibility="Visible"
                           x:Name="Password_Login"
                           Margin="200">
                 <Border Background="White"
-                        CornerRadius="15"
-                        Height="437"
-                        Width="589">
-                    <Grid Margin="70" Width="449" Height="297">
+                        CornerRadius="15">
+                    <Grid Margin="70,60,70,50">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="217"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid Width="449" Height="40" Grid.Row="0">
-                            <Label FontSize="24"
-                                   Width="449"
-                                   Height="40"
-                                   HorizontalContentAlignment="Center"
-                                   VerticalContentAlignment="Center"
-                                   Content="密码登录" />
+                        <Grid Height="40"
+                              Grid.Row="0">
+                            <TextBlock FontSize="24"
+                                       TextBlock.TextAlignment="Center"
+                                       Text="密码登录"
+                                       VerticalAlignment="Center" />
                         </Grid>
-                        <Grid Grid.Row="1" Width="449" Height="217">
-                            <Grid Width="449" Height="217">
+                        <Grid Grid.Row="1">
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" Width="449" Height="82">
-                                    <Grid  Margin="50,20,50,10"
-                                           Height="42"
-                                           Width="349">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="40" />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <Border BorderBrush="#FED4E0"
-                                                Background="White"
-                                                BorderThickness="1,1,0,1"
-                                                CornerRadius="5,0,0,5"
-                                                Width="40"
-                                                Height="42">
-                                            <Image Source="resource/img/账号.png"
-                                                   Width="30"
-                                                   Height="30">
-                                                <Image.Clip>
-                                                    <RectangleGeometry RadiusX="30"
-                                                                       RadiusY="30"
-                                                                       Rect="0,0,30,30" />
-                                                </Image.Clip>
-                                            </Image>
-                                        </Border>
-                                        <Border Grid.Column="1"
-                                                BorderBrush="#FED4E0"
-                                                BorderThickness="0,1,1,1"
-                                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                                Width="309"
-                                                Height="42"
-                                                SnapsToDevicePixels="true"
-                                                CornerRadius="0,5,5,0">
-                                            <TextBox BorderBrush="{x:Null}"
-                                                     BorderThickness="0"
-                                                     x:Name="account_textbox"
-                                                     FontSize="16"
-                                                     Width="307"
-                                                     Height="40"
-                                                     VerticalContentAlignment="Center"
-                                                     FontFamily="Microsoft YaHei Light"
-                                                     Grid.Row="0"
-                                                     Margin="0,0,1,0">
-                                                <TextBox.Resources>
-                                                    <VisualBrush x:Key="HelpBrush"
-                                                                 TileMode="None"
-                                                                 Opacity="0.3"
-                                                                 Stretch="None"
-                                                                 AlignmentX="Left">
-                                                        <VisualBrush.Visual>
-                                                            <TextBlock Width="118"
-                                                                       Height="21"
-                                                                       FontStyle="Italic"
-                                                                       Text="你的手机号/邮箱" />
-                                                        </VisualBrush.Visual>
-                                                    </VisualBrush>
-                                                </TextBox.Resources>
-                                                <TextBox.Style>
-                                                    <Style TargetType="TextBox">
-                                                        <Style.Triggers>
-                                                            <Trigger Property="Text"
-                                                                     Value="{x:Null}">
-                                                                <Setter Property="Background"
-                                                                        Value="{StaticResource HelpBrush}" />
-                                                            </Trigger>
-                                                            <Trigger Property="Text"
-                                                                     Value="">
-                                                                <Setter Property="Background"
-                                                                        Value="{StaticResource HelpBrush}" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBox.Style>
-                                            </TextBox>
-                                        </Border>
-                                    </Grid>
+                                <Grid Grid.Row="0">
+                                    <hc:TextBox x:Name="account_textbox"
+                                                ShowClearButton="True"
+                                                Margin="50,20,50,10"
+                                                hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
                                 </Grid>
-                                <Grid Grid.Row="1" Width="449" Height="73">
-                                    <Grid  Margin="50,10,50,20"
-                                           Height="43"
-                                           Width="349">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="40" />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <Border BorderBrush="#FED4E0"
-                                                Background="White"
-                                                Width="40"
-                                                Height="43"
-                                                BorderThickness="1,1,0,1"
-                                                CornerRadius="5,0,0,5">
-                                            <Image Source="resource/img/密码.png"
-                                                   Width="30"
-                                                   Height="30">
-                                                <Image.Clip>
-                                                    <RectangleGeometry RadiusX="30"
-                                                                       RadiusY="30"
-                                                                       Rect="0,0,30,30" />
-                                                </Image.Clip>
-                                            </Image>
-                                        </Border>
-                                        <Border Grid.Column="1"
-                                                x:Name="password_textbox_border"
-                                                BorderBrush="#FED4E0"
-                                                Height="43"
-                                                Width="309"
-                                                BorderThickness="0,1,1,1"
-                                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                                SnapsToDevicePixels="true"
-                                                CornerRadius="0,5,5,0">
-                                        <PasswordBox BorderBrush="{x:Null}"
-                                                     BorderThickness="0"
-                                                     x:Name="password_textbox"
-                                                     FontSize="16"
-                                                     Width="307"
-                                                     Height="41"
-                                                     VerticalContentAlignment="Center"
-                                                     FontFamily="Microsoft YaHei Light"
-                                                     Grid.Row="0"
-                                                     Margin="0,0,0,0">
-                                            <PasswordBox.Resources>
-                                                    <VisualBrush x:Key="HelpBrush"
-                                                                 TileMode="None"
-                                                                 Opacity="0.3"
-                                                                 Stretch="None"
-                                                                 AlignmentX="Left">
-                                                        <VisualBrush.Visual>
-                                                            <TextBlock  FontStyle="Italic"
-                                                                        Height="21"
-                                                                        Width="32"
-                                                                        Text="密码" />
-                                                        </VisualBrush.Visual>
-                                                    </VisualBrush>
-                                                </PasswordBox.Resources>
-                                            <PasswordBox.Style>
-                                                <Style TargetType="PasswordBox">
-                                                    <Setter Property="Height" Value="23"></Setter>
-                                                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                                                    <Setter Property="VerticalAlignment" Value="Top"></Setter>
-                                                    <Setter Property="PasswordStyle:PasswordBoxMonitor.IsMonitoring"  Value="True"/>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type PasswordBox}">
-                                                                <Border Name="Bd"  Background="{TemplateBinding Background}"  BorderThickness="{TemplateBinding BorderThickness}"
-                                                                        BorderBrush="{TemplateBinding BorderBrush}"  SnapsToDevicePixels="true">
-                                                                    <Grid>
-                                                                        <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                                                        <StackPanel Orientation="Horizontal" Visibility="Collapsed" Name="myStackPanel">
-                                                                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="LightGray" Text=" 请输入密码"/>
-                                                                        </StackPanel>
-                                                                    </Grid>
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsEnabled" Value="false">
-                                                                        <Setter Property="Visibility" TargetName="myStackPanel" Value="Collapsed"/>
-                                                                    </Trigger>
-                                                                    <Trigger Property="PasswordStyle:PasswordBoxMonitor.PasswordLength" Value="0">
-                                                                        <Setter Property="Visibility" TargetName="myStackPanel" Value="Visible"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </PasswordBox.Style>
-                                        </PasswordBox>
-                                        </Border>
-                                    </Grid>
+                                <Grid Grid.Row="1">
+                                    <hc:PasswordBox x:Name="password_textbox"
+                                                    Margin="50,10,50,20"
+                                                    hc:InfoElement.Placeholder="请输入密码"
+                                                    ShowClearButton="True"></hc:PasswordBox>
+
                                 </Grid>
-                                <Grid Grid.Row="2"
-                                      Width="449"
-                                      Height="72">
-                                    <Button Background="#FED4E0"
-                                            Content="登录"
+                                <Grid Grid.Row="2">
+                                    <Button Content="登录"
                                             Width="119"
                                             Height="52"
                                             x:Name="Pass_Login_button"
@@ -231,57 +63,26 @@
                                             FontFamily="Arial Black"
                                             Margin="160,10,170,10"
                                             Click="Password_Login_buttons_Click">
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}"             Width="119" Height="52"
-                                                        BorderThickness="0"
-                                                        CornerRadius="5"
-                                                        Name="PART_Background">
-                                                    <Border.Background>
-                                                        <LinearGradientBrush EndPoint="0,1"
-                                                                             StartPoint="0,0">
-                                                            <GradientStop Color="#FED4E0"
-                                                                          Offset="0.0" />
-                                                            <GradientStop Color="#FED4E0"
-                                                                          Offset="0.5" />
-                                                            <GradientStop Color="#FED4E0"
-                                                                          Offset="0.0" />
-                                                        </LinearGradientBrush>
-                                                    </Border.Background>
-                                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                                                                      HorizontalAlignment="Center"
-                                                                      VerticalAlignment="Center" />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Button.Template>
                                     </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid Grid.Row="2"
-                              Width="449"
-                              Height="40">
-                            <Grid Margin="0,5" Width="449" Height="30">
-                                <TextBlock Width="133"
-                                           Height="20"
+                        <Grid Grid.Row="2">
+                            <Grid Margin="0,5">
+                                <TextBlock 
                                            FontSize="14"
                                            FontWeight="Bold"
-                                           Margin="0,5"
+                                           Margin="0,5,0,0"
                                            Text="不想用账号密码登录?"
-                                           HorizontalAlignment="Left">
-                                </TextBlock>
-                                <TextBlock Width="48"
-                                           Height="18"
-                                           Foreground="#FF23A4EE"
+                                           HorizontalAlignment="Left" />
+                                <TextBlock Foreground="#FF23A4EE"
                                            Text="扫码登录"
                                            TextDecorations="Underline"
                                            MouseDown="Qrcode"
                                            HorizontalAlignment="Left"
                                            Margin="140,6,0,6" />
-                                <TextBlock Width="60"
-                                           Height="18"
-                                           Foreground="#FF23A4EE"
-                                           Text="验证码登录"
+                                <TextBlock Foreground="#FF23A4EE"
+                                           Text="短信登录"
                                            TextDecorations="Underline"
                                            MouseDown="Sms"
                                            HorizontalAlignment="Left"
@@ -291,330 +92,152 @@
                     </Grid>
                 </Border>
             </ItemsControl>
-            <!--</Viewbox>-->
+        </Viewbox>
         <!--验证码登录-->
-        <ItemsControl  Visibility="Hidden"
-                      x:Name="Sms_Code_Login"
-                      Margin="200">
-            <Border Background="White"
-                    CornerRadius="15"
-                    Height="437">
-                <Grid Margin="70">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Label FontSize="24"
-                               HorizontalContentAlignment="Center"
-                               VerticalContentAlignment="Center"
-                               Content="验证码登录" />
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <Grid  Margin="50,20,50,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Border BorderBrush="#FED4E0"
-                                            Background="White"
-                                            BorderThickness="1,1,0,1"
-                                            CornerRadius="5,0,0,5"
-                                            x:Name="Phone_border">
-                                        <Image Source="resource/img/手机号.png"
-                                               Width="35"
-                                               Height="35">
-                                        </Image>
-                                    </Border>
-                                    <Border Grid.Column="1"
-                                            BorderBrush="#FED4E0"
-                                            BorderThickness="0,1,1,1"
-                                            Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                            SnapsToDevicePixels="true"
-                                            CornerRadius="0,5,5,0">
-                                        <TextBox BorderBrush="{x:Null}"
-                                                 BorderThickness="0"
-                                                 x:Name="phone_textbox"
-                                                 FontSize="16"
-                                                 VerticalContentAlignment="Center"
-                                                 FontFamily="Microsoft YaHei Light"
-                                                 Grid.Row="0"
-                                                 Margin="0,0,1,0">
-                                            <TextBox.Resources>
-                                                <VisualBrush x:Key="HelpBrush"
-                                                             TileMode="None"
-                                                             Opacity="0.3"
-                                                             Stretch="None"
-                                                             AlignmentX="Left">
-                                                    <VisualBrush.Visual>
-                                                        <TextBlock  FontStyle="Italic"
-                                                                    Text=" 你的手机号" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </TextBox.Resources>
-                                            <TextBox.Style>
-                                                <Style TargetType="TextBox">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="Text"
-                                                                 Value="{x:Null}">
-                                                            <Setter Property="Background"
-                                                                    Value="{StaticResource HelpBrush}" />
-                                                        </Trigger>
-                                                        <Trigger Property="Text"
-                                                                 Value="">
-                                                            <Setter Property="Background"
-                                                                    Value="{StaticResource HelpBrush}" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBox.Style>
-                                        </TextBox>
-                                    </Border>
-                                </Grid>
-                            </Grid>
-
-                            <Grid Grid.Row="1">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"
-                                          Margin="50,10,0,20">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="40" />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <Border BorderBrush="#FED4E0"
-                                                Background="White"
-                                                BorderThickness="1,1,0,1"
-                                                CornerRadius="5,0,0,5">
-                                            <Image Source="resource/img/验证码.png"
-                                                   Width="25"
-                                                   Height="25">
-                                            </Image>
-                                        </Border>
-                                        <Border Grid.Column="1"
-                                                BorderBrush="#FED4E0"
-                                                BorderThickness="0,1,1,1"
-                                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                                                SnapsToDevicePixels="true"
-                                                CornerRadius="0,5,5,0">
-                                            <TextBox BorderBrush="{x:Null}"
-                                                     BorderThickness="0"
-                                                     x:Name="smscode_textbox"
-                                                     FontSize="16"
-                                                     VerticalContentAlignment="Center"
-                                                     FontFamily="Microsoft YaHei Light"
-                                                     Grid.Row="0"
-                                                     Margin="0,0,2,0">
-                                                <TextBox.Resources>
-                                                    <VisualBrush x:Key="HelpBrush"
-                                                                 TileMode="None"
-                                                                 Opacity="0.3"
-                                                                 Stretch="None"
-                                                                 AlignmentX="Left">
-                                                        <VisualBrush.Visual>
-                                                            <TextBlock  FontStyle="Italic"
-                                                                        Text="验证码" />
-                                                        </VisualBrush.Visual>
-                                                    </VisualBrush>
-                                                </TextBox.Resources>
-                                                <TextBox.Style>
-                                                    <Style TargetType="TextBox">
-                                                        <Style.Triggers>
-                                                            <Trigger Property="Text"
-                                                                     Value="{x:Null}">
-                                                                <Setter Property="Background"
-                                                                        Value="{StaticResource HelpBrush}" />
-                                                            </Trigger>
-                                                            <Trigger Property="Text"
-                                                                     Value="">
-                                                                <Setter Property="Background"
-                                                                        Value="{StaticResource HelpBrush}" />
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBox.Style>
-                                            </TextBox>
-                                        </Border>
-                                    </Grid>
-                                    <Grid Grid.Column="1"
-                                          Margin="20,10,50,20">
-
-                                        <Button Background="#FED4E0"
-                                                Content="发送"
-                                                x:Name="Sms_code_Send_buttons"
-                                                Opacity="0.8"
-                                                FontSize="20"
-                                                FontWeight="Bold"
-                                                FontFamily="Arial Black"
-                                                Click="Sms_code_Send">
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
-                                                            BorderThickness="0"
-                                                            CornerRadius="5"
-                                                            Name="PART_Background">
-                                                        <Border.Background>
-                                                            <LinearGradientBrush EndPoint="0,1"
-                                                                                 StartPoint="0,0">
-                                                                <GradientStop Color="#FED4E0"
-                                                                              Offset="0.0" />
-                                                                <GradientStop Color="#FED4E0"
-                                                                              Offset="0.5" />
-                                                                <GradientStop Color="#FED4E0"
-                                                                              Offset="0.0" />
-                                                            </LinearGradientBrush>
-                                                        </Border.Background>
-                                                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                                                                          HorizontalAlignment="Center"
-                                                                          VerticalAlignment="Center" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid Grid.Row="2">
-                                <Button Background="#FED4E0"
-                                        IsEnabled="False"
-                                        Content="登录"
-                                        x:Name="Sms_Login_button"
-                                        Opacity="0.8"
-                                        FontSize="20"
-                                        FontWeight="Bold"
-                                        FontFamily="Arial Black"
-                                        Margin="160,10,170,10"
-                                        Click="Sms_code_Login">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
-                                                    BorderThickness="0"
-                                                    CornerRadius="5"
-                                                    Name="PART_Background">
-                                                <Border.Background>
-                                                    <LinearGradientBrush EndPoint="0,1"
-                                                                         StartPoint="0,0">
-                                                        <GradientStop Color="#FED4E0"
-                                                                      Offset="0.0" />
-                                                        <GradientStop Color="#FED4E0"
-                                                                      Offset="0.5" />
-                                                        <GradientStop Color="#FED4E0"
-                                                                      Offset="0.0" />
-                                                    </LinearGradientBrush>
-                                                </Border.Background>
-                                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                                                                  HorizontalAlignment="Center"
-                                                                  VerticalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid Margin="0,5">
-                            <TextBlock FontSize="14"
-                                       FontWeight="Bold"
-                                       Margin="0,5"
-                                       Text="不想用短信验证登录?"
-                                       HorizontalAlignment="Left">
-                            </TextBlock>
-                            <TextBlock Foreground="#FF23A4EE"
-                                       Text="扫码登录"
-                                       TextDecorations="Underline"
-                                       MouseDown="Qrcode"
-                                       HorizontalAlignment="Left"
-                                       Margin="140,6,0,6" />
-                            <TextBlock Foreground="#FF23A4EE"
-                                       Text="密码登录"
-                                       TextDecorations="Underline"
-                                       MouseDown="Password"
-                                       HorizontalAlignment="Left"
-                                       Margin="200,6,0,6" />
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-        </ItemsControl>
-         <!--主登录框-->
-        <ItemsControl  Visibility="Hidden"
-                       x:Name="QrCode_Login"
-                       Margin="200">
-            <Border Background="White"
-                    CornerRadius="15"
-                    Height="437">
-                <Grid Margin="70">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="40"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Label FontSize="24"
-                               HorizontalContentAlignment="Center"
-                               VerticalContentAlignment="Center"
-                               Content="扫码登录" />
-                    </Grid>
-                    <Grid Grid.Row="1">
+        <Viewbox>
+            <ItemsControl Visibility="Hidden"
+                          x:Name="Sms_Code_Login"
+                          Margin="200">
+                <Border Background="White"
+                        CornerRadius="15">
+                    <Grid Margin="70,60,70,50">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="217"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid  Margin="50,20,50,0">
-                                <Image x:Name="Qrcode_img"
-                                       Source="resource/img/exported_qrcode_image_600.png"
-                                       MouseDown="Refresh_Qrcode" />
-
-                            </Grid>
+                        <Grid Height="40"
+                              Grid.Row="0">
+                            <TextBlock FontSize="24"
+                                       TextBlock.TextAlignment="Center"
+                                       Text="验证码登录"
+                                       VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Grid  Margin="50,20,50,10">
-                                <Label Foreground="#FB7299" x:Name="Scan_status" Content="请使用 哔哩哔哩客户端 扫码登录"
-                                       VerticalContentAlignment="Center"
-                                       HorizontalContentAlignment="Center"
-                                       Margin="50,0"
-                                       FontSize="14"
-                                        />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <hc:TextBox x:Name="phone_textbox"
+                                                ShowClearButton="True"
+                                                Margin="50,20,145,10"
+                                                hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
+                                    <Button x:Name="Sms_code_Send_buttons" Content="发送" Width="63" Height="42.33"
+                                             HorizontalAlignment="Right"
+                                             Margin="0,9.5,52,0"></Button>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <hc:PinBox x:Name="smscode_textbox"
+                                               Margin="35,10"
+                                               Length="6" />
+
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Button Content="登录"
+                                            Width="119"
+                                            Height="52"
+                                            x:Name="Sms_Login_button"
+                                            Opacity="0.8"
+                                            FontSize="20"
+                                            FontWeight="Bold"
+                                            FontFamily="Arial Black"
+                                            Margin="160,10,170,10"
+                                            Click="Password_Login_buttons_Click">
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid Margin="0,5">
+                                <TextBlock FontSize="14"
+                                           FontWeight="Bold"
+                                           Margin="0,5,0,0"
+                                           Text="不想用短信验证登录?"
+                                           HorizontalAlignment="Left" />
+                                <TextBlock Foreground="#FF23A4EE"
+                                           Text="扫码登录"
+                                           TextDecorations="Underline"
+                                           MouseDown="Qrcode"
+                                           HorizontalAlignment="Left"
+                                           Margin="140,6,0,6" />
+                                <TextBlock Foreground="#FF23A4EE"
+                                           Text="密码登录"
+                                           TextDecorations="Underline"
+                                           MouseDown="Password"
+                                           HorizontalAlignment="Left"
+                                           Margin="200,6,0,6" />
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid Grid.Row="2">
-                        <Grid Margin="0,5">
-                            <TextBlock FontSize="14"
-                                       FontWeight="Bold"
-                                       Margin="0,5"
-                                       Text="不想扫码二维码登录?"
-                                       HorizontalAlignment="Left">
-                            </TextBlock>
-                            <TextBlock Foreground="#FF23A4EE"
-                                       Text="短信登录"
-                                       TextDecorations="Underline"
-                                       MouseDown="Sms"
-                                       HorizontalAlignment="Left"
-                                       Margin="140,6,0,6" />
-                            <TextBlock Foreground="#FF23A4EE"
-                                       Text="密码登录"
-                                       TextDecorations="Underline"
-                                       MouseDown="Password"
-                                       HorizontalAlignment="Left"
-                                       Margin="200,6,0,6" />
+                </Border>
+            </ItemsControl>
+        </Viewbox>
+        <!--二维码登录框-->
+        <Viewbox >
+            <ItemsControl Visibility="Hidden"
+                          x:Name="QrCode_Login"
+                          Margin="200">
+                <Border Background="White"
+                        CornerRadius="15" Width="589" Height="404.24">
+                    <Grid Margin="70,60,70,50">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="217"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Height="40"
+                              Grid.Row="0">
+                            <TextBlock FontSize="24"
+                                       TextBlock.TextAlignment="Center"
+                                       Text="二维码登录"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Image  x:Name="Qrcode_img" Height="128"
+                                           Source="resource/img/exported_qrcode_image_600.png"></Image>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <TextBlock Foreground="#FB7299"
+                                               x:Name="Scan_status"
+                                               Text="请使用 哔哩哔哩客户端 扫码登录"
+                                               VerticalAlignment="Center" Block.TextAlignment="Center"></TextBlock>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid Margin="0,5">
+                                <TextBlock FontSize="14"
+                                           FontWeight="Bold"
+                                           Margin="0,6,0,0"
+                                           Text="不想扫码二维码登录?"
+                                           HorizontalAlignment="Left" />
+                                <TextBlock Foreground="#FF23A4EE"
+                                           Text="短信登录"
+                                           TextDecorations="Underline"
+                                           MouseDown="Sms"
+                                           HorizontalAlignment="Left"
+                                           Margin="140,6,0,0" />
+                                <TextBlock Foreground="#FF23A4EE"
+                                           Text="密码登录"
+                                           TextDecorations="Underline"
+                                           MouseDown="Password"
+                                           HorizontalAlignment="Left"
+                                           Margin="200,6,0,0" />
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Border>
-        </ItemsControl>
+                </Border>
+            </ItemsControl>
+        </Viewbox>
     </Grid>
 </Page>

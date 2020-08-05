@@ -278,17 +278,17 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 string data = recommend["data"].ToString();
                 if (string.Equals(data, "-5"))
                 {
-                    Scan_login.Scan_status.Content = "扫描成功,请在手机上确认是否授权";
+                    Scan_login.Scan_status.Text = "扫描成功,请在手机上确认是否授权";
                     Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(33, 211, 97));
                 }
                 else if (string.Equals(data, "-4"))
                 {
-                    Scan_login.Scan_status.Content = "请使用 哔哩哔哩客户端 扫码登录";
+                    Scan_login.Scan_status.Text = "请使用 哔哩哔哩客户端 扫码登录";
                     Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));
                 }
                 else if (string.Equals(data, "-2"))
                 {
-                    Scan_login.Scan_status.Content = "二维码已失效,请点击二维码刷新";
+                    Scan_login.Scan_status.Text = "二维码已失效,请点击二维码刷新";
                     Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(208, 2, 27));
                     Get_Scan_Login_Qrcode_status_Timer.Stop();
                     Get_Scan_Login_Qrcode_status_Timer =null;
@@ -374,8 +374,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             JToken data = recommend["data"];
             string User_Cover = data["face"].ToString();
             string User_Name = data["uname"].ToString();
-            mainWindow.User_Name_Label.Content = User_Name;
-            mainWindow.User_Cover_Img.Source = new BitmapImage(new Uri(User_Cover, UriKind.RelativeOrAbsolute));
+           /* mainWindow.User_Name_Label.Content = User_Name;
+            mainWindow.User_Cover_Img.Source = new BitmapImage(new Uri(User_Cover, UriKind.RelativeOrAbsolute));*/
             client = null;
             request = null;
             response = null;

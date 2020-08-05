@@ -95,6 +95,12 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="HandyControl, Version=2.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\HandyControl.2.5.0.2\lib\net47\HandyControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -217,28 +223,7 @@
     <Resource Include="resource\img\BILIBILI_LOGO.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\分类.png" />
-    <Resource Include="resource\img\收藏.png" />
-    <Resource Include="resource\img\消息.png" />
     <Resource Include="resource\img\记录.png" />
-    <Resource Include="resource\img\设置.png" />
-    <Resource Include="resource\img\首页.png" />
-    <Resource Include="resource\img\直播.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\漫画.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\排行.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\相机.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\会员购.png" />
-    <Resource Include="resource\img\番剧.png" />
-    <Resource Include="resource\img\动态.png" />
-    <Resource Include="resource\img\游戏中心.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\我的.png" />
@@ -247,13 +232,7 @@
     <Resource Include="resource\img\头像.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\投稿工具.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resource\img\PILIPILI_LOGO.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\搜索.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\cover.jpg" />
@@ -270,12 +249,6 @@
   <ItemGroup>
     <Resource Include="resource\img\弹幕数.png" />
     <Resource Include="resource\img\评论数.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\认证.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\刷新.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -304,9 +277,30 @@
     <Resource Include="resource\img\exported_qrcode_image_600.png" />
     <Resource Include="resource\img\550758fec170d499cef132620f0a766c.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\Bilibili_User_Cover.png" />
+    <Resource Include="resource\img\BILIBILI_LOGO-PINK.png" />
+    <Resource Include="resource\img\分类.png" />
+    <Resource Include="resource\img\投稿工具.png" />
+    <Resource Include="resource\img\漫画.png" />
+    <Resource Include="resource\img\直播.png" />
+    <Resource Include="resource\img\频道.png" />
+    <Resource Include="Properties\分区.png" />
+    <Resource Include="Properties\动态.png" />
+    <Resource Include="Properties\历史记录.png" />
+    <Resource Include="Properties\收藏夹.png" />
+    <Resource Include="Properties\首页.png" />
+    <Resource Include="resource\img\分区.png" />
+    <Resource Include="resource\img\动态.png" />
+    <Resource Include="resource\img\历史记录.png" />
+    <Resource Include="resource\img\收藏夹.png" />
+    <Resource Include="resource\img\首页.png" />
+    <Resource Include="resource\img\稍后观看.png" />
+    <Resource Include="resource\img\排行榜.png" />
+    <Resource Include="resource\img\消息.png" />
     <Content Include="resource\Web\geetest-validator\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
