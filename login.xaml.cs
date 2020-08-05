@@ -129,6 +129,7 @@ namespace Bilibili_Client
             Password_Login.Visibility = Visibility.Visible;
             Sms_Code_Login.Visibility = Visibility.Hidden;
             QrCode_Login.Visibility = Visibility.Hidden;
+            bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
         }
 
         //切换到验证码登录页面
@@ -137,6 +138,7 @@ namespace Bilibili_Client
             Password_Login.Visibility = Visibility.Hidden;
             Sms_Code_Login.Visibility = Visibility.Visible;
             QrCode_Login.Visibility = Visibility.Hidden;
+            bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
         }
 
         //切换到二维码登录页面
@@ -186,10 +188,6 @@ namespace Bilibili_Client
             return bitmapImage;
         }
 
-        private void password_textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 
 }

@@ -16,7 +16,7 @@ namespace Bilibili_Client
     public class Bilibili_Login//哔哩哔哩登录类
 
     {
-        public DispatcherTimer Get_Scan_Login_Qrcode_status_Timer = new DispatcherTimer();
+        public DispatcherTimer Get_Scan_Login_Qrcode_status_Timer;
         public login Scan_login;
         public string Scan_oauthKey;
 
@@ -211,6 +211,9 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             IRestResponse response = client.Execute(request);
             BiliCookie biliCookie = Get_Cookie(response.Headers[4].ToString());
             Login_Success(biliCookie, login);
+            client = null;
+            request = null;
+            response = null;
         }
 
         //获取登录二维码
@@ -227,9 +230,15 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             login.Qrcode_img.Source = login.NewQRCodeByThoughtWorks(url, ImageFormat.Png);
             Scan_login = login;
             Scan_oauthKey = oauthKey;
+            Get_Scan_Login_Qrcode_status_Timer = new DispatcherTimer();
             Get_Scan_Login_Qrcode_status_Timer.Tick += new EventHandler(Get_Scan_Login_Qrcode_status);
             Get_Scan_Login_Qrcode_status_Timer.Interval = new TimeSpan(0, 0, 0, 1);
             Get_Scan_Login_Qrcode_status_Timer.Start();
+            url = null;
+            oauthKey = null;
+            client = null;
+            request = null;
+            response = null;
         }
 
         //获取登录二维码的扫码状态
@@ -247,6 +256,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 BiliCookie biliCookie = Get_Cookie(recommend["data"]["url"].ToString());
                 Qrcode_Login(biliCookie, Scan_login);
                 Get_Scan_Login_Qrcode_status_Timer.Stop();
+                Get_Scan_Login_Qrcode_status_Timer = null;
             }
             else if (string.Equals(recommend["status"].ToString(), "False"))
             {
@@ -266,6 +276,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                     Scan_login.Scan_status.Content = "二维码已失效,请点击二维码刷新";
                     Scan_login.Scan_status.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(208, 2, 27));
                     Get_Scan_Login_Qrcode_status_Timer.Stop();
+                    Get_Scan_Login_Qrcode_status_Timer =null;
+
                 }
             }
         }
