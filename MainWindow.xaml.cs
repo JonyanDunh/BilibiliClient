@@ -85,8 +85,10 @@ namespace Bilibili_Client
 
 
         }
+        //登录成功后操作
         private void Login_Success()
         {
+            geetest_page.geetest_web.Dispose();
             IsLogin = true;
             bilibili.Set_User_Data(this);
             middle_frame.Navigate(space_page);

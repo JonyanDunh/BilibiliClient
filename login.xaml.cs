@@ -28,6 +28,10 @@ namespace Bilibili_Client
                 // 以十六进制格式格式化
                 stb.Append(b.ToString("x2"));
             }
+            bs = null;
+            hs = null;
+            md5 = null;
+            md5.Dispose();
             return stb.ToString();
         }
 
@@ -126,19 +130,22 @@ namespace Bilibili_Client
         //切换到密码登录页面
         private void Password(object sender, MouseButtonEventArgs e)
         {
+            if (QrCode_Login.Visibility == Visibility.Visible)
+                bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
             Password_Login.Visibility = Visibility.Visible;
             Sms_Code_Login.Visibility = Visibility.Hidden;
             QrCode_Login.Visibility = Visibility.Hidden;
-            bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
+
         }
 
         //切换到验证码登录页面
         private void Sms(object sender, MouseButtonEventArgs e)
         {
+            if (QrCode_Login.Visibility == Visibility.Visible)
+                bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
             Password_Login.Visibility = Visibility.Hidden;
             Sms_Code_Login.Visibility = Visibility.Visible;
             QrCode_Login.Visibility = Visibility.Hidden;
-            bilibili.Get_Scan_Login_Qrcode_status_Timer.Stop();
         }
 
         //切换到二维码登录页面
@@ -164,6 +171,7 @@ namespace Bilibili_Client
             Bitmap bcodeBitmap = encoder.Encode(codeContent);
             BitmapImage bitmapImage = BitmapToBitmapImage(bcodeBitmap);
             bcodeBitmap.Dispose();
+            encoder = null;
             return bitmapImage;
         }
 
@@ -185,6 +193,12 @@ namespace Bilibili_Client
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = new MemoryStream(ms.ToArray());
             bitmapImage.EndInit();
+
+            bitmapSource.Dispose();
+            ms.Dispose();
+            bitmap.Dispose();
+            
+
             return bitmapImage;
         }
 

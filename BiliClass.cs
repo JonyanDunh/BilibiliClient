@@ -74,12 +74,13 @@ namespace Bilibili_Client
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
             JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
-            client = null;
-            request = null;
-            response = null;
             verification_key.gt = recommend["data"]["result"]["gt"].ToString();
             verification_key.challenge = recommend["data"]["result"]["challenge"].ToString();
             verification_key.key = recommend["data"]["result"]["key"].ToString();
+            client = null;
+            request = null;
+            response = null;
+            recommend = null;
             return verification_key;
         }
 
@@ -132,14 +133,17 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             {
                 BiliCookie biliCookie = Get_Cookie(response.Content);
                 Login_Success(biliCookie, login);
+
             }
             else
             {
                 MessageBox.Show(response.Content);
             }
-
             client = null;
             request = null;
+            response = null;
+            recommend = null;
+            code = null;
         }
 
         //发送手机验证码
@@ -166,6 +170,11 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 {
                     login.Sms_code_Send_buttons.Content = "失败";
                 }
+                client = null;
+                request = null;
+                response = null;
+                recommend = null;
+                code = null;
             }
             else if (verification_key.Sms_type == 21)//验证码登录
             {
@@ -186,13 +195,18 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 {
                     MessageBox.Show(recommend["message"].ToString());
                     login.Sms_code_Send_buttons.Content = "重发";
-
                 }
                 else if (string.Equals(code, "0"))
                 {
                     login.Sms_code_Send_buttons.Content = "重发";
                     login.Sms_Login_button.IsEnabled = true;
+
                 }
+                client = null;
+                request = null;
+                response = null;
+                recommend = null;
+                code = null;
 
             }
         }
@@ -239,6 +253,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             client = null;
             request = null;
             response = null;
+            recommend = null;
         }
 
         //获取登录二维码的扫码状态
@@ -280,6 +295,10 @@ Xl69GV6klzgxW6d2xQIDAQAB";
 
                 }
             }
+            client = null;
+            request = null;
+            response = null;
+            recommend = null;
         }
 
         //二维码登录
@@ -321,9 +340,19 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 request.AddCookie("SESSDATA", ((JObject)JsonConvert.DeserializeObject(Login_User_Json))["SESSDATA"].ToString());
                 IRestResponse response = client.Execute(request);
                 if (string.Equals(((JObject)JsonConvert.DeserializeObject(response.Content))["code"].ToString(), "0"))
-                    return true;
+                {
+                    client = null;
+                    request = null;
+                    response = null;
+                    return true; 
+                }
                 else
-                    return false;
+                {
+                    client = null;
+                    request = null;
+                    response = null;
+                    return false; 
+                }
             }
             else
             {
@@ -347,6 +376,13 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             string User_Name = data["uname"].ToString();
             mainWindow.User_Name_Label.Content = User_Name;
             mainWindow.User_Cover_Img.Source = new BitmapImage(new Uri(User_Cover, UriKind.RelativeOrAbsolute));
+            client = null;
+            request = null;
+            response = null;
+            User_Name = null;
+            User_Cover = null;
+            data = null;
+            recommend = null;
         }
         public string Get_User_Data(string str1, string str2, bool If_Doubel, MainWindow mainWindow)
         {
@@ -357,6 +393,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 var request = new RestRequest(Method.GET);
                 request.AddCookie("SESSDATA", SESSDATA);
                 IRestResponse response = client.Execute(request);
+                client = null;
+                request = null;
                 return ((JObject)JsonConvert.DeserializeObject(response.Content))["data"][str1][str2].ToString();
             }
             else
@@ -365,6 +403,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 var request = new RestRequest(Method.GET);
                 request.AddCookie("SESSDATA", SESSDATA);
                 IRestResponse response = client.Execute(request);
+                client = null;
+                request = null;
                 return ((JObject)JsonConvert.DeserializeObject(response.Content))["data"][str1].ToString();
             }
 
