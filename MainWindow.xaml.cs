@@ -32,9 +32,9 @@ namespace Bilibili_Client
              Adaptive();//屏幕自适应
             /* Message();//建立信息槽
              Create_data();//创建文件夹*/
-            
+            Right_Drawer.IsOpen = true;
 
-
+            //Left_SideMenu
 
         }
 
@@ -152,6 +152,11 @@ namespace Bilibili_Client
 
         private void test(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void Open_Index(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

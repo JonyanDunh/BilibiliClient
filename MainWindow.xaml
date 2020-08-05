@@ -55,7 +55,8 @@
                                 Background="#FFFFFBFB"
                                 Margin="30,0"
                                 VerticalAlignment="Top" />
-                    <hc:SideMenu Height="336">
+                    <hc:SideMenu Height="336"
+                                 x:Name="Left_SideMenu">
                         <!--首页-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
@@ -230,7 +231,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <TextBlock HorizontalAlignment="Left"
+                <TextBlock x:Name="middle_title" HorizontalAlignment="Left"
                            Margin="30,5,5,5"
                            Text="首页"
                            Style="{StaticResource TextBlockLargeBold}" />
@@ -238,7 +239,11 @@
             <Grid Grid.Row="1">
                 <Frame NavigationUIVisibility="Hidden"
                        Source="login.xaml" BorderThickness="0"/>
-                
+                <hc:Drawer IsOpen="True" x:Name="Right_Drawer" Dock="Right"
+                           ShowMode="Push" Width="377.7">
+                    <Frame x:Name="right_frame"
+                           NavigationUIVisibility="Hidden" />
+                </hc:Drawer>
             </Grid>
 
         </Grid>
