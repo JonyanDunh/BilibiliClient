@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         x:Name="mainwindow"
-        Background="White"
+        Background="Transparent"
         Title="PILIPILI客户端"
         Height="900"
         Width="1360"
         WindowStyle="None"
         MinWidth="1011.1">
+   
     <Window.CommandBindings>
         <CommandBinding Command="New"
                         Executed="Change_Middle_Title"></CommandBinding>
@@ -25,7 +26,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="318.4"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>

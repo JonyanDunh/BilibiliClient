@@ -1,10 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 
@@ -24,6 +27,20 @@ namespace Bilibili_Client
             InitializeComponent();
             Thread thread = new Thread(Home_Recommendation);//加载推荐视频的函数加入一个新的子线程
             thread.Start();//线程开始
+
+            CoverFlowMain.AddRange(new[]
+{
+
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
+    new Uri(@"pack://application:,,,/resource/img/cover.jpg")
+});
+            CoverFlowMain.JumpTo(2);
+
         }
         private void Home_Recommendation()
         {
@@ -105,12 +122,20 @@ namespace Bilibili_Client
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            /* if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
-                 Thread_blocking.Set();*/
+             if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
+                 Thread_blocking.Set();
         
 
         }
 
-
+        private void content_box_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+            {
+                RoutedEvent = UIElement.MouseWheelEvent,
+                Source = sender
+            };
+            this.content_box.RaiseEvent(eventArg);
+        }
     }
 }

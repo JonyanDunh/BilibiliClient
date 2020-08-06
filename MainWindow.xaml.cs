@@ -46,7 +46,6 @@ namespace Bilibili_Client
             GCTimer.Interval = new TimeSpan(0, 0, 0, 1);
             GCTimer.Start();
             middle_frame.Navigate(index_page);//默认打开主页
-           // Index_Button.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(251, 114, 153));//主页的按钮设置为粉色
             if (bilibili.Check_Login_status())//判断是否登录
             {
                 IsLogin = true;

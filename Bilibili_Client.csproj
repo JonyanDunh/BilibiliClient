@@ -114,6 +114,7 @@
     <Reference Include="System.Extended, Version=3.4.16.616, Culture=neutral, PublicKeyToken=675fb48d7a2b2d96, processorArchitecture=MSIL">
       <HintPath>packages\System.Extended.3.4.16.616\lib\net40\System.Extended.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
