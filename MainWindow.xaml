@@ -12,15 +12,16 @@
         Height="900"
         Width="1360"
         WindowStyle="None"
-        MinWidth="1011.1"
-        >
+        MinWidth="1011.1">
+    <Window.CommandBindings>
+        <CommandBinding Command="New"
+                        Executed="Change_Middle_Title"></CommandBinding>
+    </Window.CommandBindings>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Basic/Colors/Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -40,7 +41,14 @@
                     <Image  Height="24"
                             Source="resource/img/BILIBILI_LOGO-PINK.png"
                             Margin="20,0,150,0" />
+                    
                 </Viewbox>
+                <Button x:Name="Back_Button" Visibility="Hidden" hc:BorderElement.CornerRadius="100"
+                         HorizontalAlignment="Right"
+                         Height="38"
+                         Margin="0,0,20,0"
+                         Click="Black">
+                    <Image Height="16" Width="16" Source="resource/img/返回.png"></Image> </Button>
             </Grid>
             <Grid  Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -55,10 +63,11 @@
                                 Background="#FFFFFBFB"
                                 Margin="30,0"
                                 VerticalAlignment="Top" />
-                    <hc:SideMenu Height="336"
+                    <hc:SideMenu  SelectionChanged="Left_SideMenu_SelectionChanged"  Height="336"
                                  x:Name="Left_SideMenu">
                         <!--首页-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
+                        <hc:SideMenuItem   
+                                           Background="#FFF3F8F9"
                                          FontSize="14"
                                          Header="首页"
                                          MouseDown="Open_Index">
@@ -71,7 +80,9 @@
                         <!--动态-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="动态">
+                                         Header="动态"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/动态.png"
                                        Width="20"
@@ -81,7 +92,9 @@
                         <!--排行榜-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="排行榜">
+                                         Header="排行榜"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/排行榜.png"
                                        Width="20"
@@ -91,7 +104,9 @@
                         <!--直播-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="直播">
+                                         Header="直播"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/直播.png"
                                        Width="20"
@@ -101,7 +116,9 @@
                         <!--漫画-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="漫画">
+                                         Header="漫画"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/漫画.png"
                                        Width="20"
@@ -111,7 +128,9 @@
                         <!--分区-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="分区">
+                                         Header="分区"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/分区.png"
                                        Width="20"
@@ -121,7 +140,9 @@
                         <!--投稿工具-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="投稿工具">
+                                         Header="投稿工具"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/投稿工具.png"
                                        Width="20"
@@ -137,11 +158,13 @@
                                 Background="#FFFFFBFB"
                                 Margin="30,0"
                                 VerticalAlignment="Top" />
-                    <hc:SideMenu Height="192">
+                    <hc:SideMenu x:Name="User_SideMenu" Visibility="Hidden" Height="192">
                         <!--历史记录-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="历史记录">
+                                         Header="历史记录"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/历史记录.png"
                                        Width="20"
@@ -151,7 +174,9 @@
                         <!--稍后观看-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="稍后观看">
+                                         Header="稍后观看"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/稍后观看.png"
                                        Width="20"
@@ -161,7 +186,9 @@
                         <!--收藏夹-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="收藏夹">
+                                         Header="收藏夹"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/收藏夹.png"
                                        Width="20"
@@ -172,7 +199,9 @@
                         <!--消息-->
                         <hc:SideMenuItem Background="#FFF3F8F9"
                                          FontSize="14"
-                                         Header="消息">
+                                         Header="消息"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/消息.png"
                                        Width="20"
@@ -193,35 +222,47 @@
                         <ColumnDefinition Width="5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                    <hc:Gravatar Height="60" Width="60" Style="{StaticResource GravatarCircleImg}"
+                        <hc:Gravatar MouseDown="Open_User_Space"
+                                     Height="60" Width="60" Style="{StaticResource GravatarCircleImg}"
                                      Margin="15,0,0,0"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center">
-                        <Image Source="resource/img/头像.png"
+                            <Image  x:Name="User_Cover_Img"
+                                   Source="resource/img/Bilibili_User_Cover.png"
                                    MouseDown="Open_User_Space" />
-                    </hc:Gravatar>
+                        </hc:Gravatar>
                     </Grid>
                     <Grid Grid.Column="1">
-                        <Grid>
+                        <Grid x:Name="User_Name_Grid"
+                              Visibility="Hidden">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
-                                <TextBlock HorizontalAlignment="Left"
-                                           Text="Jonyan Dunh"
+                                <TextBlock x:Name="User_Name_Label" HorizontalAlignment="Left"
                                            Style="{StaticResource TextBlockSubTitleBold}"
                                            VerticalAlignment="Bottom" />
 
                             </Grid>
                             <Grid Grid.Row="1">
-                            <ProgressBar  Style="{DynamicResource ProgressBarFlat}"
-                                      Value="40"
+                            <ProgressBar x:Name="User_Exp_Bar" Style="{DynamicResource ProgressBarFlat}"
+                                      Value="0"
                                       Margin="0,0,15,30"
                                       VerticalAlignment="Bottom" />
                             </Grid>
                         </Grid>
+                        <Button x:Name="Login_Button" Height="36"
+                                hc:BorderElement.CornerRadius="7"
+                                Background="#FB7299"
+                                FontSize="11.5"
+                                Foreground="White"
+                                Content="哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="0,0,20,0"
+                                Click="Login_Button_Click"></Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -234,20 +275,19 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <TextBlock x:Name="middle_title" HorizontalAlignment="Left"
-                           Margin="30,5,5,5"
+                           Margin="25,5,5,5"
                            Text="首页"
                            Style="{StaticResource TextBlockLargeBold}" />
             </Grid>
             <Grid Grid.Row="1">
-                <Frame NavigationUIVisibility="Hidden"
-                       x:Name="middle_frame" BorderThickness="0"/>
-                <hc:Drawer  x:Name="Right_Drawer" Dock="Right"
-                           ShowMode="Push" Width="377.7">
-                    <Frame x:Name="right_frame"
-                           NavigationUIVisibility="Hidden" />
-                </hc:Drawer>
+                <Frame Navigated="middle_frame_Navigated"   NavigationUIVisibility="Hidden"
+                       x:Name="middle_frame"
+                       BorderThickness="0" />
             </Grid>
 
         </Grid>
+
+
     </Grid>
+
 </Window>

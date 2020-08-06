@@ -127,15 +127,17 @@
                                                 hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
                                     <Button x:Name="Sms_code_Send_buttons" Content="发送" Width="63" Height="42.33"
                                              HorizontalAlignment="Right"
-                                             Margin="0,9.5,52,0"></Button>
+                                             Margin="0,9.5,52,0"
+                                            Click="Sms_code_Send"></Button>
                                 </Grid>
                                 <Grid Grid.Row="1">
                                     <hc:PinBox x:Name="smscode_textbox"
                                                Margin="35,10"
-                                               Length="6" />
+                                               Length="6"
+                                               Completed="Sms_code_Login" />
 
                                 </Grid>
-                                <Grid Grid.Row="2">
+                                <Grid Grid.Row="2" >
                                     <Button Content="登录"
                                             Width="119"
                                             Height="52"
@@ -145,7 +147,7 @@
                                             FontWeight="Bold"
                                             FontFamily="Arial Black"
                                             Margin="160,10,170,10"
-                                            Click="Password_Login_buttons_Click">
+                                            Click="Sms_code_Login">
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -203,7 +205,8 @@
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
                                     <Image  x:Name="Qrcode_img" Height="128"
-                                           Source="resource/img/exported_qrcode_image_600.png"></Image>
+                                           Source="resource/img/exported_qrcode_image_600.png"
+                                            MouseDown="Refresh_Qrcode"></Image>
                                 </Grid>
                                 <Grid Grid.Row="1">
                                     <TextBlock Foreground="#FB7299"

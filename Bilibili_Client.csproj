@@ -97,6 +97,7 @@
   <ItemGroup>
     <Reference Include="HandyControl, Version=2.5.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\HandyControl.2.5.0.2\lib\net47\HandyControl.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
@@ -301,6 +302,8 @@
     <Resource Include="resource\img\稍后观看.png" />
     <Resource Include="resource\img\排行榜.png" />
     <Resource Include="resource\img\消息.png" />
+    <Resource Include="resource\img\GifImage.gif" />
+    <Resource Include="resource\img\返回.png" />
     <Content Include="resource\Web\geetest-validator\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

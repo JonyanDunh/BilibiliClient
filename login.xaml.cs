@@ -188,7 +188,7 @@ namespace Bilibili_Client
                     bitmapSource.SetPixel(i, j, newColor);
                 }
             MemoryStream ms = new MemoryStream();
-            bitmapSource.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmapSource.Save(ms, ImageFormat.Bmp);
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = new MemoryStream(ms.ToArray());

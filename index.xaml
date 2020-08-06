@@ -8,11 +8,11 @@
       mc:Ignorable="d"
       Background="Transparent"
       Title="index"
+      Height="792"
+      Width="1033.6"
       xmlns:hc="https://handyorg.github.io/handycontrol">
     <Grid>
-       
-
-            <hc:CoverView   x:Name="content_box" ItemHeight="284"
+        <hc:CoverView Grid.Row="1"  x:Name="content_box" ItemHeight="284"
                           ItemWidth="304"
                             ScrollViewer.CanContentScroll="True"
                         Margin="20,0,0,0">

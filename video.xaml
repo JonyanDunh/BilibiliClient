@@ -40,7 +40,7 @@
                         </Grid>
                         <!--点赞数-->
                         <Grid Grid.Column="1">
-                            <TextBlock x:Name="video_like"
+                            <TextBlock x:FieldModifier="public" x:Name="video_like"
                                        FontFamily="Helvetica Neue"
                                        Margin="0,6,0,0"
                                        FontSize="14"

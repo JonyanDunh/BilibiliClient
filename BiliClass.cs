@@ -4,6 +4,7 @@ using RestSharp;
 using System;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -193,8 +194,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 string code = recommend["code"].ToString();
                 if (!string.Equals(code, "0"))
                 {
-                    MessageBox.Show(recommend["message"].ToString());
-                    login.Sms_code_Send_buttons.Content = "重发";
+                    MessageBox.Show(response.Content);
+                    login.Sms_code_Send_buttons.Content = "发送";
                 }
                 else if (string.Equals(code, "0"))
                 {
@@ -223,11 +224,23 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             request.AddParameter("tel", ID);
             request.AddParameter("smsCode", Sms_Code);
             IRestResponse response = client.Execute(request);
-            BiliCookie biliCookie = Get_Cookie(response.Headers[4].ToString());
-            Login_Success(biliCookie, login);
+            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+            string code = recommend["code"].ToString();
+            if (!string.Equals(code, "0"))
+            {
+                MessageBox.Show(response.Content);
+            }
+            else if (string.Equals(code, "0"))
+            {
+                BiliCookie biliCookie = Get_Cookie(response.Headers[4].ToString());
+                Login_Success(biliCookie, login);
+
+            }        
             client = null;
             request = null;
             response = null;
+            recommend = null;
+            code = null; 
         }
 
         //获取登录二维码
@@ -374,8 +387,12 @@ Xl69GV6klzgxW6d2xQIDAQAB";
             JToken data = recommend["data"];
             string User_Cover = data["face"].ToString();
             string User_Name = data["uname"].ToString();
-           /* mainWindow.User_Name_Label.Content = User_Name;
-            mainWindow.User_Cover_Img.Source = new BitmapImage(new Uri(User_Cover, UriKind.RelativeOrAbsolute));*/
+            mainWindow.Login_Button.Visibility = Visibility.Hidden;
+            mainWindow.User_Name_Grid.Visibility = Visibility.Visible;
+            mainWindow.User_SideMenu.Visibility = Visibility.Visible;
+            mainWindow.User_Name_Label.Text = User_Name;
+            mainWindow.User_Cover_Img.Source = new BitmapImage(new Uri(User_Cover, UriKind.RelativeOrAbsolute));
+            mainWindow.User_Exp_Bar.Value = (data["level_info"]["current_exp"].ToObject<double>() / data["level_info"]["current_min"].ToObject<double>()) * 100;
             client = null;
             request = null;
             response = null;
