@@ -126,7 +126,7 @@ namespace Bilibili_Client
             GC.WaitForPendingFinalizers();
         }
 
-        //打开个人主页的按钮
+        //点击头像
         private void Open_User_Space(object sender, MouseButtonEventArgs e)
         {
             if (IsLogin)
@@ -141,7 +141,10 @@ namespace Bilibili_Client
                 middle_frame.Navigate(login_page);
                 middle_title.Text ="登录";
             }
-            
+            if (initializations)
+            {
+                    sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }
         }
         //打开首页的按钮
         private void Open_Index(object sender, MouseButtonEventArgs e)
@@ -152,12 +155,15 @@ namespace Bilibili_Client
         }
 
 
-
+        //登录按钮
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
             middle_frame.Navigate(login_page);
             middle_title.Text = "登录";
-            
+            if (initializations)
+            {
+                sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }
         }
 
         private void Black(object sender, RoutedEventArgs e)
