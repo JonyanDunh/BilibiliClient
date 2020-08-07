@@ -208,11 +208,8 @@ namespace Bilibili_Client
                     Last_animationPath.IsPlaying = false;
                     Last_animationPath.Stroke= new SolidColorBrush(Color.FromRgb(0, 0, 0)); 
                 }
-  
             Last_sideMenuItem = (SideMenuItem)e.Parameter;
             Last_animationPath = ((AnimationPath)((SideMenuItem)e.Parameter).Icon);
-           
-           
         }
 
     }

@@ -256,12 +256,6 @@
     <Resource Include="resource\img\BILIBILI_LOGO.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\记录.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resource\img\我的.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resource\img\头像.png" />
   </ItemGroup>
   <ItemGroup>
@@ -296,19 +290,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\密码.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resource\img\账号.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resource\img\二维码.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resource\img\手机号.png" />
-    <Resource Include="resource\img\验证码.png" />
     <Resource Include="resource\img\exported_qrcode_image_600.png" />
-    <Resource Include="resource\img\550758fec170d499cef132620f0a766c.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -316,25 +304,12 @@
   <ItemGroup>
     <Resource Include="resource\img\Bilibili_User_Cover.png" />
     <Resource Include="resource\img\BILIBILI_LOGO-PINK.png" />
-    <Resource Include="resource\img\分类.png" />
-    <Resource Include="resource\img\投稿工具.png" />
-    <Resource Include="resource\img\漫画.png" />
-    <Resource Include="resource\img\直播.png" />
     <Resource Include="resource\img\频道.png" />
     <Resource Include="Properties\分区.png" />
     <Resource Include="Properties\动态.png" />
     <Resource Include="Properties\历史记录.png" />
     <Resource Include="Properties\收藏夹.png" />
     <Resource Include="Properties\首页.png" />
-    <Resource Include="resource\img\分区.png" />
-    <Resource Include="resource\img\动态.png" />
-    <Resource Include="resource\img\历史记录.png" />
-    <Resource Include="resource\img\收藏夹.png" />
-    <Resource Include="resource\img\首页.png" />
-    <Resource Include="resource\img\稍后观看.png" />
-    <Resource Include="resource\img\排行榜.png" />
-    <Resource Include="resource\img\消息.png" />
-    <Resource Include="resource\img\GifImage.gif" />
     <Resource Include="resource\img\返回.png" />
     <Content Include="resource\Web\geetest-validator\css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

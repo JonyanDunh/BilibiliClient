@@ -25,15 +25,7 @@ namespace Bilibili_Client
         {
             InitializeComponent();
         }
-        public ICommand ButtonCommand
-        {
-            get
-            {
-                return new DelegateCommand<string>((str) => {
-                    MessageBox.Show("Button's parameter:" + str);
-                });
-            }
-        }
+
 
     }
 }

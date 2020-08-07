@@ -23,25 +23,7 @@
                     <RowDefinition Height="400"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Width="100"
-                      Height="100">
-                    <hc:AnimationPath Data="{DynamicResource GithubGeometry}"
-                                      Duration="0:00:05"
-                                      RepeatBehavior="12"
-                                      Stretch="Uniform"
-                                      StrokeThickness="1"
-                                      Stroke="#1296db"></hc:AnimationPath>
-                    <Button Content="Button"
-                            Height="33"
-                            HorizontalAlignment="Left"
-                            Margin="34,20,0,0"
-                            Name="button1"
-                            VerticalAlignment="Top"
-                            Width="109"
-                            Command="{Binding ButtonCommand}"
-                            CommandParameter="20" />
 
-                </Grid>
             </Grid>
         </ScrollViewer>
     </Grid>

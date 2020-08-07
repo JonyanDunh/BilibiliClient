@@ -260,7 +260,7 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
+                                <hc:AnimationPath Height="17"
                                                   Data="{DynamicResource Message_Logo}"
                                                   Duration="0:00:05"
                                                   RepeatBehavior="12"
