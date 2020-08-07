@@ -22,6 +22,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Geometry.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -70,7 +71,7 @@
                     <hc:SideMenu  SelectionChanged="Left_SideMenu_SelectionChanged"  Height="336"
                                  x:Name="Left_SideMenu">
                         <!--首页-->
-                        <hc:SideMenuItem  
+                        <hc:SideMenuItem x:Name="Index_Button" IsSelected="True"
                                            Background="#FFF3F8F9"
                                          FontSize="14"
                                          Header="首页"
@@ -78,9 +79,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/首页.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Index_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--动态-->
@@ -90,9 +96,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/动态.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Dynamic_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--排行榜-->
@@ -102,9 +113,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/排行榜.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Leaderboard_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--直播-->
@@ -114,9 +130,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/直播.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Live_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--漫画-->
@@ -126,9 +147,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/漫画.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Comics_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--分区-->
@@ -138,9 +164,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/分区.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Partition_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--投稿工具-->
@@ -150,9 +181,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/投稿工具.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Post_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                     </hc:SideMenu>
@@ -172,9 +208,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/历史记录.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource History_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--稍后观看-->
@@ -184,9 +225,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/稍后观看.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Later_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         <!--收藏夹-->
@@ -196,9 +242,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/收藏夹.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Favorites_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                         
@@ -209,9 +260,14 @@
                                          Command="New"
                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
-                                <Image Source="resource/img/消息.png"
-                                       Width="20"
-                                       Height="20" />
+                                <hc:AnimationPath Height="20"
+                                                  Data="{DynamicResource Message_Logo}"
+                                                  Duration="0:00:05"
+                                                  RepeatBehavior="12"
+                                                  Stretch="Uniform"
+                                                  IsPlaying="False"
+                                                  StrokeThickness="1"
+                                                  Stroke="Black" />
                             </hc:SideMenuItem.Icon>
                         </hc:SideMenuItem>
                     </hc:SideMenu>

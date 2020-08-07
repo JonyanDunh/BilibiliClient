@@ -51,6 +51,11 @@ namespace Bilibili_Client
                 IsLogin = true;
                 bilibili.Set_User_Data(this);
             }
+            Last_sideMenuItem = Index_Button;
+            Last_animationPath =(AnimationPath)Index_Button.Icon;
+            Last_sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(251, 114, 153));
+            Last_animationPath.Stroke = new SolidColorBrush(Color.FromRgb(251, 114, 153));
+            Last_animationPath.IsPlaying = true;
         }
 
         //屏幕自适应
@@ -141,10 +146,10 @@ namespace Bilibili_Client
                 middle_frame.Navigate(login_page);
                 middle_title.Text ="登录";
             }
-            if (initializations)
-            {
-                    sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            }
+                Last_sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                Last_animationPath.IsPlaying = false;
+                Last_animationPath.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+
         }
         //打开首页的按钮
         private void Open_Index(object sender, MouseButtonEventArgs e)
@@ -160,10 +165,10 @@ namespace Bilibili_Client
         {
             middle_frame.Navigate(login_page);
             middle_title.Text = "登录";
-            if (initializations)
-            {
-                sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            }
+
+                Last_sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                Last_animationPath.IsPlaying = false;
+                Last_animationPath.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
 
         private void Black(object sender, RoutedEventArgs e)
@@ -188,21 +193,26 @@ namespace Bilibili_Client
             else
                 Back_Button.Visibility = Visibility.Hidden;
         }
-
-        SideMenuItem sideMenuItem;
-        bool initializations = false;
+        SideMenuItem Last_sideMenuItem;
+        AnimationPath Last_animationPath;
 
         private void Change_Middle_Title(object sender, ExecutedRoutedEventArgs e)
         {
             middle_title.Text =((SideMenuItem)e.Parameter).Header.ToString();
             ((SideMenuItem)e.Parameter).Foreground = new SolidColorBrush(Color.FromRgb(251, 114, 153));
-            if (initializations)
-            {
-                if(!string.Equals(sideMenuItem.Header.ToString(), ((SideMenuItem)e.Parameter).Header.ToString()))
-                sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
-            }
-            sideMenuItem = (SideMenuItem)e.Parameter;
-            initializations = true;
+            ((AnimationPath)((SideMenuItem)e.Parameter).Icon).Stroke = new SolidColorBrush(Color.FromRgb(251, 114, 153));
+            ((AnimationPath)((SideMenuItem)e.Parameter).Icon).IsPlaying = true;
+                if (!string.Equals(Last_sideMenuItem.Header.ToString(), ((SideMenuItem)e.Parameter).Header.ToString()))
+                {
+                    Last_sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                    Last_animationPath.IsPlaying = false;
+                    Last_animationPath.Stroke= new SolidColorBrush(Color.FromRgb(0, 0, 0)); 
+                }
+  
+            Last_sideMenuItem = (SideMenuItem)e.Parameter;
+            Last_animationPath = ((AnimationPath)((SideMenuItem)e.Parameter).Icon);
+           
+           
         }
 
     }
