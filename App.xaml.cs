@@ -8,6 +8,7 @@ using System.Linq;
 using System.Management;
 using System.Threading.Tasks;
 using System.Windows;
+using Unosquare.FFME;
 
 namespace Bilibili_Client
 {
@@ -16,7 +17,17 @@ namespace Bilibili_Client
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Library.FFmpegDirectory = @"c:\ffmpeg";
+            Library.LoadFFmpeg();
+            MediaElement.FFmpegMessageLogged += (s, ev) =>
+            {
+                System.Diagnostics.Debug.WriteLine(ev.Message);
+            };
+            base.OnStartup(e);
 
+        }
     }
     
 }

@@ -10,237 +10,247 @@
       d:DesignHeight="837"
       d:DesignWidth="989"
       Title="login">
-    <Grid>
+    <hc:TransitioningContentControl TransitionMode="Bottom2Top">
+        <hc:TransitioningContentControl TransitionMode="Left2Right">
+            <Grid>
 
-        <!--密码登录-->
-        <Viewbox>
-            <ItemsControl Visibility="Visible"
-                          x:Name="Password_Login"
-                          Margin="200">
-                <Border Background="White"
-                        CornerRadius="15">
-                    <Grid Margin="70,60,70,50">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="217"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Height="40"
-                              Grid.Row="0">
-                            <TextBlock FontSize="24"
-                                       TextBlock.TextAlignment="Center"
-                                       Text="密码登录"
-                                       VerticalAlignment="Center" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid>
+                <!--密码登录-->
+                <Viewbox>
+                    <ItemsControl Visibility="Visible"
+                                  x:Name="Password_Login"
+                                  Margin="200">
+                        <Border Background="White"
+                                CornerRadius="15">
+                            <Grid Margin="70,60,70,50">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="217"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <hc:TextBox x:Name="account_textbox"
-                                                ShowClearButton="True"
-                                                Margin="50,20,50,10"
-                                                hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
+                                <Grid Height="40"
+                                      Grid.Row="0">
+                                    <TextBlock FontSize="24"
+                                               TextBlock.TextAlignment="Center"
+                                               Text="密码登录"
+                                               VerticalAlignment="Center" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <hc:PasswordBox x:Name="password_textbox"
-                                                    Margin="50,10,50,20"
-                                                    hc:InfoElement.Placeholder="请输入密码"
-                                                    ShowClearButton="True"></hc:PasswordBox>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <hc:TextBox x:Name="account_textbox"
+                                                        ShowClearButton="True"
+                                                        Margin="50,20,50,10"
+                                                        hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
+                                        </Grid>
+                                        <Grid Grid.Row="1">
+                                            <hc:PasswordBox x:Name="password_textbox"
+                                                            Margin="50,10,50,20"
+                                                            hc:InfoElement.Placeholder="请输入密码"
+                                                            ShowClearButton="True"></hc:PasswordBox>
 
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Button Content="登录"
+                                                    Width="119"
+                                                    Height="52"
+                                                    x:Name="Pass_Login_button"
+                                                    Opacity="0.8"
+                                                    FontSize="20"
+                                                    FontWeight="Bold"
+                                                    FontFamily="Arial Black"
+                                                    Margin="160,10,170,10"
+                                                    Click="Password_Login_buttons_Click">
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <Button Content="登录"
-                                            Width="119"
-                                            Height="52"
-                                            x:Name="Pass_Login_button"
-                                            Opacity="0.8"
-                                            FontSize="20"
-                                            FontWeight="Bold"
-                                            FontFamily="Arial Black"
-                                            Margin="160,10,170,10"
-                                            Click="Password_Login_buttons_Click">
-                                    </Button>
+                                    <Grid Margin="0,5">
+                                        <TextBlock FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Margin="0,5,0,0"
+                                                   Text="不想用账号密码登录?"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Foreground="#FF23A4EE"
+                                                   Text="扫码登录"
+                                                   TextDecorations="Underline"
+                                                   MouseDown="Qrcode"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="140,6,0,6" />
+                                        <TextBlock Foreground="#FF23A4EE"
+                                                   Text="短信登录"
+                                                   TextDecorations="Underline"
+                                                   MouseDown="Sms"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="200,6,0,6" />
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid Margin="0,5">
-                                <TextBlock 
-                                           FontSize="14"
-                                           FontWeight="Bold"
-                                           Margin="0,5,0,0"
-                                           Text="不想用账号密码登录?"
-                                           HorizontalAlignment="Left" />
-                                <TextBlock Foreground="#FF23A4EE"
-                                           Text="扫码登录"
-                                           TextDecorations="Underline"
-                                           MouseDown="Qrcode"
-                                           HorizontalAlignment="Left"
-                                           Margin="140,6,0,6" />
-                                <TextBlock Foreground="#FF23A4EE"
-                                           Text="短信登录"
-                                           TextDecorations="Underline"
-                                           MouseDown="Sms"
-                                           HorizontalAlignment="Left"
-                                           Margin="200,6,0,6" />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </ItemsControl>
-        </Viewbox>
-        <!--验证码登录-->
-        <Viewbox>
-            <ItemsControl Visibility="Hidden"
-                          x:Name="Sms_Code_Login"
-                          Margin="200">
-                <Border Background="White"
-                        CornerRadius="15">
-                    <Grid Margin="70,60,70,50">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="217"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Height="40"
-                              Grid.Row="0">
-                            <TextBlock FontSize="24"
-                                       TextBlock.TextAlignment="Center"
-                                       Text="验证码登录"
-                                       VerticalAlignment="Center" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid>
+                        </Border>
+                    </ItemsControl>
+                </Viewbox>
+                <!--验证码登录-->
+                <Viewbox>
+                    <ItemsControl Visibility="Hidden"
+                                  x:Name="Sms_Code_Login"
+                                  Margin="200">
+                        <Border Background="White"
+                                CornerRadius="15">
+                            <Grid Margin="70,60,70,50">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="217"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <hc:TextBox x:Name="phone_textbox"
-                                                ShowClearButton="True"
-                                                Margin="50,20,145,10"
-                                                hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
-                                    <Button x:Name="Sms_code_Send_buttons" Content="发送" Width="63" Height="42.33"
-                                             HorizontalAlignment="Right"
-                                             Margin="0,9.5,52,0"
-                                            Click="Sms_code_Send"></Button>
+                                <Grid Height="40"
+                                      Grid.Row="0">
+                                    <TextBlock FontSize="24"
+                                               TextBlock.TextAlignment="Center"
+                                               Text="验证码登录"
+                                               VerticalAlignment="Center" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <hc:PinBox x:Name="smscode_textbox"
-                                               Margin="35,10"
-                                               Length="6"
-                                               Completed="Sms_code_Login" />
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <hc:TextBox x:Name="phone_textbox"
+                                                        ShowClearButton="True"
+                                                        Margin="50,20,145,10"
+                                                        hc:InfoElement.Placeholder="手机号/邮箱"></hc:TextBox>
+                                            <Button x:Name="Sms_code_Send_buttons"
+                                                    Content="发送"
+                                                    Width="63"
+                                                    Height="42.33"
+                                                    HorizontalAlignment="Right"
+                                                    Margin="0,9.5,52,0"
+                                                    Click="Sms_code_Send"></Button>
+                                        </Grid>
+                                        <Grid Grid.Row="1">
+                                            <hc:PinBox x:Name="smscode_textbox"
+                                                       Margin="35,10"
+                                                       Length="6"
+                                                       Completed="Sms_code_Login" />
 
+                                        </Grid>
+                                        <Grid Grid.Row="2">
+                                            <Button Content="登录"
+                                                    Width="119"
+                                                    Height="52"
+                                                    x:Name="Sms_Login_button"
+                                                    Opacity="0.8"
+                                                    FontSize="20"
+                                                    FontWeight="Bold"
+                                                    FontFamily="Arial Black"
+                                                    Margin="160,10,170,10"
+                                                    Click="Sms_code_Login">
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid Grid.Row="2" >
-                                    <Button Content="登录"
-                                            Width="119"
-                                            Height="52"
-                                            x:Name="Sms_Login_button"
-                                            Opacity="0.8"
-                                            FontSize="20"
-                                            FontWeight="Bold"
-                                            FontFamily="Arial Black"
-                                            Margin="160,10,170,10"
-                                            Click="Sms_code_Login">
-                                    </Button>
+                                <Grid Grid.Row="2">
+                                    <Grid Margin="0,5">
+                                        <TextBlock FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Margin="0,5,0,0"
+                                                   Text="不想用短信验证登录?"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Foreground="#FF23A4EE"
+                                                   Text="扫码登录"
+                                                   TextDecorations="Underline"
+                                                   MouseDown="Qrcode"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="140,6,0,6" />
+                                        <TextBlock Foreground="#FF23A4EE"
+                                                   Text="密码登录"
+                                                   TextDecorations="Underline"
+                                                   MouseDown="Password"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="200,6,0,6" />
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid Margin="0,5">
-                                <TextBlock FontSize="14"
-                                           FontWeight="Bold"
-                                           Margin="0,5,0,0"
-                                           Text="不想用短信验证登录?"
-                                           HorizontalAlignment="Left" />
-                                <TextBlock Foreground="#FF23A4EE"
-                                           Text="扫码登录"
-                                           TextDecorations="Underline"
-                                           MouseDown="Qrcode"
-                                           HorizontalAlignment="Left"
-                                           Margin="140,6,0,6" />
-                                <TextBlock Foreground="#FF23A4EE"
-                                           Text="密码登录"
-                                           TextDecorations="Underline"
-                                           MouseDown="Password"
-                                           HorizontalAlignment="Left"
-                                           Margin="200,6,0,6" />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </ItemsControl>
-        </Viewbox>
-        <!--二维码登录框-->
-        <Viewbox >
-            <ItemsControl Visibility="Hidden"
-                          x:Name="QrCode_Login"
-                          Margin="200">
-                <Border Background="White"
-                        CornerRadius="15" Width="589" Height="404.24">
-                    <Grid Margin="70,60,70,50">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="217"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Height="40"
-                              Grid.Row="0">
-                            <TextBlock FontSize="24"
-                                       TextBlock.TextAlignment="Center"
-                                       Text="二维码登录"
-                                       VerticalAlignment="Center" />
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid>
+                        </Border>
+                    </ItemsControl>
+                </Viewbox>
+                <!--二维码登录框-->
+                <Viewbox>
+                    <ItemsControl Visibility="Hidden"
+                                  x:Name="QrCode_Login"
+                                  Margin="200">
+                        <Border Background="White"
+                                CornerRadius="15"
+                                Width="589"
+                                Height="404.24">
+                            <Grid Margin="70,60,70,50">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="217"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <Image  x:Name="Qrcode_img" Height="128"
-                                           Source="resource/img/exported_qrcode_image_600.png"
-                                            MouseDown="Refresh_Qrcode"></Image>
+                                <Grid Height="40"
+                                      Grid.Row="0">
+                                    <TextBlock FontSize="24"
+                                               TextBlock.TextAlignment="Center"
+                                               Text="二维码登录"
+                                               VerticalAlignment="Center" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <TextBlock Foreground="#FB7299"
-                                               x:Name="Scan_status"
-                                               Text="请使用 哔哩哔哩客户端 扫码登录"
-                                               VerticalAlignment="Center" Block.TextAlignment="Center"></TextBlock>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="3*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <Image  x:Name="Qrcode_img"
+                                                    Height="128"
+                                                    Source="resource/img/exported_qrcode_image_600.png"
+                                                    MouseDown="Refresh_Qrcode"></Image>
+                                        </Grid>
+                                        <Grid Grid.Row="1">
+                                            <TextBlock Foreground="#FB7299"
+                                                       x:Name="Scan_status"
+                                                       Text="请使用 哔哩哔哩客户端 扫码登录"
+                                                       VerticalAlignment="Center"
+                                                       Block.TextAlignment="Center"></TextBlock>
 
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Grid Margin="0,5">
+                                        <TextBlock FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Margin="0,6,0,0"
+                                                   Text="不想扫码二维码登录?"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Foreground="#FF23A4EE"
+                                                   Text="短信登录"
+                                                   TextDecorations="Underline"
+                                                   MouseDown="Sms"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="140,6,0,0" />
+                                        <TextBlock Foreground="#FF23A4EE"
+                                                   Text="密码登录"
+                                                   TextDecorations="Underline"
+                                                   MouseDown="Password"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="200,6,0,0" />
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Grid Margin="0,5">
-                                <TextBlock FontSize="14"
-                                           FontWeight="Bold"
-                                           Margin="0,6,0,0"
-                                           Text="不想扫码二维码登录?"
-                                           HorizontalAlignment="Left" />
-                                <TextBlock Foreground="#FF23A4EE"
-                                           Text="短信登录"
-                                           TextDecorations="Underline"
-                                           MouseDown="Sms"
-                                           HorizontalAlignment="Left"
-                                           Margin="140,6,0,0" />
-                                <TextBlock Foreground="#FF23A4EE"
-                                           Text="密码登录"
-                                           TextDecorations="Underline"
-                                           MouseDown="Password"
-                                           HorizontalAlignment="Left"
-                                           Margin="200,6,0,0" />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </ItemsControl>
-        </Viewbox>
-    </Grid>
+                        </Border>
+                    </ItemsControl>
+                </Viewbox>
+            </Grid>
+        </hc:TransitioningContentControl>
+    </hc:TransitioningContentControl>
 </Page>

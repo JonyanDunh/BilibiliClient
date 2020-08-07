@@ -12,8 +12,7 @@
         Height="900"
         Width="1360"
         WindowStyle="None"
-        MinWidth="1011.1"
-        ResizeMode="NoResize">
+        MinWidth="1011.1">
    
     <Window.CommandBindings>
         <CommandBinding Command="New"
@@ -28,328 +27,354 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
     <Grid>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="318"></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid  Grid.Column="0"
-              Background="#FFF3F8F9">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Viewbox>
-                    <Image  Height="24"
-                            Source="resource/img/BILIBILI_LOGO-PINK.png"
-                            Margin="20,0,150,0" />
-                    
-                </Viewbox>
-                <Button x:Name="Back_Button" Visibility="Hidden" hc:BorderElement.CornerRadius="100"
-                         HorizontalAlignment="Right"
-                         Height="38"
-                         Margin="0,0,20,0"
-                         Click="Black">
-                    <Image Height="16" Width="16" Source="resource/img/返回.png"></Image> </Button>
-            </Grid>
-            <Grid  Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="318"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid  Grid.Column="0"
+                   Background="#FFF3F8F9">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="400"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid  Grid.Row="0">
-                    <hc:Divider LineStrokeThickness="2"
-                                Orientation="Horizontal"
-                                Height="1"
-                                Background="#FFFFFBFB"
-                                Margin="30,0"
-                                VerticalAlignment="Top" />
-                    <hc:SideMenu  SelectionChanged="Left_SideMenu_SelectionChanged"  Height="336"
-                                 x:Name="Left_SideMenu">
-                        <!--首页-->
-                        <hc:SideMenuItem x:Name="Index_Button" IsSelected="True"
-                                           Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="首页"
-                                         MouseDown="Open_Index"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Index_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--动态-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="动态"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Dynamic_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--排行榜-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="排行榜"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Leaderboard_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--直播-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="直播"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Live_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--漫画-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="漫画"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Comics_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--分区-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="分区"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Partition_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--投稿工具-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="投稿工具"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Post_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                    </hc:SideMenu>
-                </Grid>
-                <Grid Grid.Row="1" >
-                    <hc:Divider LineStrokeThickness="2"
-                                Orientation="Horizontal"
-                                Height="1"
-                                Background="#FFFFFBFB"
-                                Margin="30,0"
-                                VerticalAlignment="Top" />
-                    <hc:SideMenu x:Name="User_SideMenu" Visibility="Hidden" Height="192">
-                        <!--历史记录-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="历史记录"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource History_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--稍后观看-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="稍后观看"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Later_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        <!--收藏夹-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="收藏夹"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="20"
-                                                  Data="{DynamicResource Favorites_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                        
-                        <!--消息-->
-                        <hc:SideMenuItem Background="#FFF3F8F9"
-                                         FontSize="14"
-                                         Header="消息"
-                                         Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
-                            <hc:SideMenuItem.Icon>
-                                <hc:AnimationPath Height="17"
-                                                  Data="{DynamicResource Message_Logo}"
-                                                  Duration="0:00:05"
-                                                  RepeatBehavior="12"
-                                                  Stretch="Uniform"
-                                                  IsPlaying="False"
-                                                  StrokeThickness="1"
-                                                  Stroke="Black" />
-                            </hc:SideMenuItem.Icon>
-                        </hc:SideMenuItem>
-                    </hc:SideMenu>
-                    <hc:Divider LineStrokeThickness="2"
-                                Orientation="Horizontal"
-                                Height="1"
-                                Background="#FFFFFBFB"
-                                Margin="30,0"
-                                VerticalAlignment="Bottom" />
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="5*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <hc:Gravatar MouseDown="Open_User_Space"
-                                     Height="60" Width="60" Style="{StaticResource GravatarCircleImg}"
-                                     Margin="15,0,0,0"
-                                     HorizontalAlignment="Left"
-                                     VerticalAlignment="Center">
-                            <Image  x:Name="User_Cover_Img"
-                                   Source="resource/img/Bilibili_User_Cover.png"
-                                   MouseDown="Open_User_Space" />
-                        </hc:Gravatar>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid x:Name="User_Name_Grid"
-                              Visibility="Hidden">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
+            <hc:TransitioningContentControl TransitionMode="Top2Bottom">
+                <Grid Grid.Row="0">
+                    <Viewbox>
+                        <Image  Height="24"
+                                Source="resource/img/BILIBILI_LOGO-PINK.png"
+                                Margin="20,0,150,0" />
 
-                            <Grid Grid.Row="0">
-                                <TextBlock x:Name="User_Name_Label" HorizontalAlignment="Left"
-                                           Style="{StaticResource TextBlockSubTitleBold}"
-                                           VerticalAlignment="Bottom" />
+                    </Viewbox>
+                    <Button x:Name="Back_Button"
+                            Visibility="Hidden"
+                            hc:BorderElement.CornerRadius="100"
+                            HorizontalAlignment="Right"
+                            Height="38"
+                            Margin="0,0,20,0"
+                            Click="Black">
+                        <Image Height="16"
+                               Width="16"
+                               Source="resource/img/返回.png"></Image>
+                    </Button>
+                </Grid>
+            </hc:TransitioningContentControl>
 
-                            </Grid>
-                            <Grid Grid.Row="1">
-                            <ProgressBar x:Name="User_Exp_Bar" Style="{DynamicResource ProgressBarFlat}"
-                                      Value="0"
-                                      Margin="0,0,15,30"
-                                      VerticalAlignment="Bottom" />
-                            </Grid>
+                <Grid  Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                <hc:TransitioningContentControl TransitionMode="Bottom2Top">
+                    <hc:TransitioningContentControl TransitionMode="Right2Left">
+                        <Grid  Grid.Row="0">
+                            <hc:Divider LineStrokeThickness="2"
+                                        Orientation="Horizontal"
+                                        Height="1"
+                                        Background="#FFFFFBFB"
+                                        Margin="30,0"
+                                        VerticalAlignment="Top" />
+                            <hc:SideMenu  SelectionChanged="Left_SideMenu_SelectionChanged"
+                                          Height="336"
+                                          x:Name="Left_SideMenu">
+                                <!--首页-->
+                                <hc:SideMenuItem x:Name="Index_Button"
+                                                 IsSelected="True"
+                                                 Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="首页"
+                                                 MouseDown="Open_Index"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Index_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                                <!--动态-->
+                                <hc:SideMenuItem Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="动态"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Dynamic_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                                <!--排行榜-->
+                                <hc:SideMenuItem Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="排行榜"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Leaderboard_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                                <!--直播-->
+                                <hc:SideMenuItem Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="直播"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Live_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                                <!--漫画-->
+                                <hc:SideMenuItem Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="漫画"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Comics_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                                <!--分区-->
+                                <hc:SideMenuItem Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="分区"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Partition_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                                <!--投稿工具-->
+                                <hc:SideMenuItem Background="#FFF3F8F9"
+                                                 FontSize="14"
+                                                 Header="投稿工具"
+                                                 Command="New"
+                                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <hc:AnimationPath Height="20"
+                                                          Data="{DynamicResource Post_Logo}"
+                                                          Duration="0:00:05"
+                                                          RepeatBehavior="12"
+                                                          Stretch="Uniform"
+                                                          IsPlaying="False"
+                                                          StrokeThickness="1"
+                                                          Stroke="Black" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+                            </hc:SideMenu>
                         </Grid>
-                        <Button x:Name="Login_Button" Height="36"
-                                hc:BorderElement.CornerRadius="7"
-                                Background="#FB7299"
-                                FontSize="11.5"
-                                Foreground="White"
-                                Content="哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Margin="0,0,20,0"
-                                Click="Login_Button_Click"></Button>
+                    </hc:TransitioningContentControl>
+                </hc:TransitioningContentControl>
+                <Grid Grid.Row="1">
+                        <hc:Divider LineStrokeThickness="2"
+                                    Orientation="Horizontal"
+                                    Height="1"
+                                    Background="#FFFFFBFB"
+                                    Margin="30,0"
+                                    VerticalAlignment="Top" />
+                        <hc:SideMenu x:Name="User_SideMenu"
+                                     Visibility="Hidden"
+                                     Height="192">
+                            <!--历史记录-->
+                            <hc:SideMenuItem Background="#FFF3F8F9"
+                                             FontSize="14"
+                                             Header="历史记录"
+                                             Command="New"
+                                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                <hc:SideMenuItem.Icon>
+                                    <hc:AnimationPath Height="20"
+                                                      Data="{DynamicResource History_Logo}"
+                                                      Duration="0:00:05"
+                                                      RepeatBehavior="12"
+                                                      Stretch="Uniform"
+                                                      IsPlaying="False"
+                                                      StrokeThickness="1"
+                                                      Stroke="Black" />
+                                </hc:SideMenuItem.Icon>
+                            </hc:SideMenuItem>
+                            <!--稍后观看-->
+                            <hc:SideMenuItem Background="#FFF3F8F9"
+                                             FontSize="14"
+                                             Header="稍后观看"
+                                             Command="New"
+                                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                <hc:SideMenuItem.Icon>
+                                    <hc:AnimationPath Height="20"
+                                                      Data="{DynamicResource Later_Logo}"
+                                                      Duration="0:00:05"
+                                                      RepeatBehavior="12"
+                                                      Stretch="Uniform"
+                                                      IsPlaying="False"
+                                                      StrokeThickness="1"
+                                                      Stroke="Black" />
+                                </hc:SideMenuItem.Icon>
+                            </hc:SideMenuItem>
+                            <!--收藏夹-->
+                            <hc:SideMenuItem Background="#FFF3F8F9"
+                                             FontSize="14"
+                                             Header="收藏夹"
+                                             Command="New"
+                                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                <hc:SideMenuItem.Icon>
+                                    <hc:AnimationPath Height="20"
+                                                      Data="{DynamicResource Favorites_Logo}"
+                                                      Duration="0:00:05"
+                                                      RepeatBehavior="12"
+                                                      Stretch="Uniform"
+                                                      IsPlaying="False"
+                                                      StrokeThickness="1"
+                                                      Stroke="Black" />
+                                </hc:SideMenuItem.Icon>
+                            </hc:SideMenuItem>
+
+                            <!--消息-->
+                            <hc:SideMenuItem Background="#FFF3F8F9"
+                                             FontSize="14"
+                                             Header="消息"
+                                             Command="New"
+                                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                <hc:SideMenuItem.Icon>
+                                    <hc:AnimationPath Height="17"
+                                                      Data="{DynamicResource Message_Logo}"
+                                                      Duration="0:00:05"
+                                                      RepeatBehavior="12"
+                                                      Stretch="Uniform"
+                                                      IsPlaying="False"
+                                                      StrokeThickness="1"
+                                                      Stroke="Black" />
+                                </hc:SideMenuItem.Icon>
+                            </hc:SideMenuItem>
+                        </hc:SideMenu>
+                        <hc:Divider LineStrokeThickness="2"
+                                    Orientation="Horizontal"
+                                    Height="1"
+                                    Background="#FFFFFBFB"
+                                    Margin="30,0"
+                                    VerticalAlignment="Bottom" />
+                    </Grid>
+
+                <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="5*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <hc:Gravatar MouseDown="Open_User_Space"
+                                         Height="60"
+                                         Width="60"
+                                         Style="{StaticResource GravatarCircleImg}"
+                                         Margin="15,0,0,0"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center">
+                                <Image  x:Name="User_Cover_Img"
+                                        Source="resource/img/Bilibili_User_Cover.png"
+                                        MouseDown="Open_User_Space" />
+                            </hc:Gravatar>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Grid x:Name="User_Name_Grid"
+                                  Visibility="Hidden">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <TextBlock x:Name="User_Name_Label"
+                                               HorizontalAlignment="Left"
+                                               Style="{StaticResource TextBlockSubTitleBold}"
+                                               VerticalAlignment="Bottom" />
+
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <ProgressBar x:Name="User_Exp_Bar"
+                                                 Style="{DynamicResource ProgressBarFlat}"
+                                                 Value="0"
+                                                 Margin="0,0,15,30"
+                                                 VerticalAlignment="Bottom" />
+                                </Grid>
+                            </Grid>
+                            <Button x:Name="Login_Button"
+                                    Height="36"
+                                    hc:BorderElement.CornerRadius="7"
+                                    Background="#FB7299"
+                                    FontSize="11.5"
+                                    Foreground="White"
+                                    Content="哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Margin="0,0,20,0"
+                                    Click="Login_Button_Click"></Button>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Grid>
-        <Grid Grid.Column="1"
-              Background="#FFFFFBFB">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <TextBlock x:Name="middle_title" HorizontalAlignment="Left"
-                           Margin="25,5,5,5"
-                           Text="首页"
-                           Style="{StaticResource TextBlockLargeBold}" />
-            </Grid>
-            <Grid Grid.Row="1">
-                <Frame Navigated="middle_frame_Navigated"   NavigationUIVisibility="Hidden"
-                       x:Name="middle_frame"
-                       BorderThickness="0" />
-            </Grid>
 
         </Grid>
+        
+            <Grid Grid.Column="1"
+                  Background="#FFFFFBFB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                <hc:TransitioningContentControl TransitionMode="Top2Bottom">
+                    <TextBlock x:Name="middle_title"
+                               HorizontalAlignment="Left"
+                               Margin="25,5,5,5"
+                               Text="首页"
+                               Style="{StaticResource TextBlockLargeBold}" />
+                </hc:TransitioningContentControl>
+            </Grid>
+                <Grid Grid.Row="1">
+                    <Frame Navigated="middle_frame_Navigated"
+                           NavigationUIVisibility="Hidden"
+                           x:Name="middle_frame"
+                           BorderThickness="0" />
+                </Grid>
 
+            </Grid>
 
-    </Grid>
+        </Grid>
 
 </Window>

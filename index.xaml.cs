@@ -40,12 +40,8 @@ namespace Bilibili_Client
             coverFlow.Margin= new Thickness(32);
             coverFlow.Width = 800;
             coverFlow.Height = 260;
-            coverFlow.SetValue(Grid.RowProperty, 0);
             coverFlow.Loop = true;
             Index_Grid.Children.Add(coverFlow);
-
-
-
         }
 
         //主页广告
@@ -107,7 +103,7 @@ namespace Bilibili_Client
                 Download_Complete++;
             }
         }
-
+        int Add_Times=0;
         //主页推荐
         private void Home_Recommendation()
         {
@@ -138,6 +134,7 @@ namespace Bilibili_Client
                            };
                         this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
+
                             content_box.Items.Add(double_row_video);//按照模板加入一个item
                             double_row_video = null;
                         });
@@ -147,7 +144,15 @@ namespace Bilibili_Client
                 request = null;
                 response = null;
                 recommend = null;
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                {
+                    Loading.Visibility = Visibility.Hidden;
+                    
+                });
+                Add_Times++;
+
                 Thread_blocking.Reset();
+                
             }
 
         }
@@ -189,8 +194,11 @@ namespace Bilibili_Client
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
-                Thread_blocking.Set();
+            if (index_scrollViewer.ScrollableHeight - 700 < index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
+            {
+                Loading.Visibility = Visibility.Visible;
+                Thread_blocking.Set(); 
+            }
 
 
         }

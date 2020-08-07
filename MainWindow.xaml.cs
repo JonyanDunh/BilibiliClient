@@ -19,7 +19,7 @@ namespace Bilibili_Client
         index index_page = new index();
         login login_page = new login();
         Space space_page = new Space();
-        video video_page = new video();
+        //video video_page = new video();
         geetest geetest_page = new geetest();
         Bilibili bilibili = new Bilibili();
         public Bilibili.BiliCookie BiliCookie = new Bilibili.BiliCookie();
@@ -45,7 +45,7 @@ namespace Bilibili_Client
             GCTimer.Tick += new EventHandler(TimerGC);
             GCTimer.Interval = new TimeSpan(0, 0, 0, 1);
             GCTimer.Start();
-            middle_frame.Navigate(video_page);//默认打开主页
+            middle_frame.Navigate(index_page);//默认打开主页
             if (bilibili.Check_Login_status())//判断是否登录
             {
                 IsLogin = true;
