@@ -11,16 +11,11 @@
       xmlns:hc="https://handyorg.github.io/handycontrol">
     <Grid>
         <ScrollViewer  x:Name="index_scrollViewer" ScrollChanged="ScrollChanged">
-            <Grid>
+            <Grid x:Name="Index_Grid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <hc:CoverFlow Loop="True"  Grid.Row="0"
-                              x:Name="CoverFlowMain"
-                              Margin="32"
-                              Width="800"
-                              Height="260" />
                 <hc:CoverView PreviewMouseWheel="content_box_PreviewMouseWheel" Grid.Row="1"
                       x:Name="content_box"
                       ItemHeight="284"
@@ -28,7 +23,7 @@
                       Margin="20,0,0,0" >
             <hc:CoverView.ItemHeaderTemplate>
                 <DataTemplate>
-                        <Grid Width="304"
+                        <Grid  Width="304"
                               Height="284">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="190"></RowDefinition>

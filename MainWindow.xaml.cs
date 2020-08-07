@@ -1,17 +1,16 @@
 ﻿using HandyControl.Controls;
-using Microsoft.Xaml.Behaviors;
+using Prism.Commands;
 using System;
 using System.IO;
-using System.Reflection;
-using System.Web.UI;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace Bilibili_Client
 {
 
-    
+
     public partial class MainWindow : System.Windows.Window
     {
 
@@ -20,6 +19,7 @@ namespace Bilibili_Client
         index index_page = new index();
         login login_page = new login();
         Space space_page = new Space();
+        video video_page = new video();
         geetest geetest_page = new geetest();
         Bilibili bilibili = new Bilibili();
         public Bilibili.BiliCookie BiliCookie = new Bilibili.BiliCookie();
@@ -45,7 +45,7 @@ namespace Bilibili_Client
             GCTimer.Tick += new EventHandler(TimerGC);
             GCTimer.Interval = new TimeSpan(0, 0, 0, 1);
             GCTimer.Start();
-            middle_frame.Navigate(index_page);//默认打开主页
+            middle_frame.Navigate(video_page);//默认打开主页
             if (bilibili.Check_Login_status())//判断是否登录
             {
                 IsLogin = true;
@@ -75,9 +75,9 @@ namespace Bilibili_Client
         //创建文件夹
         private void Create_data()
         {
-            if (false == Directory.Exists(@"Data\Cache\Img"))
+            if (false == Directory.Exists(@"Data\Cache\Img\Cover"))
             {
-                Directory.CreateDirectory(@"Data\Cache\Img");
+                Directory.CreateDirectory(@"Data\Cache\Img\Cover");
             }
 
         }
@@ -164,7 +164,6 @@ namespace Bilibili_Client
         {
              if(middle_frame.CanGoBack)
              middle_frame.GoBack();
-
         }
 
         private void Left_SideMenu_SelectionChanged(object sender, HandyControl.Data.FunctionEventArgs<object> e)
@@ -184,9 +183,21 @@ namespace Bilibili_Client
                 Back_Button.Visibility = Visibility.Hidden;
         }
 
+        SideMenuItem sideMenuItem;
+        bool initializations = false;
+
         private void Change_Middle_Title(object sender, ExecutedRoutedEventArgs e)
         {
-            middle_title.Text = e.Parameter.ToString();
+            middle_title.Text =((SideMenuItem)e.Parameter).Header.ToString();
+            ((SideMenuItem)e.Parameter).Foreground = new SolidColorBrush(Color.FromRgb(251, 114, 153));
+            if (initializations)
+            {
+                if(!string.Equals(sideMenuItem.Header.ToString(), ((SideMenuItem)e.Parameter).Header.ToString()))
+                sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            }
+            sideMenuItem = (SideMenuItem)e.Parameter;
+            initializations = true;
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,15 @@ namespace Bilibili_Client
         {
             InitializeComponent();
         }
+        public ICommand ButtonCommand
+        {
+            get
+            {
+                return new DelegateCommand<string>((str) => {
+                    MessageBox.Show("Button's parameter:" + str);
+                });
+            }
+        }
+
     }
 }

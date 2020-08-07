@@ -12,7 +12,8 @@
         Height="900"
         Width="1360"
         WindowStyle="None"
-        MinWidth="1011.1">
+        MinWidth="1011.1"
+        ResizeMode="NoResize">
    
     <Window.CommandBindings>
         <CommandBinding Command="New"
@@ -30,7 +31,7 @@
     <Grid>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="318.4"></ColumnDefinition>
+            <ColumnDefinition Width="318"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid  Grid.Column="0"
@@ -69,11 +70,13 @@
                     <hc:SideMenu  SelectionChanged="Left_SideMenu_SelectionChanged"  Height="336"
                                  x:Name="Left_SideMenu">
                         <!--首页-->
-                        <hc:SideMenuItem   
+                        <hc:SideMenuItem  
                                            Background="#FFF3F8F9"
                                          FontSize="14"
                                          Header="首页"
-                                         MouseDown="Open_Index">
+                                         MouseDown="Open_Index"
+                                         Command="New"
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/首页.png"
                                        Width="20"
@@ -85,7 +88,7 @@
                                          FontSize="14"
                                          Header="动态"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/动态.png"
                                        Width="20"
@@ -97,7 +100,7 @@
                                          FontSize="14"
                                          Header="排行榜"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/排行榜.png"
                                        Width="20"
@@ -109,7 +112,7 @@
                                          FontSize="14"
                                          Header="直播"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/直播.png"
                                        Width="20"
@@ -121,7 +124,7 @@
                                          FontSize="14"
                                          Header="漫画"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/漫画.png"
                                        Width="20"
@@ -133,7 +136,7 @@
                                          FontSize="14"
                                          Header="分区"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/分区.png"
                                        Width="20"
@@ -145,7 +148,7 @@
                                          FontSize="14"
                                          Header="投稿工具"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/投稿工具.png"
                                        Width="20"
@@ -167,7 +170,7 @@
                                          FontSize="14"
                                          Header="历史记录"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/历史记录.png"
                                        Width="20"
@@ -179,7 +182,7 @@
                                          FontSize="14"
                                          Header="稍后观看"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/稍后观看.png"
                                        Width="20"
@@ -191,7 +194,7 @@
                                          FontSize="14"
                                          Header="收藏夹"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/收藏夹.png"
                                        Width="20"
@@ -204,7 +207,7 @@
                                          FontSize="14"
                                          Header="消息"
                                          Command="New"
-                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Header}">
+                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                             <hc:SideMenuItem.Icon>
                                 <Image Source="resource/img/消息.png"
                                        Width="20"

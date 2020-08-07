@@ -1,13 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using HandyControl.Controls;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 
 
@@ -18,30 +23,92 @@ namespace Bilibili_Client
     /// index.xaml 的交互逻辑
     /// </summary>
 
+
     public partial class index : Page
     {
         ManualResetEvent Thread_blocking = new ManualResetEvent(true);//线程阻塞
-
+        CoverFlow coverFlow = new CoverFlow();
+        int Download_Complete = 0;
         public index()
         {
             InitializeComponent();
             Thread thread = new Thread(Home_Recommendation);//加载推荐视频的函数加入一个新的子线程
             thread.Start();//线程开始
+            Thread thread2 = new Thread(Homepage_Ad);//加载推荐视频的函数加入一个新的子线程
+            thread2.Start();//线程开始
+            CoverFlow coverFlow = new CoverFlow();
+            coverFlow.Margin= new Thickness(32);
+            coverFlow.Width = 800;
+            coverFlow.Height = 260;
+            coverFlow.SetValue(Grid.RowProperty, 0);
+            coverFlow.Loop = true;
+            Index_Grid.Children.Add(coverFlow);
 
-            CoverFlowMain.AddRange(new[]
-{
 
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg"),
-    new Uri(@"pack://application:,,,/resource/img/cover.jpg")
-});
-            CoverFlowMain.JumpTo(2);
 
         }
+
+        //主页广告
+        private void Homepage_Ad()
+        {
+            
+            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=0&flush=0&column=4&device=pad&pull=true&build=5520400&appkey=4ebafd7c4951b366&mobi_app=iphone&platform=ios&ts=1596754509&access_key=71626a38ce02b8a18b9a8b0dd8add481&sign=5d3bbfa008082c409bf56603278ea7a8");
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+            JToken items = recommend["data"]["items"][0]["banner_item"];
+            for (int i = 0; i <= items.Count() - 1; i++)
+            {
+
+                if (File.Exists(@"Data\Cache\Img\Cover\" + items[i]["id"].ToString() + ".jpg"))
+                {
+                    coverFlow.Add(new Uri(@"Data\Cache\Img\Cover\" + items[i]["id"].ToString() + ".jpg", UriKind.Relative));
+                    Download_Complete++;
+                }
+                else
+                {
+                    
+                    WebClient Client = new WebClient();
+                    Uri uri = new Uri(items[i]["image"].ToString());
+                    Client.DownloadFileCompleted += Down_Cover_Completed;
+                    Client.DownloadFileAsync(uri, @"Data\Cache\Img\Cover\"+ items[i]["id"].ToString() + ".jpg", @"Data\Cache\Img\Cover\" + items[i]["id"].ToString() + ".jpg");
+
+                }
+            }
+            
+            new Thread((obj) =>
+            { 
+            while(true)
+                {
+                    if (Download_Complete ==(int)obj)
+                    {
+                        this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                        {
+                            coverFlow.JumpTo(1);
+                            Index_Grid.Children.Add(coverFlow);
+                        });
+                        break;
+                    }
+                }        
+            }).Start(items.Count());
+            client = null;
+            request = null;
+            response = null;
+            recommend = null;
+        }
+
+        //广告封面下载完成
+        private void Down_Cover_Completed(object sender, AsyncCompletedEventArgs e)
+        {
+           
+            if (e.UserState != null)
+            {
+                coverFlow.Add(new Uri(e.UserState.ToString(), UriKind.Relative));
+                Download_Complete++;
+            }
+        }
+
+        //主页推荐
         private void Home_Recommendation()
         {
             while (true)
@@ -122,9 +189,9 @@ namespace Bilibili_Client
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-             if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
-                 Thread_blocking.Set();
-        
+            if (index_scrollViewer.ScrollableHeight == index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
+                Thread_blocking.Set();
+
 
         }
 
@@ -137,5 +204,8 @@ namespace Bilibili_Client
             };
             this.content_box.RaiseEvent(eventArg);
         }
+
+
+
     }
 }
