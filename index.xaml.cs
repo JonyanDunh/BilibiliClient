@@ -223,6 +223,7 @@ namespace Bilibili_Client
 
         private void Goto_Video_Page(object sender, ExecutedRoutedEventArgs e)
         {
+            string avid = ((Button)e.Parameter).Uid.ToString();
             index_Page_Open_Video(((Button)e.Parameter).Uid.ToString());
         }
     }

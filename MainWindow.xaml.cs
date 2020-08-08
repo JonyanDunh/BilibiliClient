@@ -1,6 +1,7 @@
 ﻿using HandyControl.Controls;
 using Prism.Commands;
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -27,7 +28,7 @@ namespace Bilibili_Client
         private delegate void MainWindow_SendMessage_To_Login_page();//主窗口发送给登录窗口类
         private MainWindow_SendMessage_To_Login_page mainWindow_SendMessage_To_Login_page;
 
-        private delegate void MainWindow_Open_Video_page(string avid);//主窗口发送给登录窗口类
+        private delegate void MainWindow_Open_Video_page(string avid,MainWindow mainWindow);//主窗口发送给登录窗口类
         private MainWindow_Open_Video_page mainWindow_Open_Video_page;
 
         public MainWindow()
@@ -118,7 +119,7 @@ namespace Bilibili_Client
         private void Open_Video_Page(string avid)
         {
             middle_frame.Navigate(video_page);
-            mainWindow_Open_Video_page(avid);
+            mainWindow_Open_Video_page(avid,this);
             
 
         }
@@ -183,10 +184,19 @@ namespace Bilibili_Client
                 Last_animationPath.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
         }
 
+        //页面返回按钮
         private void Black(object sender, RoutedEventArgs e)
         {
-             if(middle_frame.CanGoBack)
-             middle_frame.GoBack();
+            if (middle_frame.CanGoBack)
+            {
+                if (video_page.Media.IsPlaying)
+                {
+                    var converter = TypeDescriptor.GetConverter(typeof(Geometry));
+                    video_page.Media.Pause();
+                    ((System.Windows.Shapes.Path)video_page.Pause_Button.Content).Data = (Geometry)(converter.ConvertFrom("M442.181818 709.818182c0 37.236364-30.254545 69.818182-69.818182 69.818182s-69.818182-30.254545-69.818181-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818181-69.818182s69.818182 30.254545 69.818182 69.818182v395.636364z m279.272727 0c0 37.236364-30.254545 69.818182-69.818181 69.818182s-69.818182-30.254545-69.818182-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818182-69.818182s69.818182 30.254545 69.818181 69.818182v395.636364z"));
+                }
+                middle_frame.GoBack();
+            }
         }
 
         private void Left_SideMenu_SelectionChanged(object sender, HandyControl.Data.FunctionEventArgs<object> e)
@@ -196,7 +206,7 @@ namespace Bilibili_Client
 
         }
 
-
+        //在打开页面时判断页面是否能返回，从而显示和隐藏按钮
 
         private void middle_frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {

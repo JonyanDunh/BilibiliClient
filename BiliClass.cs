@@ -434,8 +434,118 @@ Xl69GV6klzgxW6d2xQIDAQAB";
 
     public class Bilibili_Video
     {
+        public struct video_info
+        {
+            public bool Success;
+            public string aid;//视频avID	
+            public string bvid;//视频bvID	
+            public int videos;//视频分P总数	
+            public int tid;//分区ID	
+            public string tname;//子分区名称	
+            public int copyright;//版权标志	1：自制 2：转载
+            public string pic;//视频封面图片url	
+            public string title;//视频标题	
+            public string ctime;//视频审核通过时间	
+            public string desc;//视频简介	
+            public string mid;//UP主UID	
+            public string name;//UP主昵称	
+            public string face;//UP主头像	
+            public int view;//观看次数 普通：0 屏蔽时：-1
+            public int danmaku;//弹幕数	
+            public int reply;//评论数	
+            public int favorite;//收藏数	
+            public int coin;//投币数	
+            public int share;//分享数	
+            public int like;//获赞数	
+            public pages[] pages;
+        }
+        public struct pages//视频分P列表
+        {
+            public string cid;//当前分P CID	
+            public int page;//当前分P	
+            public string part;//当前分P标题	
+        }
+        public struct P_data
+        {
+            public bool Success;
+            public string url;
 
 
+        }
+        public video_info gets_video_info(string aid)
+        {
+            var client = new RestClient("http://api.bilibili.com/x/web-interface/view?aid=" + aid);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+            video_info videoinfo = new video_info();
+            JToken data = recommend["data"];
+            if (Convert.ToInt32(recommend["code"]) == 0)
+            {
+                videoinfo.Success = true;
+                videoinfo.aid = aid;
+                videoinfo.bvid = data["bvid"].ToString();
+                videoinfo.videos = Convert.ToInt32(data["videos"]);
+                videoinfo.tid= Convert.ToInt32(data["tid"]);
+                videoinfo.tname = data["tname"].ToString();
+                videoinfo.copyright = Convert.ToInt32(data["copyright"]);
+                videoinfo.pic = data["pic"].ToString();
+                videoinfo.title = data["title"].ToString();
+                videoinfo.ctime = data["ctime"].ToString();
+                videoinfo.desc = data["desc"].ToString();
+                videoinfo.mid= data["owner"]["mid"].ToString();
+                videoinfo.name = data["owner"]["name"].ToString();
+                videoinfo.face = data["owner"]["face"].ToString();
+                videoinfo.view = Convert.ToInt32(data["stat"]["view"]);
+                videoinfo.danmaku = Convert.ToInt32(data["stat"]["danmaku"]);
+                videoinfo.reply = Convert.ToInt32(data["stat"]["reply"]);
+                videoinfo.favorite = Convert.ToInt32(data["stat"]["favorite"]);
+                videoinfo.coin = Convert.ToInt32(data["stat"]["coin"]);
+                videoinfo.share = Convert.ToInt32(data["stat"]["share"]);
+                videoinfo.like = Convert.ToInt32(data["stat"]["like"]);
+                videoinfo.pages = new pages[videoinfo.videos];
+                 for(int i=0;i<videoinfo.videos;i++)
+                 {
+                     videoinfo.pages[i].cid = data["pages"][i]["cid"].ToString();
+                     videoinfo.pages[i].page = Convert.ToInt32(data["pages"][i]["page"]);
+                     videoinfo.pages[i].part = data["pages"][i]["part"].ToString();
+                }
+                return videoinfo;
+            }else
+            {
+
+                MessageBox.Show("该视频不存在");
+                videoinfo.Success = false;
+                return videoinfo;
+
+            }
+
+        }
+        public P_data Get_Video_Stream(string avid,string cid,int clarity,bool Islogin,Bilibili_Account.BiliCookie biliCookie)
+        {
+            P_data p_Data = new P_data();
+            var client = new RestClient("http://api.bilibili.com/x/player/playurl?cid="+cid+"&avid="+avid+"&qn="+clarity);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            if(Islogin)
+            request.AddCookie("SESSDATA", biliCookie.SESSDATA);
+            IRestResponse response = client.Execute(request);
+            JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+            if ((int)recommend["code"] == 0)
+            {
+                p_Data.Success = true;
+                JToken data = recommend["data"];
+                p_Data.url = data["durl"][0]["url"].ToString();
+                return p_Data;
+            }else
+            {
+                p_Data.Success = false;
+                MessageBox.Show("视频加载失败");
+                return p_Data;
+            }
+
+        }
 
 
 

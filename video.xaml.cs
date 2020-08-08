@@ -1,26 +1,13 @@
-﻿using Prism.Commands;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Unosquare.FFME.Common;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Bilibili_Client
 {
@@ -64,11 +51,16 @@ namespace Bilibili_Client
     }
     public partial class video : Page
     {
+        MainWindow mainWindow;
+        public bool IsLogin = false;
+        Bilibili_Account.BiliCookie biliCookie = new Bilibili_Account.BiliCookie();
+        Bilibili_Video bilibili_Video = new Bilibili_Video();
+        Bilibili_Video.video_info video_Info = new Bilibili_Video.video_info();
         bool Is_Play = true;
         public video()
         {
             InitializeComponent();
-            //Media.Open(new Uri(@"http://upos-sz-mirrorcos.bilivideo.com/upgcxcode/02/34/186803402/186803402-1-112.flv?e=ig8euxZM2rNcNbN1nwuVhwdlhbR37zdVhoNvNC8BqJIzNbfqXBvEqxTEto8BTrNvN0GvT90W5JZMkX_YN0MvXg8gNEV4NC8xNEV4N03eN0B5tZlqNxTEto8BTrNvNeZVuJ10Kj_g2UB02J0mN0B5tZlqNCNEto8BTrNvNC7MTX502C8f2jmMQJ6mqF2fka1mqx6gqj0eN0B599M=&uipk=5&nbs=1&deadline=1596880701&gen=playurl&os=cosbv&oi=3070377771&trid=a37775b2f77d46db81ba04bf1a7aabe1u&platform=pc&upsig=71125246097ec0f0c16b669820cbc2ec&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=96876893&orderid=0,3&agrr=1&logo=80000000"));
+            //
 
 
         }
@@ -86,7 +78,7 @@ namespace Bilibili_Client
         }
 
         //暂停&&播放按钮
-        private void Pause(object sender, RoutedEventArgs e)
+        public void Pause(object sender, RoutedEventArgs e)
         {
             
             var converter = TypeDescriptor.GetConverter(typeof(Geometry));
@@ -105,13 +97,30 @@ namespace Bilibili_Client
             }
         }
 
-        public void Open_New_Video(string avid)
+        public void Open_New_Video(string avid,MainWindow MainWindow)
+        {
+            new Thread(() =>
+            {
+                int clarity = 32;
+            mainWindow = MainWindow;
+            video_Info = bilibili_Video.gets_video_info(avid);
+            if (mainWindow.IsLogin)
+            {
+                biliCookie = mainWindow.BiliCookie;
+                IsLogin = true;
+                clarity = 80;
+            }
+            if (video_Info.Success)
+                if(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid, 80, IsLogin, biliCookie).Success)
+                    Play_Video(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid,80, IsLogin, biliCookie).url);
+
+            }).Start();
+        }
+        private void Play_Video(string url)
         {
 
-            MessageBox.Show(avid);
-
+            Media.Open(new Uri(url));
         }
-
 
     }
     

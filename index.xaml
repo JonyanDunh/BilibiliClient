@@ -19,27 +19,27 @@
         <Grid>
             <hc:ScrollViewer IsInertiaEnabled="True" x:Name="index_scrollViewer"
                            ScrollChanged="ScrollChanged">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <hc:TransitioningContentControl TransitionMode="Left2Right">
-                        <Grid Grid.Row="0"
-                              x:Name="Index_Grid">
-                            
-                        </Grid>
-                    </hc:TransitioningContentControl>
-                    <hc:CoverView PreviewMouseWheel="content_box_PreviewMouseWheel"
-                                  Grid.Row="1"
-                                  x:Name="content_box"
-                                  ItemHeight="284"
-                                  ItemWidth="304"
-                                  Margin="20,0,20,0"
-                                  ItemContentHeight="100">
-                        <hc:CoverView.ItemHeaderTemplate>
-                            <DataTemplate>
-                                <hc:TransitioningContentControl TransitionMode="Left2Right">
+                <hc:TransitioningContentControl TransitionMode="Left2Right">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <hc:TransitioningContentControl TransitionMode="Left2Right">
+                            <Grid Grid.Row="0"
+                                  x:Name="Index_Grid">
+
+                            </Grid>
+                        </hc:TransitioningContentControl>
+                        <hc:CoverView PreviewMouseWheel="content_box_PreviewMouseWheel"
+                                      Grid.Row="1"
+                                      x:Name="content_box"
+                                      ItemHeight="284"
+                                      ItemWidth="304"
+                                      Margin="20,0,20,0"
+                                      ItemContentHeight="100">
+                            <hc:CoverView.ItemHeaderTemplate>
+                                <DataTemplate>
 
                                     <Grid Width="304"
                                           Height="284">
@@ -54,18 +54,19 @@
                                                     BorderBrush="#FFD1D1D1"
                                                     BorderThickness="0"
                                                     CornerRadius="10,10,0,0">
-                                                <Button Uid="{Binding Avid}" Height="190"
+                                                <Button Uid="{Binding Avid}"
+                                                        Height="190"
                                                         BorderThickness="0"
                                                         Background="Transparent"
                                                         hc:BorderElement.CornerRadius="10"
                                                         Command="New"
                                                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                                     <Image  Name="cover_img"
-                                                           Width="285"
-                                                           Height="178"
-                                                           Source="{Binding video_cover}"
-                                                           HorizontalAlignment="Right"
-                                                           VerticalAlignment="Top">
+                                                            Width="285"
+                                                            Height="178"
+                                                            Source="{Binding video_cover}"
+                                                            HorizontalAlignment="Right"
+                                                            VerticalAlignment="Top">
 
                                                         <Image.Clip>
                                                             <RectangleGeometry RadiusX="10"
@@ -203,16 +204,16 @@
                                         </Grid>
                                     </Grid>
 
-                                </hc:TransitioningContentControl>
-                            </DataTemplate>
-                        </hc:CoverView.ItemHeaderTemplate>
-                        <hc:CoverView.ItemTemplate>
-                            <DataTemplate>
+                                </DataTemplate>
+                            </hc:CoverView.ItemHeaderTemplate>
+                            <hc:CoverView.ItemTemplate>
+                                <DataTemplate>
 
-                            </DataTemplate>
-                        </hc:CoverView.ItemTemplate>
-                    </hc:CoverView>
-                </Grid>
+                                </DataTemplate>
+                            </hc:CoverView.ItemTemplate>
+                        </hc:CoverView>
+                    </Grid>
+                </hc:TransitioningContentControl>
             </hc:ScrollViewer>
             <hc:LoadingCircle  x:Name="Loading"
                                Foreground="#fb7299"
