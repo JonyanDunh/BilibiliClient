@@ -26,6 +26,9 @@ namespace Bilibili_Client
 
     public partial class index : Page
     {
+        public delegate void Index_Page_Open_Video(string avid);//主窗口发送给登录窗口类
+        public Index_Page_Open_Video index_Page_Open_Video;
+
         ManualResetEvent Thread_blocking = new ManualResetEvent(true);//线程阻塞
         CoverFlow coverFlow = new CoverFlow();
         int Download_Complete = 0;
@@ -126,10 +129,11 @@ namespace Bilibili_Client
                       items[obj]["desc"].ToString(),//up名字
                       items[obj]["cover"].ToString()+"@320w_200h_1c_95q",//封面
                       items[obj]["cover_left_text_1"].ToString(),//时长
-                      items[obj]["title"].ToString().Length>17?items[obj]["title"].ToString().Substring(0,17)+"...":items[obj]["title"].ToString(),//标题
+                      items[obj]["title"].ToString(),//标题
                       items[obj]["args"]["rname"].ToString(),//分区
                       items[obj]["cover_left_text_2"].ToString(),//播放量
-                      items[obj]["cover_left_text_3"].ToString()//弹幕数
+                      items[obj]["cover_left_text_3"].ToString(),//弹幕数
+                      items[obj]["param"].ToString()//AV号
                                                )
                            };
                         this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
@@ -167,6 +171,7 @@ namespace Bilibili_Client
             public string video_barrages { get; private set; }
             public string video_duration { get; private set; }
             public string video_partition { get; private set; }
+            public string Avid { get; private set; }
 
 
             public double_row_video(
@@ -177,7 +182,8 @@ namespace Bilibili_Client
                 string title,//标题
                 string partition,//分区
                 string play_volume, //播放量
-                string barrages //弹幕数
+                string barrages, //弹幕数
+                string avid//AV号
                 )
             {
                 head_img_url = up_head;//up头像
@@ -188,6 +194,7 @@ namespace Bilibili_Client
                 video_partition = partition;//分区
                 video_play_volume = play_volume;//播放量
                 video_barrages = barrages;//弹幕数
+                Avid = avid;
 
             }
         }
@@ -214,6 +221,9 @@ namespace Bilibili_Client
         }
 
 
-
+        private void Goto_Video_Page(object sender, ExecutedRoutedEventArgs e)
+        {
+            index_Page_Open_Video(((Button)e.Parameter).Uid.ToString());
+        }
     }
 }

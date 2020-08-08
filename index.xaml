@@ -8,11 +8,16 @@
       mc:Ignorable="d"
       Background="Transparent"
       Title="index"
-
       xmlns:hc="https://handyorg.github.io/handycontrol">
+    <Page.CommandBindings>
+        <CommandBinding Command="New"
+                        Executed="Goto_Video_Page"></CommandBinding>
+    </Page.CommandBindings>
+    <!--Height="792"
+      Width="1034"-->
     <hc:TransitioningContentControl TransitionMode="Bottom2Top">
         <Grid>
-            <ScrollViewer  x:Name="index_scrollViewer"
+            <hc:ScrollViewer IsInertiaEnabled="True" x:Name="index_scrollViewer"
                            ScrollChanged="ScrollChanged">
                 <Grid >
                     <Grid.RowDefinitions>
@@ -30,12 +35,14 @@
                                   x:Name="content_box"
                                   ItemHeight="284"
                                   ItemWidth="304"
-                                  Margin="20,0,0,0">
+                                  Margin="20,0,20,0"
+                                  ItemContentHeight="100">
                         <hc:CoverView.ItemHeaderTemplate>
                             <DataTemplate>
                                 <hc:TransitioningContentControl TransitionMode="Left2Right">
-                                    <Grid  Width="304"
-                                           Height="284">
+
+                                    <Grid Width="304"
+                                          Height="284">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="190"></RowDefinition>
                                             <RowDefinition Height="*"></RowDefinition>
@@ -47,24 +54,33 @@
                                                     BorderBrush="#FFD1D1D1"
                                                     BorderThickness="0"
                                                     CornerRadius="10,10,0,0">
-                                                <Image Width="304"
-                                                       Name="cover_img"
-                                                       Source="{Binding video_cover}"
-                                                       HorizontalAlignment="Right"
-                                                       VerticalAlignment="Top">
-                                                    <Image.Clip>
-                                                        <RectangleGeometry RadiusX="10"
-                                                                           RadiusY="10"
-                                                                           Rect="0,0,304,190
+                                                <Button Uid="{Binding Avid}" Height="190"
+                                                        BorderThickness="0"
+                                                        Background="Transparent"
+                                                        hc:BorderElement.CornerRadius="10"
+                                                        Command="New"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
+                                                    <Image  Name="cover_img"
+                                                           Width="285"
+                                                           Height="178"
+                                                           Source="{Binding video_cover}"
+                                                           HorizontalAlignment="Right"
+                                                           VerticalAlignment="Top">
+
+                                                        <Image.Clip>
+                                                            <RectangleGeometry RadiusX="10"
+                                                                               RadiusY="10"
+                                                                               Rect="0,0,285,178
                                                                        " />
-                                                    </Image.Clip>
-                                                </Image>
+                                                        </Image.Clip>
+                                                    </Image>
+                                                </Button>
                                             </Border>
                                             <!--视频时长-->
                                             <Border CornerRadius="5"
                                                     Background="#FF403D3D"
                                                     HorizontalAlignment="Right"
-                                                    Margin="0,158,10,10">
+                                                    Margin="0,158,15,10">
                                                 <TextBlock  Width="auto"
                                                             Text="{Binding video_duration}"
                                                             FontSize="10"
@@ -87,7 +103,8 @@
                                                     </Grid.RowDefinitions>
                                                     <!--标题栏-->
                                                     <Grid Grid.Row="0">
-                                                        <TextBlock FontSize="16"
+                                                        <TextBlock TextTrimming="CharacterEllipsis"
+                                                                   FontSize="16"
                                                                    Text="{Binding video_title}"
                                                                    VerticalAlignment="Center"
                                                                    FontFamily="Microsoft YaHei"
@@ -112,13 +129,13 @@
                                                                        RenderTransformOrigin="0.4,0.589"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
-                                                                       Margin="6,0,0,0"
+                                                                       Margin="8,0,0,0"
                                                                        Width="20" />
                                                                 <!--播放量-->
                                                                 <TextBlock FontFamily="Microsoft YaHei"
                                                                            Foreground="Gray"
                                                                            Text="{Binding video_play_volume}"
-                                                                           Margin="26,0,0,0"
+                                                                           Margin="27,0,0,0"
                                                                            HorizontalAlignment="Left"
                                                                            FontSize="10"
                                                                            FontWeight="Bold"
@@ -164,7 +181,7 @@
                                                                HorizontalAlignment="Left"
                                                                VerticalAlignment="Center"
                                                                Width="22"
-                                                               Margin="6,0,0,0">
+                                                               Margin="7,0,0,0">
                                                             <Image.Clip>
                                                                 <RectangleGeometry RadiusX="100"
                                                                                    RadiusY="100"
@@ -175,7 +192,7 @@
                                                         <TextBlock FontFamily="Microsoft YaHei"
                                                                    Foreground="Gray"
                                                                    Text="{Binding video_up}"
-                                                                   Margin="32,0,0,0"
+                                                                   Margin="33,0,0,0"
                                                                    HorizontalAlignment="Left"
                                                                    FontWeight="Bold"
                                                                    VerticalAlignment="Center" />
@@ -185,6 +202,7 @@
 
                                         </Grid>
                                     </Grid>
+
                                 </hc:TransitioningContentControl>
                             </DataTemplate>
                         </hc:CoverView.ItemHeaderTemplate>
@@ -195,13 +213,13 @@
                         </hc:CoverView.ItemTemplate>
                     </hc:CoverView>
                 </Grid>
-            </ScrollViewer>
+            </hc:ScrollViewer>
             <hc:LoadingCircle  x:Name="Loading"
                                Foreground="#fb7299"
                                VerticalAlignment="Bottom"
                                HorizontalAlignment="Right"
                                Margin="0,0,10,10" />
-
+            
         </Grid>
     </hc:TransitioningContentControl>
 </Page>

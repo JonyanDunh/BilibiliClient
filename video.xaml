@@ -11,11 +11,11 @@
       d:DesignWidth="1033.6"
       Title="video">
     <Page.Resources>
-        <ResourceDictionary>
-            
-        </ResourceDictionary>
+        <local:TimeConver x:Key="cvtDate" />
+        <local:Time2Seconds x:Key="t2s" />
     </Page.Resources>
     <hc:TransitioningContentControl TransitionMode="Bottom2Top">
+        <hc:TransitioningContentControl TransitionMode="Left2Right">
         <Grid>
             <ScrollViewer  x:Name="video_scrollViewer">
                 <Grid>
@@ -24,48 +24,197 @@
                         <RowDefinition Height="400"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <hc:TransitioningContentControl TransitionMode="Left2Right">
+                    
                         <Grid Grid.Row="0">
-                            <ffme:MediaElement x:Name="Media"
+                            <ffme:MediaElement   x:Name="Media"
                                                Background="Black"
                                                LoadedBehavior="Play"
                                                UnloadedBehavior="Manual"
-                                               MediaInitializing="Media_MediaInitializing" />
-                            <Grid Height="60"
+                                               MediaInitializing="Media_MediaInitializing"
+                                                  />
+                            <Grid Height="50"
                                   x:Name="Video_Control_Bar"
                                   VerticalAlignment="Bottom">
                                 <Grid Background="#FF8A8D8D"
                                       Opacity="0.4" />
-                                <hc:PreviewSlider x:Name="PreviewSlider"
-                                                  Value="500"
-                                                  Maximum="1000"
-                                                  VerticalAlignment="Top">
-                                    <hc:PreviewSlider.PreviewContent>
-                                        <Label Style="{StaticResource LabelPrimary}"
-                                               Content="{Binding ElementName=PreviewSlider,Path=PreviewPosition}"
-                                               ContentStringFormat="{}{0:#0.0}" />
-                                    </hc:PreviewSlider.PreviewContent>
+                                <!--进度条-->
+                                <hc:PreviewSlider  x:Name="PreviewSlider"
+                                                   Value="{Binding Position, ElementName=Media,Mode=TwoWay,Converter={StaticResource t2s}}"
+                                                   Maximum="{Binding PlaybackEndTime, ElementName=Media,Mode=OneWay,Converter={StaticResource t2s}}"
+                                                   VerticalAlignment="Top">
                                 </hc:PreviewSlider>
-                                <Button x:Name="Pause_Button"
-                                        BorderBrush="#FB7299"
+                                <!--按钮栏-->
+                                <Grid Margin="0,10,0,0"
+                                      Height="40">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="4*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+                                    <!--左边按钮和时间栏-->
+                                    <Grid Grid.Column="0">
+                                        <Button x:Name="Pause_Button"
+                                       BorderThickness="0"
                                         Background="Transparent"
-                                        Height="30"
-                                        Width="30"
-                                        VerticalAlignment="Bottom"
-                                        Click="Pause"
-                                        Margin="0,0,0,7">
-                                    <Path Height="15"
-                                          Width="15"
+                                        Height="40"
+                                        Width="40"
+                                                VerticalAlignment="Center"
+                                                Click="Pause"
+                                                HorizontalAlignment="Left"
+                                                Margin="5,0,0,0">
+                                    <Path Height="20"
+                                          Width="20"
                                           StrokeThickness="2"
                                           Stretch="Uniform"
-                                          Stroke="#FB7299"
-                                          Data="M735.9 64.9c-51.2 0-96 44.7-96 95.8v702.6c0 51.1 44.8 95.8 96 95.8s96-44.7 96-95.8V160.7c0-51.1-44.8-95.8-96-95.8z m-447.8 0c-51.2 0-96 44.7-96 95.8v702.6c0 51.1 44.8 95.8 96 95.8s96-44.7 96-95.8V160.7c-0.1-51.1-44.9-95.8-96-95.8z" />
+                                          Stroke="White"
+                                          Fill="White"
+                                          Data="M442.181818 709.818182c0 37.236364-30.254545 69.818182-69.818182 69.818182s-69.818182-30.254545-69.818181-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818181-69.818182s69.818182 30.254545 69.818182 69.818182v395.636364z m279.272727 0c0 37.236364-30.254545 69.818182-69.818181 69.818182s-69.818182-30.254545-69.818182-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818182-69.818182s69.818182 30.254545 69.818181 69.818182v395.636364z" />
                                 </Button>
+                                        <TextBlock TextTrimming="CharacterEllipsis" Foreground="White" FontSize="14" VerticalAlignment="Center"
+                                                   Margin="50,0,0,0"
+                                                   HorizontalAlignment="Left">
+                                            <Run Text="{Binding Position, ElementName=Media,Mode=OneWay,Converter={StaticResource cvtDate}}" ></Run>
+                                            <Run Text="/"></Run>
+                                            <Run Text="{Binding PlaybackEndTime, ElementName=Media,Mode=OneWay,Converter={StaticResource cvtDate}}" x:Name="Video_End_Time"></Run>
+                                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <!--画质-->
+                                        <hc:SplitButton Foreground="White" BorderThickness="0" Background="Transparent" HitMode="Hover" Content="1080P"
+                                                        Command="{Binding SelectCmd}"
+                                                        CommandParameter="Command0"
+                                                        HorizontalAlignment="Right"
+                                                        Margin="0,0,280,0">
+                                            <hc:SplitButton.DropDownContent>
+                                                <StackPanel>
+                                                    <MenuItem Header="4K"
+                                                              Command="{Binding SelectCmd}"
+                                                              CommandParameter="Command1" />
+                                                    <MenuItem Header="Test 3"
+                                                              Command="{Binding SelectCmd}"
+                                                              CommandParameter="Command2" />
+                                                    <MenuItem Header="Test 4"
+                                                              Command="{Binding SelectCmd}"
+                                                              CommandParameter="Command3" />
+                                                </StackPanel>
+                                            </hc:SplitButton.DropDownContent>
+                                        </hc:SplitButton>
+                                        <!--倍速-->
+                                        <hc:SplitButton Foreground="White"
+                                                        BorderThickness="0"
+                                                        Background="Transparent"
+                                                        HitMode="Hover"
+                                                        Content="倍速"
+                                                        Command="{Binding SelectCmd}"
+                                                        CommandParameter="Command0"
+                                                        HorizontalAlignment="Right"
+                                                        Margin="0,0,210,0">
+                                            <hc:SplitButton.DropDownContent>
+                                                <StackPanel>
+                                                    <MenuItem Header="4K"
+                                                              Command="{Binding SelectCmd}"
+                                                              CommandParameter="Command1" />
+                                                    <MenuItem Header="Test 3"
+                                                              Command="{Binding SelectCmd}"
+                                                              CommandParameter="Command2" />
+                                                    <MenuItem Header="Test 4"
+                                                              Command="{Binding SelectCmd}"
+                                                              CommandParameter="Command3" />
+                                                </StackPanel>
+                                            </hc:SplitButton.DropDownContent>
+                                        </hc:SplitButton>
+                                        <!--声音-->
+                                        <hc:SplitButton Foreground="White"
+                                                        BorderThickness="0"
+                                                        Background="Transparent"
+                                                        HitMode="Hover"
+                                                       
+                                                        Command="{Binding SelectCmd}"
+                                                        CommandParameter="Command0"
+                                                        HorizontalAlignment="Right"
+                                                        Margin="115,0,140,0">
+                                            <Path Height="20"
+                                                  Width="20"
+                                                  StrokeThickness="1"
+                                                  Stretch="Uniform"
+                                                  Stroke="White"
+                                                  Fill="White"
+                                                  Data="M912.665073 268.055476c-25.529093-19.14682-70.205006-19.14682-89.351826 6.382273s-25.529093 63.822732-6.382273 89.351825c38.293639 38.293639 63.822732 89.351825 63.822733 146.792285s-25.529093 108.498645-63.822733 146.792284c-25.529093 25.529093-25.529093 70.205006 0 95.734099 25.529093 25.529093 70.205006 25.529093 95.734099 0 63.822732-63.822732 102.116372-153.174558 102.116372-242.526383s-31.911366-178.703651-102.116372-242.526383zM580.786864 12.764546L280.820022 236.14411h-191.468197c-25.529093 0-51.058186 6.382273-63.822732 25.529093s-25.529093 38.293639-25.529093 63.822732v370.171848c0 51.058186 44.675913 89.351825 95.734099 89.351825h191.468197l299.966842 223.379563c44.675913 31.911366 76.587279 12.764546 76.587279-38.293639V51.058186c-6.382273-51.058186-38.293639-63.822732-82.969553-38.29364z M1084.98645 82.969552c-31.911366-25.529093-76.587279-25.529093-102.116372 0-25.529093 25.529093-31.911366 70.205006 0 95.734099C1072.221904 268.055476 1129.662363 382.936394 1129.662363 510.581859s-57.440459 242.526383-153.174558 331.878208c-25.529093 25.529093-25.529093 70.205006 0 95.734099 25.529093 25.529093 76.587279 25.529093 102.116372 0C1340.27738 702.050056 1340.27738 319.113662 1084.98645 82.969552z" />
+                                            <hc:SplitButton.DropDownContent>
+                                                <StackPanel>
+
+                                                </StackPanel>
+                                            </hc:SplitButton.DropDownContent>
+                                        </hc:SplitButton>
+                                        <Button x:Name="Setting_Button"
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Height="40"
+                                                Width="40"
+                                                VerticalAlignment="Center"
+                                                Click="Pause"
+                                                HorizontalAlignment="Right"
+                                                Margin="0,0,105,0">
+                                            <!--设置-->
+                                            <Path Height="20"
+                                                  Width="20"
+                                                  StrokeThickness="1"
+                                                  Stretch="Uniform"
+                                                  Stroke="White"
+                                                  Fill="White"
+                                                  Data="M512 349.090909c-90.763636 0-162.909091 72.145455-162.909091 162.909091s72.145455 162.909091 162.909091 162.909091 162.909091-72.145455 162.909091-162.909091-72.145455-162.909091-162.909091-162.909091z m0 279.272727c-65.163636 0-116.363636-51.2-116.363636-116.363636s51.2-116.363636 116.363636-116.363636 116.363636 51.2 116.363636 116.363636-51.2 116.363636-116.363636 116.363636z M830.836364 381.672727c-11.636364-27.927273-25.6-53.527273-44.218182-79.127272 13.963636-27.927273 16.290909-60.509091 9.309091-90.763637-9.309091-34.909091-30.254545-62.836364-62.836364-79.127273-58.181818-32.581818-132.654545-16.290909-172.218182 37.236364-16.290909-2.327273-32.581818-4.654545-48.872727-4.654545s-32.581818 2.327273-48.872727 4.654545c-39.563636-53.527273-114.036364-69.818182-172.218182-34.909091-30.254545 18.618182-53.527273 46.545455-62.836364 79.127273-9.309091 30.254545-4.654545 62.836364 9.309091 90.763636-18.618182 23.272727-32.581818 48.872727-44.218182 79.127273C125.672727 386.327273 69.818182 442.181818 69.818182 512s55.854545 125.672727 123.345454 130.327273c11.636364 27.927273 25.6 53.527273 44.218182 79.127272-13.963636 27.927273-16.290909 60.509091-9.309091 90.763637 9.309091 34.909091 30.254545 62.836364 62.836364 79.127273 20.945455 11.636364 44.218182 18.618182 65.163636 18.618181 41.890909 0 81.454545-18.618182 107.054546-53.527272 13.963636 2.327273 27.927273 4.654545 44.218182 4.654545s34.909091-2.327273 51.2-4.654545c25.6 34.909091 65.163636 53.527273 107.054545 53.527272 23.272727 0 44.218182-4.654545 65.163636-18.618181 30.254545-18.618182 53.527273-46.545455 62.836364-79.127273 9.309091-30.254545 4.654545-62.836364-9.309091-90.763637 18.618182-23.272727 32.581818-48.872727 44.218182-79.127272 69.818182-4.654545 125.672727-60.509091 125.672727-130.327273s-55.854545-125.672727-123.345454-130.327273z m0 216.436364h-9.309091c-9.309091 0-18.618182-2.327273-27.927273-4.654546-11.636364 46.545455-34.909091 86.109091-65.163636 121.018182 9.309091 9.309091 16.290909 18.618182 20.945454 30.254546 0 2.327273 4.654545 11.636364 4.654546 13.963636 2.327273 13.963636 2.327273 27.927273 0 41.890909-6.981818 23.272727-20.945455 41.890909-41.890909 53.527273-32.581818 18.618182-72.145455 13.963636-100.072728-9.309091-13.963636-11.636364-23.272727-25.6-27.927272-44.218182-23.272727 6.981818-48.872727 9.309091-74.472728 9.309091s-44.218182-4.654545-67.490909-9.309091c-4.654545 16.290909-13.963636 32.581818-27.927273 44.218182-27.927273 23.272727-67.490909 27.927273-100.072727 9.309091-20.945455-11.636364-34.909091-30.254545-41.890909-53.527273-4.654545-13.963636-4.654545-27.927273 0-41.890909 0-2.327273 2.327273-11.636364 4.654546-13.963636 4.654545-11.636364 11.636364-20.945455 20.945454-30.254546-30.254545-34.909091-55.854545-74.472727-67.490909-121.018182-9.309091 2.327273-18.618182 4.654545-27.927273 4.654546h-9.309091c-41.890909-6.981818-74.472727-41.890909-74.472727-86.109091s32.581818-79.127273 74.472727-86.109091h9.309091c9.309091 0 18.618182 2.327273 27.927273 4.654546 13.963636-46.545455 37.236364-86.109091 67.490909-121.018182-9.309091-9.309091-16.290909-18.618182-20.945454-30.254546 0-2.327273-4.654545-11.636364-4.654546-13.963636-2.327273-13.963636-2.327273-27.927273 0-41.890909 6.981818-23.272727 20.945455-41.890909 41.890909-53.527273 32.581818-18.618182 72.145455-13.963636 100.072727 9.309091 13.963636 11.636364 23.272727 25.6 27.927273 44.218182 23.272727-6.981818 44.218182-9.309091 69.818182-9.309091s46.545455 4.654545 69.818182 9.309091c4.654545-16.290909 13.963636-32.581818 25.6-44.218182 16.290909-13.963636 37.236364-20.945455 58.181818-20.945455 13.963636 0 30.254545 4.654545 44.218182 11.636364 20.945455 11.636364 34.909091 30.254545 41.890909 53.527273 4.654545 13.963636 4.654545 27.927273 0 41.890909 0 2.327273-2.327273 11.636364-4.654546 13.963636-4.654545 11.636364-11.636364 20.945455-20.945454 30.254546 30.254545 34.909091 55.854545 74.472727 67.490909 121.018182 9.309091-2.327273 18.618182-4.654545 27.927273-4.654546h9.309091c41.890909 6.981818 74.472727 41.890909 74.472727 86.109091s-32.581818 79.127273-74.472727 86.109091z"
+                                                  />
+                                        </Button>
+                                        <!--画中画-->
+                                        <Button x:Name="pwp_Button"
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Height="40"
+                                                Width="40"
+                                                VerticalAlignment="Center"
+                                                Click="Pause"
+                                                HorizontalAlignment="Right"
+                                                Margin="0,0,60,0">
+                                            <Path Height="20"
+                                                  Width="20"
+                                                  StrokeThickness="1"
+                                                  Stretch="Uniform"
+                                                  Stroke="White"
+                                                  Fill="White"
+                                                  Data="M504 896H160a96 96 0 0 1-96-96V224a96 96 0 0 1 96-96h704a96 96 0 0 1 96 96v344a8 8 0 0 1-8 8h-48a8 8 0 0 1-8-8V224a32 32 0 0 0-32-32H160a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h344a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8z M576 640m32 0l320 0q32 0 32 32l0 192q0 32-32 32l-320 0q-32 0-32-32l0-192q0-32 32-32Z"
+                                                  
+                                                  />
+                                        </Button>
+                                        <!--网页全屏-->
+                                        <Button x:Name="Full_Screen_Button"
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Height="40"
+                                                Width="40"
+                                                VerticalAlignment="Center"
+                                                Click="Pause"
+                                                HorizontalAlignment="Right"
+                                                Margin="0,0,15,0">
+                                            <Path Height="20"
+                                                  Width="20"
+                                                  StrokeThickness="1"
+                                                  Stretch="Uniform"
+                                                  Stroke="White"
+                                                  Fill="White"
+                                                  Data="M510.05316 618.008382c-22.281469 0-39.627533-7.661494-51.841715-15.898085l-88.548732 201.874777c42.259476 21.336958 89.937358 33.384341 140.39147 33.384342 51.356668 0 99.836823-12.444427 142.654001-34.46086l-88.689948-202.196095c-12.33084 8.740058-30.411637 17.295921-53.965076 17.295921zM597.775061 466.068901c11.140735 19.295462 13.179161 38.148855 12.152784 52.845579l219.10316-24.251334c-2.651386-47.26549-16.056698-94.580099-41.284265-138.27425-25.677822-44.475957-60.695361-80.238462-101.171214-106.311281l-130.762159 177.905876c13.735839 6.306636 30.185486 17.686824 41.961694 38.08541zM422.331259 466.068901c11.139711-19.295462 26.448372-30.487362 39.688931-36.947493l-130.554428-177.623444c-39.60809 25.929556-73.880661 61.195757-99.108228 104.889909-25.677822 44.475957-39.140439 92.682889-41.482787 140.772141l219.451084 24.290219c-1.402953-15.047718 0.228197-34.983769 12.005428-55.381332z"
+                                                  />
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </hc:TransitioningContentControl>
+                        <Grid Grid.Row="1">
+
+                        </Grid>
+                    
                 </Grid>
             </ScrollViewer>
         </Grid>
+        </hc:TransitioningContentControl>
     </hc:TransitioningContentControl>
 </Page>

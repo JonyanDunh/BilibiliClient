@@ -19,14 +19,16 @@ namespace Bilibili_Client
         index index_page = new index();
         login login_page = new login();
         Space space_page = new Space();
-        //video video_page = new video();
+        video video_page = new video();
         geetest geetest_page = new geetest();
-        Bilibili bilibili = new Bilibili();
-        public Bilibili.BiliCookie BiliCookie = new Bilibili.BiliCookie();
+        Bilibili_Account bilibili = new Bilibili_Account();
+        public Bilibili_Account.BiliCookie BiliCookie = new Bilibili_Account.BiliCookie();
         public bool IsLogin = false;
         private delegate void MainWindow_SendMessage_To_Login_page();//主窗口发送给登录窗口类
         private MainWindow_SendMessage_To_Login_page mainWindow_SendMessage_To_Login_page;
 
+        private delegate void MainWindow_Open_Video_page(string avid);//主窗口发送给登录窗口类
+        private MainWindow_Open_Video_page mainWindow_Open_Video_page;
 
         public MainWindow()
         {
@@ -75,6 +77,8 @@ namespace Bilibili_Client
             geetest_page.geetest_SendKey_To_Login_page = login_page.Login_Recevie_Key_From_Geetest_page;//把验证页面的发送Key函数和登录页面接受Key函数链接
             geetest_page.geetest_SendSmsKey_To_Login_page = login_page.Login_Recevie_SmsKey_From_Geetest_page;//把验证页面的发送SmsKey函数和登录页面接受SmsKey函数链接
             login_page.sendKey_To_Geetest_page = geetest_page.Geetest_Get_Key_From_Login_Page;////把登录页面的发送函数和验证页面接受函数链接
+            index_page.index_Page_Open_Video = Open_Video_Page;
+            mainWindow_Open_Video_page=video_page.Open_New_Video;
         }
 
         //创建文件夹
@@ -92,6 +96,7 @@ namespace Bilibili_Client
 
 
         }
+
         //登录成功后操作
         private void Login_Success()
         {
@@ -109,6 +114,13 @@ namespace Bilibili_Client
         private void login_open_geetest_page()
         {
             geetest_page.Show();
+        }
+        private void Open_Video_Page(string avid)
+        {
+            middle_frame.Navigate(video_page);
+            mainWindow_Open_Video_page(avid);
+            
+
         }
         private void Window_MouseMove(object sender, MouseEventArgs e)//移动窗口
         {

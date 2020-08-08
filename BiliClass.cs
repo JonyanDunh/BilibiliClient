@@ -335,7 +335,7 @@ Xl69GV6klzgxW6d2xQIDAQAB";
 
     }
 
-    public class Bilibili
+    public class Bilibili_Account//哔哩哔哩账户类
     {
         public class BiliCookie
         {
@@ -430,5 +430,15 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         }
 
 
-    }//哔哩哔哩账户类
+    }
+
+    public class Bilibili_Video
+    {
+
+
+
+
+
+
+    }
 }
