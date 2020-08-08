@@ -205,8 +205,10 @@ namespace Bilibili_Client
                 if (!string.Equals(Last_sideMenuItem.Header.ToString(), ((SideMenuItem)e.Parameter).Header.ToString()))
                 {
                     Last_sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                    Last_sideMenuItem.FontSize = 14;
                     Last_animationPath.IsPlaying = false;
                     Last_animationPath.Stroke= new SolidColorBrush(Color.FromRgb(0, 0, 0)); 
+
                 }
             Last_sideMenuItem = (SideMenuItem)e.Parameter;
             Last_animationPath = ((AnimationPath)((SideMenuItem)e.Parameter).Icon);

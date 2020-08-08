@@ -19,7 +19,7 @@ namespace Bilibili_Client
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Library.FFmpegDirectory = @"c:\ffmpeg";
+            Library.FFmpegDirectory = @"resource\FFmpeg\";
             Library.LoadFFmpeg();
             MediaElement.FFmpegMessageLogged += (s, ev) =>
             {
