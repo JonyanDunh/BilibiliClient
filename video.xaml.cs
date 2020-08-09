@@ -101,7 +101,7 @@ namespace Bilibili_Client
         {
             new Thread(() =>
             {
-                int clarity = 32;
+                int clarity = 120;
             mainWindow = MainWindow;
             video_Info = bilibili_Video.gets_video_info(avid);
             if (mainWindow.IsLogin)
@@ -111,14 +111,13 @@ namespace Bilibili_Client
                 clarity = 80;
             }
             if (video_Info.Success)
-                if(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid, 80, IsLogin, biliCookie).Success)
+                if(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid, clarity, IsLogin, biliCookie).Success)
                     Play_Video(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid,80, IsLogin, biliCookie).url);
 
             }).Start();
         }
         private void Play_Video(string url)
         {
-
             Media.Open(new Uri(url));
         }
 

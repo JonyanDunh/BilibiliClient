@@ -17,8 +17,9 @@
       Width="1034"-->
     <hc:TransitioningContentControl TransitionMode="Bottom2Top">
         <Grid>
-            <hc:ScrollViewer IsInertiaEnabled="True" x:Name="index_scrollViewer"
-                           ScrollChanged="ScrollChanged">
+            <hc:ScrollViewer IsInertiaEnabled="True"
+                             x:Name="index_scrollViewer"
+                             ScrollChanged="ScrollChanged">
                 <hc:TransitioningContentControl TransitionMode="Left2Right">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -215,12 +216,7 @@
                     </Grid>
                 </hc:TransitioningContentControl>
             </hc:ScrollViewer>
-            <hc:LoadingCircle  x:Name="Loading"
-                               Foreground="#fb7299"
-                               VerticalAlignment="Bottom"
-                               HorizontalAlignment="Right"
-                               Margin="0,0,10,10" />
-            
+
         </Grid>
     </hc:TransitioningContentControl>
 </Page>

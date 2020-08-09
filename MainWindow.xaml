@@ -90,7 +90,7 @@
                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Index_Logo}"
+                                                          Data="{StaticResource Index_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -107,7 +107,7 @@
                                                  CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Dynamic_Logo}"
+                                                          Data="{StaticResource Dynamic_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -124,7 +124,7 @@
                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Leaderboard_Logo}"
+                                                          Data="{StaticResource Leaderboard_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -141,7 +141,7 @@
                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Live_Logo}"
+                                                          Data="{StaticResource Live_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -158,7 +158,7 @@
                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Comics_Logo}"
+                                                          Data="{StaticResource Comics_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -175,7 +175,7 @@
                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Partition_Logo}"
+                                                          Data="{StaticResource Partition_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -192,7 +192,7 @@
                                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                     <hc:SideMenuItem.Icon>
                                         <hc:AnimationPath Height="20"
-                                                          Data="{DynamicResource Post_Logo}"
+                                                          Data="{StaticResource Post_Logo}"
                                                           Duration="0:00:05"
                                                           RepeatBehavior="12"
                                                           Stretch="Uniform"
@@ -223,7 +223,7 @@
                                              CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                 <hc:SideMenuItem.Icon>
                                     <hc:AnimationPath Height="20"
-                                                      Data="{DynamicResource History_Logo}"
+                                                      Data="{StaticResource History_Logo}"
                                                       Duration="0:00:05"
                                                       RepeatBehavior="12"
                                                       Stretch="Uniform"
@@ -240,7 +240,7 @@
                                              CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                 <hc:SideMenuItem.Icon>
                                     <hc:AnimationPath Height="20"
-                                                      Data="{DynamicResource Later_Logo}"
+                                                      Data="{StaticResource Later_Logo}"
                                                       Duration="0:00:05"
                                                       RepeatBehavior="12"
                                                       Stretch="Uniform"
@@ -257,7 +257,7 @@
                                              CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                 <hc:SideMenuItem.Icon>
                                     <hc:AnimationPath Height="20"
-                                                      Data="{DynamicResource Favorites_Logo}"
+                                                      Data="{StaticResource Favorites_Logo}"
                                                       Duration="0:00:05"
                                                       RepeatBehavior="12"
                                                       Stretch="Uniform"
@@ -275,7 +275,7 @@
                                              CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}">
                                 <hc:SideMenuItem.Icon>
                                     <hc:AnimationPath Height="17"
-                                                      Data="{DynamicResource Message_Logo}"
+                                                      Data="{StaticResource Message_Logo}"
                                                       Duration="0:00:05"
                                                       RepeatBehavior="12"
                                                       Stretch="Uniform"
@@ -328,7 +328,7 @@
                                 </Grid>
                                 <Grid Grid.Row="1">
                                     <ProgressBar x:Name="User_Exp_Bar"
-                                                 Style="{DynamicResource ProgressBarFlat}"
+                                                 Style="{StaticResource ProgressBarFlat}"
                                                  Value="0"
                                                  Margin="0,0,15,30"
                                                  VerticalAlignment="Bottom" />

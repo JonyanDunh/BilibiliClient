@@ -178,7 +178,6 @@ namespace Bilibili_Client
         {
             middle_frame.Navigate(login_page);
             middle_title.Text = "登录";
-
                 Last_sideMenuItem.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 Last_animationPath.IsPlaying = false;
                 Last_animationPath.Stroke = new SolidColorBrush(Color.FromRgb(0, 0, 0));
@@ -192,9 +191,11 @@ namespace Bilibili_Client
                 if (video_page.Media.IsPlaying)
                 {
                     var converter = TypeDescriptor.GetConverter(typeof(Geometry));
-                    video_page.Media.Pause();
                     ((System.Windows.Shapes.Path)video_page.Pause_Button.Content).Data = (Geometry)(converter.ConvertFrom("M442.181818 709.818182c0 37.236364-30.254545 69.818182-69.818182 69.818182s-69.818182-30.254545-69.818181-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818181-69.818182s69.818182 30.254545 69.818182 69.818182v395.636364z m279.272727 0c0 37.236364-30.254545 69.818182-69.818181 69.818182s-69.818182-30.254545-69.818182-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818182-69.818182s69.818182 30.254545 69.818181 69.818182v395.636364z"));
-                }
+                    video_page.Media.Close();
+                    middle_frame.GoBack();
+                    
+                }else
                 middle_frame.GoBack();
             }
         }

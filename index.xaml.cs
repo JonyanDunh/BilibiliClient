@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -28,29 +29,29 @@ namespace Bilibili_Client
     {
         public delegate void Index_Page_Open_Video(string avid);//主窗口发送给登录窗口类
         public Index_Page_Open_Video index_Page_Open_Video;
-
         ManualResetEvent Thread_blocking = new ManualResetEvent(true);//线程阻塞
         CoverFlow coverFlow = new CoverFlow();
         int Download_Complete = 0;
         public index()
         {
             InitializeComponent();
-            Thread thread = new Thread(Home_Recommendation);//加载推荐视频的函数加入一个新的子线程
+            Thread thread = new Thread(Updata_Index);//加载推荐视频的函数加入一个新的子线程
             thread.Start();//线程开始
             Thread thread2 = new Thread(Homepage_Ad);//加载推荐视频的函数加入一个新的子线程
             thread2.Start();//线程开始
             CoverFlow coverFlow = new CoverFlow();
-            coverFlow.Margin= new Thickness(32);
+            coverFlow.Margin = new Thickness(32);
             coverFlow.Width = 800;
             coverFlow.Height = 260;
             coverFlow.Loop = true;
             Index_Grid.Children.Add(coverFlow);
         }
+        private readonly TaskScheduler _syncContextTaskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         //主页广告
         private void Homepage_Ad()
         {
-            
+
             var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=0&flush=0&column=4&device=pad&pull=true&build=5520400&appkey=4ebafd7c4951b366&mobi_app=iphone&platform=ios&ts=1596754509&access_key=71626a38ce02b8a18b9a8b0dd8add481&sign=5d3bbfa008082c409bf56603278ea7a8");
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
@@ -66,20 +67,20 @@ namespace Bilibili_Client
                 }
                 else
                 {
-                    
+
                     WebClient Client = new WebClient();
                     Uri uri = new Uri(items[i]["image"].ToString());
                     Client.DownloadFileCompleted += Down_Cover_Completed;
-                    Client.DownloadFileAsync(uri, @"Data\Cache\Img\Cover\"+ items[i]["id"].ToString() + ".jpg", @"Data\Cache\Img\Cover\" + items[i]["id"].ToString() + ".jpg");
+                    Client.DownloadFileAsync(uri, @"Data\Cache\Img\Cover\" + items[i]["id"].ToString() + ".jpg", @"Data\Cache\Img\Cover\" + items[i]["id"].ToString() + ".jpg");
 
                 }
             }
-            
+
             new Thread((obj) =>
-            { 
-            while(true)
+            {
+                while (true)
                 {
-                    if (Download_Complete ==(int)obj)
+                    if (Download_Complete == (int)obj)
                     {
                         this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
                         {
@@ -88,7 +89,7 @@ namespace Bilibili_Client
                         });
                         break;
                     }
-                }        
+                }
             }).Start(items.Count());
             client = null;
             request = null;
@@ -99,68 +100,80 @@ namespace Bilibili_Client
         //广告封面下载完成
         private void Down_Cover_Completed(object sender, AsyncCompletedEventArgs e)
         {
-           
+
             if (e.UserState != null)
             {
                 coverFlow.Add(new Uri(e.UserState.ToString(), UriKind.Relative));
                 Download_Complete++;
             }
         }
-        int Add_Times=0;
+        bool IsCompleted = false;
+        bool first = true;
+        List<double_row_video> double_row_videos = new List<double_row_video>();
+        JToken items;
+        int last_count = 1;
         //主页推荐
-        private void Home_Recommendation()
+        private void Updata_Index()
         {
+            var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?device=pad&mobi_app=iphone");
+            IRestResponse response;
+            JObject recommend;
             while (true)
             {
                 Thread_blocking.WaitOne();
-                var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?device=pad&mobi_app=iphone");
-                var request = new RestRequest(Method.GET);
-                IRestResponse response = client.Execute(request);
-                JObject recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
-                JToken items = recommend["data"]["items"];
-                for (int i = 1; i < items.Count() - 1; i++)
+                if (last_count == 19 | last_count == 1)
                 {
-                    new Thread((obj) =>
-                    {
-                        List<double_row_video> double_row_video = new List<double_row_video>
-                        {
-                            new double_row_video(
-                      items[obj]["avatar"]["cover"].ToString()+"@22w_22h_1c_95q",//up头像
-                      items[obj]["desc"].ToString(),//up名字
-                      items[obj]["cover"].ToString()+"@320w_200h_1c_95q",//封面
-                      items[obj]["cover_left_text_1"].ToString(),//时长
-                      items[obj]["title"].ToString(),//标题
-                      items[obj]["args"]["rname"].ToString(),//分区
-                      items[obj]["cover_left_text_2"].ToString(),//播放量
-                      items[obj]["cover_left_text_3"].ToString(),//弹幕数
-                      items[obj]["param"].ToString()//AV号
-                                               )
-                           };
-                        this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
-                        {
-
-                            content_box.Items.Add(double_row_video);//按照模板加入一个item
-                            double_row_video = null;
-                        });
-                    }).Start(i);
+                    var request = new RestRequest(Method.GET);
+                    response = client.Execute(request);
+                    recommend = (JObject)JsonConvert.DeserializeObject(response.Content);
+                    items = recommend["data"]["items"];
+                    last_count = 1;
                 }
-                client = null;
-                request = null;
-                response = null;
-                recommend = null;
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                IsCompleted = Parallel.For(last_count, first ? 18 : last_count + 3, (obj, loopstate) =>
+                     {
+                         double_row_videos.Add
+                                 (
+                                 new double_row_video(
+                           items[obj]["avatar"]["cover"].ToString() + "@20w_20h_1q.jpg",//up头像
+                           items[obj]["desc"].ToString(),//up名字
+                           items[obj]["cover"].ToString() + "@288w_180h_1q.jpg",//封面
+                           items[obj]["cover_left_text_1"].ToString(),//时长
+                           items[obj]["title"].ToString(),//标题
+                           items[obj]["args"]["rname"].ToString(),//分区
+                           items[obj]["cover_left_text_2"].ToString(),//播放量
+                           items[obj]["cover_left_text_3"].ToString(),//弹幕数
+                           items[obj]["param"].ToString()//AV号
+                                                    )
+                                   );
+                     }).IsCompleted;
+                Parallel_IsCompleted = IsCompleted;
+                if (!first)
                 {
-                    Loading.Visibility = Visibility.Hidden;
-                    
-                });
-                Add_Times++;
+                    Thread_blocking.Reset();
 
-                Thread_blocking.Reset();
-                
+                }
+                else
+                    first = false;
             }
-
         }
-
+        public bool Parallel_IsCompleted
+        {
+            get
+            {
+                return IsCompleted;
+            }
+            set
+            {
+                if (IsCompleted)
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                    {
+                        for (int i = 0; i < double_row_videos.Count; i++)
+                            content_box.Items.Add(double_row_videos[i]);//按照模板加入一个item
+                        double_row_videos.Clear();
+                        last_count += 3;
+                    });
+            }
+        }
         public class double_row_video
         {
             public string head_img_url { get; private set; }
@@ -198,13 +211,13 @@ namespace Bilibili_Client
 
             }
         }
-
+        double last_ContentVerticalOffset = 0;
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (index_scrollViewer.ScrollableHeight - 700 < index_scrollViewer.ContentVerticalOffset && content_box.Items.Count >= 18)
+            if (index_scrollViewer.ContentVerticalOffset - last_ContentVerticalOffset > 10 && index_scrollViewer.ScrollableHeight - index_scrollViewer.ContentVerticalOffset < 2000)
             {
-                Loading.Visibility = Visibility.Visible;
-                Thread_blocking.Set(); 
+                Thread_blocking.Set();
+                last_ContentVerticalOffset = index_scrollViewer.ContentVerticalOffset;
             }
 
 
@@ -224,7 +237,9 @@ namespace Bilibili_Client
         private void Goto_Video_Page(object sender, ExecutedRoutedEventArgs e)
         {
             string avid = ((Button)e.Parameter).Uid.ToString();
-            index_Page_Open_Video(((Button)e.Parameter).Uid.ToString());
+
+            index_Page_Open_Video(avid);
+
         }
     }
 }

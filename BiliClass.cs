@@ -511,12 +511,18 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                      videoinfo.pages[i].page = Convert.ToInt32(data["pages"][i]["page"]);
                      videoinfo.pages[i].part = data["pages"][i]["part"].ToString();
                 }
+                client = null;
+                request = null;
+                response = null;
                 return videoinfo;
             }else
             {
 
                 MessageBox.Show("该视频不存在");
                 videoinfo.Success = false;
+                client = null;
+                request = null;
+                response = null;
                 return videoinfo;
 
             }
@@ -537,11 +543,17 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 p_Data.Success = true;
                 JToken data = recommend["data"];
                 p_Data.url = data["durl"][0]["url"].ToString();
+                client = null;
+                request = null;
+                response = null;
                 return p_Data;
             }else
             {
                 p_Data.Success = false;
                 MessageBox.Show("视频加载失败");
+                client = null;
+                request = null;
+                response = null;
                 return p_Data;
             }
 
