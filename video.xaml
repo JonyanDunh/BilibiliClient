@@ -1,8 +1,8 @@
 ﻿<Page x:Class="Bilibili_Client.video"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Bilibili_Client"
       mc:Ignorable="d"
       d:DesignHeight="792"
@@ -23,22 +23,25 @@
     </Page.Resources>
     <hc:TransitioningContentControl TransitionMode="Bottom2Top">
         <hc:TransitioningContentControl TransitionMode="Left2Right">
-        <Grid>
-            <ScrollViewer  x:Name="video_scrollViewer">
-                <Grid>
+            <Grid>
+                <ScrollViewer  x:Name="video_scrollViewer">
+                    <Grid>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="400"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="540"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="500"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
                             <ffme:MediaElement   x:Name="Media"
-                                               Background="Black"
-                                               LoadedBehavior="Play"
-                                               UnloadedBehavior="Manual"
-                                               MediaInitializing="Media_MediaInitializing"
-                                                  />
+                                                 Background="Black"
+                                                 LoadedBehavior="Play"
+                                                 UnloadedBehavior="Manual"
+                                                 MediaInitializing="Media_MediaInitializing" />
                             <Grid Height="50"
                                   x:Name="Video_Control_Bar"
                                   VerticalAlignment="Bottom">
@@ -54,105 +57,107 @@
                                 <Grid Margin="0,10,0,0"
                                       Height="40">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="4*" />
                                         <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="4*" />
-                                        <ColumnDefinition Width="4*" />
                                     </Grid.ColumnDefinitions>
                                     <!--左边按钮和时间栏-->
                                     <Grid Grid.Column="0">
                                         <Button x:Name="Pause_Button"
-                                       BorderThickness="0"
-                                        Background="Transparent"
-                                        Height="40"
-                                        Width="40"
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Height="40"
+                                                Width="40"
                                                 VerticalAlignment="Center"
                                                 Click="Pause"
                                                 HorizontalAlignment="Left"
                                                 Margin="5,0,0,0">
-                                    <Path Height="20"
-                                          Width="20"
-                                          StrokeThickness="2"
-                                          Stretch="Uniform"
-                                          Stroke="White"
-                                          Fill="White"
+                                            <Path Height="20"
+                                                  Width="20"
+                                                  StrokeThickness="2"
+                                                  Stretch="Uniform"
+                                                  Stroke="White"
+                                                  Fill="White"
                                                   Data="{StaticResource Pause_Logo}" />
-                                </Button>
-                                        <TextBlock TextTrimming="CharacterEllipsis" Foreground="White" FontSize="14" VerticalAlignment="Center"
+                                        </Button>
+                                        <TextBlock TextTrimming="CharacterEllipsis"
+                                                   Foreground="White"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
                                                    Margin="50,0,0,0"
                                                    HorizontalAlignment="Left">
-                                            <Run Text="{Binding Position, ElementName=Media,Mode=OneWay,Converter={StaticResource cvtDate}}" ></Run>
+                                            <Run Text="00:00:00" />
+                                            <!--<Run Text="{Binding Position, ElementName=Media,Mode=OneWay,Converter={StaticResource cvtDate}}"></Run>-->
                                             <Run Text="/"></Run>
-                                            <Run Text="{Binding PlaybackEndTime, ElementName=Media,Mode=OneWay,Converter={StaticResource cvtDate}}" x:Name="Video_End_Time"></Run>
+                                            <Run Text="00:00:00" />
+                                            <Run Text="{Binding PlaybackEndTime, ElementName=Media,Mode=OneWay,Converter={StaticResource cvtDate}}"
+                                                 x:Name="Video_End_Time"></Run>
                                         </TextBlock>
                                     </Grid>
                                     <Grid Grid.Column="2">
                                         <!--画质-->
-                                        <hc:SplitButton Foreground="White" BorderThickness="0" Background="Transparent" HitMode="Hover" Content="1080P"
-                                                        Command="{Binding SelectCmd}"
-                                                        CommandParameter="Command0"
-                                                        HorizontalAlignment="Right"
-                                                        Margin="0,0,280,0">
-                                            <hc:SplitButton.DropDownContent>
-                                                <StackPanel>
-                                                    <MenuItem Header="4K"
-                                                              Command="{Binding SelectCmd}"
-                                                              CommandParameter="Command1" />
-                                                    <MenuItem Header="Test 3"
-                                                              Command="{Binding SelectCmd}"
-                                                              CommandParameter="Command2" />
-                                                    <MenuItem Header="Test 4"
-                                                              Command="{Binding SelectCmd}"
-                                                              CommandParameter="Command3" />
-                                                </StackPanel>
-                                            </hc:SplitButton.DropDownContent>
-                                        </hc:SplitButton>
+                                        <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                                  BorderThickness="0"
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                  Style="{StaticResource ComboBoxExtend}"
+                                                  Background="Transparent"
+                                                  Foreground="White"
+                                                  HorizontalAlignment="Center"
+                                                  IsReadOnly="True"
+                                                  VerticalAlignment="Center"
+                                                      Margin="0,0,200,0"
+                                                      x:Name="Choose_Quality"
+                                                  SelectionChanged="Change_Quality">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ComboBoxItem Content="{Binding accept_description}"
+                                                                  Background="#FF8A8D8D"
+                                                                  Opacity="0.4"
+                                                                  Uid="{Binding accept_quality}"
+                                                                  HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
                                         <!--倍速-->
-                                        <hc:SplitButton Foreground="White"
-                                                        BorderThickness="0"
-                                                        Background="Transparent"
-                                                        HitMode="Hover"
-                                                        Content="倍速"
-                                                        Command="{Binding SelectCmd}"
-                                                        CommandParameter="Command0"
-                                                        HorizontalAlignment="Right"
-                                                        Margin="0,0,210,0">
-                                            <hc:SplitButton.DropDownContent>
-                                                <StackPanel>
-                                                    <MenuItem Header="4K"
-                                                              Command="{Binding SelectCmd}"
-                                                              CommandParameter="Command1" />
-                                                    <MenuItem Header="Test 3"
-                                                              Command="{Binding SelectCmd}"
-                                                              CommandParameter="Command2" />
-                                                    <MenuItem Header="Test 4"
-                                                              Command="{Binding SelectCmd}"
-                                                              CommandParameter="Command3" />
-                                                </StackPanel>
-                                            </hc:SplitButton.DropDownContent>
-                                        </hc:SplitButton>
-                                        <!--声音-->
-                                        <hc:SplitButton Foreground="White"
-                                                        BorderThickness="0"
-                                                        Background="Transparent"
-                                                        HitMode="Hover"
-                                                       
-                                                        Command="{Binding SelectCmd}"
-                                                        CommandParameter="Command0"
-                                                        HorizontalAlignment="Right"
-                                                        Margin="115,0,140,0">
-                                            <Path Height="20"
-                                                  Width="20"
-                                                  StrokeThickness="1"
-                                                  Stretch="Uniform"
-                                                  Stroke="White"
-                                                  Fill="White"
-                                                  Data="{StaticResource Voice_Logo}" />
-                                            <hc:SplitButton.DropDownContent>
-                                                <StackPanel>
-
-                                                </StackPanel>
-                                            </hc:SplitButton.DropDownContent>
-                                        </hc:SplitButton>
+                                        <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                                  BorderThickness="0"
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                  Style="{StaticResource ComboBoxExtend}"
+                                                  Background="Transparent"
+                                                  Foreground="White"
+                                                      HorizontalAlignment="Right"
+                                                      IsReadOnly="True"
+                                                  VerticalAlignment="Center"
+                                                  SelectedIndex="2"
+                                                      Margin="0,0,150,0"
+                                                      x:Name="Choose_Speed"
+                                                  SelectionChanged="Change_Speed">
+                                            <ComboBoxItem Background="#FF8A8D8D"
+                                                          Opacity="0.4"
+                                                          Content="0.5x"
+                                                          x:Uid="0.5" />
+                                            <ComboBoxItem Background="#FF8A8D8D"
+                                                          Opacity="0.4"
+                                                          Content="0.75x"
+                                                          x:Uid="0.75" />
+                                            <ComboBoxItem Background="#FF8A8D8D"
+                                                          Opacity="0.4"
+                                                          Content="1.0x"
+                                                          x:Uid="1.0" />
+                                            <ComboBoxItem Background="#FF8A8D8D"
+                                                          Opacity="0.4"
+                                                          Content="1.25x"
+                                                          x:Uid="1.25" />
+                                            <ComboBoxItem Background="#FF8A8D8D"
+                                                          Opacity="0.4"
+                                                          Content="1.5x"
+                                                          x:Uid="1.5" />
+                                            <ComboBoxItem Background="#FF8A8D8D"
+                                                          Opacity="0.4"
+                                                          Content="2.0x"
+                                                          x:Uid="2.0" />
+                                        </ComboBox>
                                         <Button x:Name="Setting_Button"
                                                 BorderThickness="0"
                                                 Background="Transparent"
@@ -169,8 +174,7 @@
                                                   Stretch="Uniform"
                                                   Stroke="White"
                                                   Fill="White"
-                                                  Data="{StaticResource Setting_Logo}"
-                                                  />
+                                                  Data="{StaticResource Setting_Logo}" />
                                         </Button>
                                         <!--画中画-->
                                         <Button x:Name="pwp_Button"
@@ -188,9 +192,7 @@
                                                   Stretch="Uniform"
                                                   Stroke="White"
                                                   Fill="White"
-                                                  Data="{StaticResource pwp_Logo}"
-                                                  
-                                                  />
+                                                  Data="{StaticResource pwp_Logo}" />
                                         </Button>
                                         <!--网页全屏-->
                                         <Button x:Name="Full_Screen_Button"
@@ -208,20 +210,48 @@
                                                   Stretch="Uniform"
                                                   Stroke="White"
                                                   Fill="White"
-                                                  Data="{StaticResource Full_Screen_Logo}"
-                                                  />
+                                                  Data="{StaticResource Full_Screen_Logo}" />
                                         </Button>
                                     </Grid>
+                                </Grid>
+                            </Grid>
+                            </Grid>
+                            <Grid Grid.Row="1" Background="White">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.7*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+
+                                    <ToggleButton  Style="{StaticResource ToggleButtonSwitch}"
+                                                  HorizontalAlignment="Left"
+                                                   Margin="0" />
+                                    <Button 
+                                            BorderThickness="0"
+                                            Background="Transparent"
+                                            VerticalAlignment="Center"
+                                            Click="Pause"
+                                            HorizontalAlignment="Left"
+                                            Margin="40,0,0,0">
+                                        <Path Height="23"
+                                              Width="23"
+                                              Stretch="Uniform"
+                                              Fill="#757575"
+                                              Data="{StaticResource Danmu_Setting_Logo}"
+                                              HorizontalAlignment="Left"
+                                              Margin="0" />
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
 
                         </Grid>
-                    
-                </Grid>
-            </ScrollViewer>
-        </Grid>
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
         </hc:TransitioningContentControl>
     </hc:TransitioningContentControl>
 </Page>

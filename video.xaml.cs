@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -7,7 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Threading;
 using Unosquare.FFME.Common;
+using static Bilibili_Client.Bilibili_Video;
 
 namespace Bilibili_Client
 {
@@ -20,7 +23,7 @@ namespace Bilibili_Client
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-           
+
             if (value == null)
                 return DependencyProperty.UnsetValue;
             return new Regex(@"(?<time>[0-9]{2}:[0-9]{2}:[0-9]{2}?)", RegexOptions.IgnoreCase).Match(value.ToString()).Groups["time"].Value;
@@ -34,7 +37,7 @@ namespace Bilibili_Client
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-           
+
             if (value == null)
                 return DependencyProperty.UnsetValue;
             return ((TimeSpan)value).Hours * 3600 + ((TimeSpan)value).Minutes * 60 + ((TimeSpan)value).Seconds;
@@ -42,7 +45,7 @@ namespace Bilibili_Client
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-         
+
             int hour = System.Convert.ToInt32(value) / 3600;
             int min = (System.Convert.ToInt32(value) - hour * 3600) / 60;
             int sen = System.Convert.ToInt32(value) - hour * 3600 - min * 60;
@@ -80,13 +83,13 @@ namespace Bilibili_Client
         //暂停&&播放按钮
         public void Pause(object sender, RoutedEventArgs e)
         {
-            
+
             var converter = TypeDescriptor.GetConverter(typeof(Geometry));
             if (Is_Play)
             {
                 Media.Pause();
-                
-                ((System.Windows.Shapes.Path)Pause_Button.Content).Data= (Geometry)(converter.ConvertFrom("M744.727273 551.563636L325.818182 795.927273c-30.254545 18.618182-69.818182-4.654545-69.818182-39.563637v-488.727272c0-34.909091 39.563636-58.181818 69.818182-39.563637l418.909091 244.363637c30.254545 16.290909 30.254545 62.836364 0 79.127272z"));
+
+                ((System.Windows.Shapes.Path)Pause_Button.Content).Data = (Geometry)(converter.ConvertFrom("M744.727273 551.563636L325.818182 795.927273c-30.254545 18.618182-69.818182-4.654545-69.818182-39.563637v-488.727272c0-34.909091 39.563636-58.181818 69.818182-39.563637l418.909091 244.363637c30.254545 16.290909 30.254545 62.836364 0 79.127272z"));
                 Is_Play = false;
             }
             else
@@ -96,31 +99,103 @@ namespace Bilibili_Client
                 Is_Play = true;
             }
         }
-
-        public void Open_New_Video(string avid,MainWindow MainWindow)
+        //这里没整好
+        public void Open_New_Video(string avid, MainWindow MainWindow)
         {
-            new Thread(() =>
-            {
-                int clarity = 120;
-            mainWindow = MainWindow;
-            video_Info = bilibili_Video.gets_video_info(avid);
-            if (mainWindow.IsLogin)
-            {
-                biliCookie = mainWindow.BiliCookie;
-                IsLogin = true;
-                clarity = 80;
-            }
-            if (video_Info.Success)
-                if(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid, clarity, IsLogin, biliCookie).Success)
-                    Play_Video(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid,80, IsLogin, biliCookie).url);
 
-            }).Start();
+            // foreach(string str in )
+
+
+
+            Thread Open_New_Video_Thread = new Thread(() =>
+             {
+                 mainWindow = MainWindow;
+                 video_Info = bilibili_Video.gets_video_info(avid);
+                 P_data p_data = bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid, 16, IsLogin, biliCookie);
+
+                 int i = 0;
+                 List<Choose_Quality_Item> choose_Quality_Items = new List<Choose_Quality_Item>();
+
+                 int clarity = 16;
+                 if (mainWindow.IsLogin)
+                 {
+                     biliCookie = mainWindow.BiliCookie;
+                     IsLogin = true;
+                    /* clarity = p_data.accept_quality[0];
+                     foreach (string str in p_data.accept_description)
+                     {
+
+                         choose_Quality_Items.Add(new Choose_Quality_Item(str, p_data.accept_quality[i]));
+                         i++;
+
+                     }
+                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                     {
+                         //Choose_Quality.ItemsSource = choose_Quality_Items;
+                         Choose_Quality.Items.Add(choose_Quality_Items);
+                         Choose_Quality.SelectedIndex = 0;
+                     });*/
+                 }else
+                 {
+                    /* foreach (string str in p_data.accept_description)
+                     {
+                         if (p_data.accept_quality[i] > 32)
+                         {
+                             i++;
+                             continue; 
+                         }
+                         choose_Quality_Items.Add(new Choose_Quality_Item(str, p_data.accept_quality[i]));
+                     }
+                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+                     {
+                         // Choose_Quality.ItemsSource = choose_Quality_Items;
+                         Choose_Quality.Items.Add(choose_Quality_Items);
+                         Choose_Quality.SelectedIndex = Choose_Quality.Items.Count - 1;
+
+                     });*/
+                 }
+                 if (video_Info.Success)
+                     if (p_data.Success)
+                         Play_Video(bilibili_Video.Get_Video_Stream(avid, video_Info.pages[0].cid, clarity, IsLogin, biliCookie).url);
+             });
+
+            Open_New_Video_Thread.Name = "Open_New_Video_Thread";
+            Open_New_Video_Thread.Start();
+
+        }
+        private void Change_Quality(object sender, SelectionChangedEventArgs e)
+        {
+            if (Media.IsOpen)
+            {
+                P_data p_data = bilibili_Video.Get_Video_Stream(video_Info.aid, video_Info.pages[0].cid, (int)((ComboBoxItem)Choose_Quality.SelectedItem).Uid.ToInt32(), IsLogin, biliCookie);
+                if (p_data.Success)
+                         Play_Video(p_data.url);
+            }
         }
         private void Play_Video(string url)
         {
             Media.Open(new Uri(url));
         }
 
+        private void Change_Speed(object sender, SelectionChangedEventArgs e)
+        {
+            if (Media.IsOpen)
+            {
+                Media.SpeedRatio = (double)((ComboBoxItem)Choose_Speed.SelectedItem).Uid.ToDouble();
+
+
+            }
+        }
+        public class Choose_Quality_Item
+        {
+            public string accept_description { get; private set; }
+            public int accept_quality { get; private set; }
+            public Choose_Quality_Item(string Accept_description, int Accept_quality)
+            {
+                accept_description = Accept_description;
+                accept_quality = Accept_quality;
+            }
+        }
     }
-    
+
 }

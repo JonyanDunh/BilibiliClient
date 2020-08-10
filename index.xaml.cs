@@ -34,11 +34,14 @@ namespace Bilibili_Client
         int Download_Complete = 0;
         public index()
         {
+            
             InitializeComponent();
-            Thread thread = new Thread(Updata_Index);//加载推荐视频的函数加入一个新的子线程
-            thread.Start();//线程开始
-            Thread thread2 = new Thread(Homepage_Ad);//加载推荐视频的函数加入一个新的子线程
-            thread2.Start();//线程开始
+            Thread Updata_Index_Featured_Video_Thread = new Thread(Updata_Index);//加载推荐视频的函数加入一个新的子线程
+            Updata_Index_Featured_Video_Thread.Name = "Updata_Index_Featured_Video_Thread";
+            Updata_Index_Featured_Video_Thread.Start();//线程开始
+            Thread ADD_Homepage_Ad_Thread = new Thread(ADD_Homepage_Ad);//加载推荐视频的函数加入一个新的子线程
+            ADD_Homepage_Ad_Thread.Name = "ADD_Homepage_Ad_Thread";
+            ADD_Homepage_Ad_Thread.Start();//线程开始
             CoverFlow coverFlow = new CoverFlow();
             coverFlow.Margin = new Thickness(32);
             coverFlow.Width = 800;
@@ -49,7 +52,7 @@ namespace Bilibili_Client
         private readonly TaskScheduler _syncContextTaskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
         //主页广告
-        private void Homepage_Ad()
+        private void ADD_Homepage_Ad()
         {
 
             var client = new RestClient("https://app.bilibili.com/x/v2/feed/index?idx=0&flush=0&column=4&device=pad&pull=true&build=5520400&appkey=4ebafd7c4951b366&mobi_app=iphone&platform=ios&ts=1596754509&access_key=71626a38ce02b8a18b9a8b0dd8add481&sign=5d3bbfa008082c409bf56603278ea7a8");
@@ -76,7 +79,7 @@ namespace Bilibili_Client
                 }
             }
 
-            new Thread((obj) =>
+            Thread AD_Cover_Download_Completed_Thread=new Thread((obj) =>
             {
                 while (true)
                 {
@@ -90,7 +93,9 @@ namespace Bilibili_Client
                         break;
                     }
                 }
-            }).Start(items.Count());
+            });
+            AD_Cover_Download_Completed_Thread.Name = "AD_Cover_Download_Completed_Thread";
+            AD_Cover_Download_Completed_Thread.Start(items.Count());
             client = null;
             request = null;
             response = null;

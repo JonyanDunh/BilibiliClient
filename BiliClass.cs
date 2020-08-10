@@ -469,8 +469,8 @@ Xl69GV6klzgxW6d2xQIDAQAB";
         {
             public bool Success;
             public string url;
-
-
+            public string[] accept_description;
+            public int[] accept_quality;
         }
         public video_info gets_video_info(string aid)
         {
@@ -543,9 +543,19 @@ Xl69GV6klzgxW6d2xQIDAQAB";
                 p_Data.Success = true;
                 JToken data = recommend["data"];
                 p_Data.url = data["durl"][0]["url"].ToString();
+                p_Data.accept_description = new string[data["accept_description"].Count()];
+                p_Data.accept_quality = new int[data["accept_description"].Count()];
+                for (int i=0;i< data["accept_description"].Count();i++)
+                {
+                    p_Data.accept_description[i] = data["accept_description"][i].ToString();
+                    p_Data.accept_quality[i] = (int)data["accept_quality"][i];
+
+                }
+                 
                 client = null;
                 request = null;
                 response = null;
+                
                 return p_Data;
             }else
             {
