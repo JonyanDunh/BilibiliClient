@@ -19,6 +19,10 @@ namespace Bilibili_Client
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            //if (Environment.Is64BitProcess)
+            //    Library.FFmpegDirectory = @"resource\FFmpeg\x64";
+            //else
+            //    Library.FFmpegDirectory = @"resource\FFmpeg\x86";
             Library.FFmpegDirectory = @"resource\FFmpeg\";
             Library.LoadFFmpeg();
             MediaElement.FFmpegMessageLogged += (s, ev) =>

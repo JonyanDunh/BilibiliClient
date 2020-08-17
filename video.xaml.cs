@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
@@ -64,13 +65,22 @@ namespace Bilibili_Client
         {
             InitializeComponent();
             //
+            string currentDirectory = @"C:\Program Files\VideoLAN\VLC";
+            var vlcLibDirectory = new DirectoryInfo(currentDirectory);
+
+            var options = new string[]
+            {
+                //添加日志
+                "--file-logging", "-vvv", "--logfile=Logs.log"
+                // VLC options can be given here. Please refer to the VLC command line documentation.
+            };
+            Media2.SourceProvider.CreatePlayer(vlcLibDirectory, options);
 
 
         }
 
         private void Media_MediaInitializing(object sender, Unosquare.FFME.Common.MediaInitializingEventArgs e)
         {
-
             if (e.MediaSource.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
            e.MediaSource.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
             {
@@ -94,6 +104,7 @@ namespace Bilibili_Client
             }
             else
             {
+               
                 Media.Play();
                 ((System.Windows.Shapes.Path)Pause_Button.Content).Data = (Geometry)(converter.ConvertFrom("M442.181818 709.818182c0 37.236364-30.254545 69.818182-69.818182 69.818182s-69.818182-30.254545-69.818181-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818181-69.818182s69.818182 30.254545 69.818182 69.818182v395.636364z m279.272727 0c0 37.236364-30.254545 69.818182-69.818181 69.818182s-69.818182-30.254545-69.818182-69.818182v-395.636364c0-37.236364 30.254545-69.818182 69.818182-69.818182s69.818182 30.254545 69.818181 69.818182v395.636364z"));
                 Is_Play = true;
@@ -174,7 +185,8 @@ namespace Bilibili_Client
         }
         private void Play_Video(string url)
         {
-            Media.Open(new Uri(url));
+           /* Media2.SourceProvider.MediaPlayer.Play(new Uri("https://apd-771331d735983f8eb4cd7a9bf2f7502e.v.smtcdns.com/mv.music.tc.qq.com/AkmKcsPzCTN6-ftcAjY1ucIvKiWpS0jYG4uYkHBfYb3k/8E6BCE9A71C642EB3E93FA2301760C6B9E630A5BEEA6B0FC1399DB028B661061825298977B580C3F2DE22AE383EB8B04ZZqqmusic_default/1049_M0118400003epFrw2Uy4CH1001699439.f9844.mp4?fname=1049_M0118400003epFrw2Uy4CH1001699439.f9844.mp4"));*/
+            Media.Open(new Uri("https://apd-771331d735983f8eb4cd7a9bf2f7502e.v.smtcdns.com/mv.music.tc.qq.com/AkmKcsPzCTN6-ftcAjY1ucIvKiWpS0jYG4uYkHBfYb3k/8E6BCE9A71C642EB3E93FA2301760C6B9E630A5BEEA6B0FC1399DB028B661061825298977B580C3F2DE22AE383EB8B04ZZqqmusic_default/1049_M0118400003epFrw2Uy4CH1001699439.f9844.mp4?fname=1049_M0118400003epFrw2Uy4CH1001699439.f9844.mp4"));
         }
 
         private void Change_Speed(object sender, SelectionChangedEventArgs e)

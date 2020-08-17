@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
         mc:Ignorable="d"
+        
         xmlns:hc="https://handyorg.github.io/handycontrol"
         x:Name="mainwindow"
         Background="Transparent"
@@ -21,6 +22,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <hc:Theme Name="HandyTheme" />
                 <ResourceDictionary Source="Geometry.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />

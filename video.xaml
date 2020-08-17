@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
       xmlns:local="clr-namespace:Bilibili_Client"
       mc:Ignorable="d"
       d:DesignHeight="792"
@@ -37,11 +38,15 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
-                            <ffme:MediaElement   x:Name="Media"
+                                <vlc:VlcControl Visibility="Hidden" x:Name="Media2"
+                                                Background="Red"
+                                                />
+                                <ffme:MediaElement   x:Name="Media"
                                                  Background="Black"
                                                  LoadedBehavior="Play"
                                                  UnloadedBehavior="Manual"
-                                                 MediaInitializing="Media_MediaInitializing" />
+                                                 MediaInitializing="Media_MediaInitializing"
+                                                      />
                             <Grid Height="50"
                                   x:Name="Video_Control_Bar"
                                   VerticalAlignment="Bottom">
@@ -225,23 +230,39 @@
                                 <Grid Grid.Column="1">
 
                                     <ToggleButton  Style="{StaticResource ToggleButtonSwitch}"
-                                                  HorizontalAlignment="Left"
+                                                   HorizontalAlignment="Left"
                                                    Margin="0" />
-                                    <Button 
-                                            BorderThickness="0"
+                                    <Button BorderThickness="0"
                                             Background="Transparent"
                                             VerticalAlignment="Center"
                                             Click="Pause"
+                                            Height="40"
                                             HorizontalAlignment="Left"
                                             Margin="40,0,0,0">
-                                        <Path Height="23"
-                                              Width="23"
+                                        <Path Height="20"
+                                              Width="20"
                                               Stretch="Uniform"
                                               Fill="#757575"
                                               Data="{StaticResource Danmu_Setting_Logo}"
                                               HorizontalAlignment="Left"
                                               Margin="0" />
                                     </Button>
+                                    <Button BorderThickness="0"
+                                            Background="Transparent"
+                                            VerticalAlignment="Stretch"
+                                            Click="Pause"
+                                            Height="40"
+                                            HorizontalAlignment="Left"
+                                            Margin="80,0,0,0">
+                                        <Path Height="20"
+                                              Width="20"
+                                              Stretch="Uniform"
+                                              Fill="#757575"
+                                              Data="{StaticResource Danmu_Front_Setting_Logo}"
+                                              HorizontalAlignment="Left"
+                                              Margin="0" />
+                                    </Button>
+
                                 </Grid>
                             </Grid>
                         </Grid>
